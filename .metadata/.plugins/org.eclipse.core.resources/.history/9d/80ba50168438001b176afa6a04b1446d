@@ -57,11 +57,30 @@ public class Employee extends User {
         return this.messages;
     }
 
-    public void putMessage(Message message) {
-        this.messages.add(message);
+    private void setMessages(List<Message> messages) {
+        this.messages = messages;
     }
     
+
+    //                          Operations                                  
+    
+    /**
+    * @generated
+    */
+    public void sendMessage(Message message) {
+        //TODO
+    }
+    /**
+    * @generated
+    */
+    public void sendOrder(Order order, TechSupportGuy executor) {
+        //TODO
+    }
+    /**
+    * @generated
+    */
     public void updateSalary(int newSalary) {
+        //TODO
     	this.salary += newSalary;
     }
     

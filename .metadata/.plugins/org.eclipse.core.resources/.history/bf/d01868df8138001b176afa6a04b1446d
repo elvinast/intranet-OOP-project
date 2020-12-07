@@ -16,7 +16,7 @@ public class User implements Serializable, Comparable {
     
     public User() {}
 
-    public User(String firstName, String lastName, String email) {
+    public User(String firstName, String lastName, String email, String login, String password) {
     	this.firstName = firstName;
     	this.lastName = lastName;
     	this.email = email;

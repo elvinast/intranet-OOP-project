@@ -25,18 +25,14 @@ public class Employee extends User {
 	
 	@Override
 	public int hashCode() {
-		final int prime = 31;
-		int result = super.hashCode();
-		result = prime * result + ((salary == null) ? 0 : salary.hashCode());
-		return result;
+		// TODO Auto-generated method stub
+		return super.hashCode();
 	}
-	
 	@Override
 	public boolean equals(Object obj) {
 		Employee employee = (Employee) obj;
 		return super.equals(obj) && salary == employee.salary;
 	}
-	
 	private Integer getSalary() {
         return this.salary;
     }
@@ -57,11 +53,30 @@ public class Employee extends User {
         return this.messages;
     }
 
-    public void putMessage(Message message) {
-        this.messages.add(message);
+    private void setMessages(List<Message> messages) {
+        this.messages = messages;
     }
     
+
+    //                          Operations                                  
+    
+    /**
+    * @generated
+    */
+    public void sendMessage(Message message) {
+        //TODO
+    }
+    /**
+    * @generated
+    */
+    public void sendOrder(Order order, TechSupportGuy executor) {
+        //TODO
+    }
+    /**
+    * @generated
+    */
     public void updateSalary(int newSalary) {
+        //TODO
     	this.salary += newSalary;
     }
     

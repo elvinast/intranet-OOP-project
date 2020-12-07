@@ -1,11 +1,6 @@
 package main;
 
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.io.Serializable;
-import java.io.IOException;
 import java.util.List;
 import java.util.Vector;
 
@@ -25,28 +20,59 @@ public class Database implements Serializable {
 	public static Vector<News> news = new Vector<News>();
 	public static Vector<Order> orders = new Vector<Order>();
 	
-	public static FileInputStream fis;
-	public static FileOutputStream fos;
-	public static ObjectOutputStream oos;
-	public static ObjectInputStream oin;
+    /**
+    * @generated
+    */
+    private void setUsers(List<User> users) {
+        this.users = users;
+    }
+    
+    /**
+    * @generated
+    */
+    private List<Course> getCourses() {
+        return this.courses;
+    }
+    
+    /**
+    * @generated
+    */
+    private void setCourses(List<Course> courses) {
+        this.courses = courses;
+    }
+    
+    /**
+    * @generated
+    */
+    private List<News> getNews() {
+        return this.news;
+    }
+    
+    /**
+    * @generated
+    */
+    private void setNews(List<News> news) {
+        this.news = news;
+    }
+    
+    /**
+    * @generated
+    */
+    private List<Order> getOrders() {
+        return this.orders;
+    }
+    
+    /**
+    * @generated
+    */
+    private void setOrders(List<Order> orders) {
+        this.orders = orders;
+    }
+    
+    
+
     //                          Operations                                  
     
-	
-	public static void serStudents() throws IOException{
-		fos = new FileOutputStream("students.out");
-		oos = new ObjectOutputStream(fos);
-		oos.writeObject(students);
-		oos.close();
-	}
-	
-	public  static void desStudents() throws IOException, ClassNotFoundException {
-		fis = new FileInputStream("students.out");
-		oin = new ObjectInputStream(fis);
-		students = (Vector<Student>) oin.readObject();
-		oin.close();
-		fis.close();
-	}
-	
     /**
     * @generated
     */

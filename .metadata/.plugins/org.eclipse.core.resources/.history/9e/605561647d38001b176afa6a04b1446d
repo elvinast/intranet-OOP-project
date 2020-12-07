@@ -124,11 +124,5 @@ public class Manager extends Employee implements INews, IOrder {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
-	@Override
-	public void sendOrder(String problem, TechSupportGuy executor) {
-		// TODO Auto-generated method stub
-		
-	}
     
 }

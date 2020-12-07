@@ -1,7 +1,6 @@
 package main;
 
 import java.io.Serializable;
-import java.util.Scanner;
 
 /**
 * @generated
@@ -16,7 +15,7 @@ public class User implements Serializable, Comparable {
     
     public User() {}
 
-    public User(String firstName, String lastName, String email) {
+    public User(String firstName, String lastName, String email, String login, String password) {
     	this.firstName = firstName;
     	this.lastName = lastName;
     	this.email = email;
@@ -53,8 +52,7 @@ public class User implements Serializable, Comparable {
     }
     
     private void setLogin(String login) {
-    	this.login = login;
-//    	this.login = this.firstName.substring(0, 1).toLowerCase() + "_" + this.lastName.toLowerCase();
+        this.login = login;
     }
 
     private String getPassword() {
@@ -68,32 +66,19 @@ public class User implements Serializable, Comparable {
     //                          Operations                                  
     
     
-    public int signIn() {
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Enter login: ");
-        String in = sc.nextLine();
-        int id = Integer.parseInt(in);
-        if (Database.users.contains(id) == false || Database.users.get(id) == null) {
-        	System.err.println("Error! Wrong login. ");
-        	return -1;
-        }
-        User u = Database.users.get(id);
-        System.out.println("Enter password: ");
-        String in1 = sc.nextLine();
-        String ps = in1;
-		if(ps.equals(u.password)){
-			return id;
-		}
-		System.err.println("Error! Wrong password. ");
-    	return -1;
+    public boolean signIn(String login, String password) {
+        //TODO
+    	return true;
     }
 
-    public boolean changePassword(String oldPassword, String newPassword) {
-        if (oldPassword.equals(this.password)) {
-        	this.password = newPassword;
-        	return true;
-        }
-    	return false;
+    public boolean changePassword(String password) {
+        //TODO
+    	return true;
+    }
+    
+
+    public void showInfo() {
+        //TODO
     }
     
     @Override
