@@ -1,0 +1,123 @@
+package main;
+
+
+/**
+* @generated
+*/
+public class Database implements Serializable {
+    
+    /**
+    * @generated
+    */
+    private List<User> users;
+    
+    /**
+    * @generated
+    */
+    private List<Course> courses;
+    
+    /**
+    * @generated
+    */
+    private List<News> news;
+    
+    /**
+    * @generated
+    */
+    private List<Order> orders;
+    
+    /**
+    * @generated
+    */
+    private List<Order> orders2;
+    
+    
+    
+    /**
+    * @generated
+    */
+    private List<User> getUsers() {
+        return this.users;
+    }
+    
+    /**
+    * @generated
+    */
+    private List<User> setUsers(List<User> users) {
+        this.users = users;
+    }
+    
+    /**
+    * @generated
+    */
+    private List<Course> getCourses() {
+        return this.courses;
+    }
+    
+    /**
+    * @generated
+    */
+    private List<Course> setCourses(List<Course> courses) {
+        this.courses = courses;
+    }
+    
+    /**
+    * @generated
+    */
+    private List<News> getNews() {
+        return this.news;
+    }
+    
+    /**
+    * @generated
+    */
+    private List<News> setNews(List<News> news) {
+        this.news = news;
+    }
+    
+    /**
+    * @generated
+    */
+    private List<Order> getOrders() {
+        return this.orders;
+    }
+    
+    /**
+    * @generated
+    */
+    private List<Order> setOrders(List<Order> orders) {
+        this.orders = orders;
+    }
+    
+    /**
+    * @generated
+    */
+    private List<Order> getOrders2() {
+        return this.orders2;
+    }
+    
+    /**
+    * @generated
+    */
+    private List<Order> setOrders2(List<Order> orders2) {
+        this.orders2 = orders2;
+    }
+    
+    
+
+    //                          Operations                                  
+    
+    /**
+    * @generated
+    */
+    public findCourse() {
+        //TODO
+    }
+    /**
+    * @generated
+    */
+    public findStudent() {
+        //TODO
+    }
+    
+}

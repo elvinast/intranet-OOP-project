@@ -1,0 +1,122 @@
+package main;
+
+/**
+* @generated
+*/
+public class File extends Course {
+    
+    /**
+    * @generated
+    */
+    private String fileName;
+    
+    /**
+    * @generated
+    */
+    private Course course;
+    
+    /**
+    * @generated
+    */
+    private Teacher creator;
+    
+    /**
+    * @generated
+    */
+    private String description;
+    
+    
+    /**
+    * @generated
+    */
+    private Course course2;
+    
+    
+    /**
+    * @generated
+    */
+    private String getFileName() {
+        return this.fileName;
+    }
+    
+    /**
+    * @generated
+    */
+    private String setFileName(String fileName) {
+        this.fileName = fileName;
+    }
+    
+    /**
+    * @generated
+    */
+    private Course getCourse() {
+        return this.course;
+    }
+    
+    /**
+    * @generated
+    */
+    private Course setCourse(Course course) {
+        this.course = course;
+    }
+    
+    /**
+    * @generated
+    */
+    private Teacher getCreator() {
+        return this.creator;
+    }
+    
+    /**
+    * @generated
+    */
+    private Teacher setCreator(Teacher creator) {
+        this.creator = creator;
+    }
+    
+    /**
+    * @generated
+    */
+    private String getDescription() {
+        return this.description;
+    }
+    
+    /**
+    * @generated
+    */
+    private String setDescription(String description) {
+        this.description = description;
+    }
+    
+    
+    /**
+    * @generated
+    */
+    public Course getCourse2() {
+        return this.course2;
+    }
+    
+    /**
+    * @generated
+    */
+    public Course setCourse2(Course course2) {
+        this.course2 = course2;
+    }
+    
+
+    //                          Operations                                  
+    
+    /**
+    * @generated
+    */
+    public showFileInfo() {
+        //TODO
+    }
+    /**
+    * @generated
+    */
+    public downloadFile() {
+        //TODO
+    }
+    
+}

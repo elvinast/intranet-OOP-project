@@ -1,0 +1,60 @@
+package main;
+
+
+/**
+* @generated
+*/
+public class Transcript {
+    
+    /**
+    * @generated
+    */
+    private Real totalGPA;
+    
+    /**
+    * @generated
+    */
+    private HashMap<Course, Real> marks;
+    
+    
+    
+    /**
+    * @generated
+    */
+    private Real getTotalGPA() {
+        return this.totalGPA;
+    }
+    
+    /**
+    * @generated
+    */
+    private Real setTotalGPA(Real totalGPA) {
+        this.totalGPA = totalGPA;
+    }
+    
+    /**
+    * @generated
+    */
+    private HashMap<Course, Real> getMarks() {
+        return this.marks;
+    }
+    
+    /**
+    * @generated
+    */
+    private HashMap<Course, Real> setMarks(HashMap<Course, Real> marks) {
+        this.marks = marks;
+    }
+    
+    
+
+    //                          Operations                                  
+    
+    /**
+    * @generated
+    */
+    public calculateGPA() {
+        //TODO
+    }
+    
+}

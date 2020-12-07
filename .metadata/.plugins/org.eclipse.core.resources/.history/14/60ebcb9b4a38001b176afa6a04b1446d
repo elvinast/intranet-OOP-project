@@ -1,0 +1,227 @@
+package Admin;
+
+
+/**
+* @generated
+*/
+public class Admin extends EmployeeUser {
+    
+    /**
+    * @generated
+    */
+    private Integer salary;
+    
+    /**
+    * @generated
+    */
+    private Real workExperience;
+    
+    /**
+    * @generated
+    */
+    private List<Message> messages;
+    
+    /**
+    * @generated
+    */
+    private String id;
+    
+    /**
+    * @generated
+    */
+    private String login;
+    
+    /**
+    * @generated
+    */
+    private String password;
+    
+    /**
+    * @generated
+    */
+    private List<User> users;
+    
+    
+    
+    /**
+    * @generated
+    */
+    private Integer getSalary() {
+        return this.salary;
+    }
+    
+    /**
+    * @generated
+    */
+    private Integer setSalary(Integer salary) {
+        this.salary = salary;
+    }
+    
+    /**
+    * @generated
+    */
+    private Real getWorkExperience() {
+        return this.workExperience;
+    }
+    
+    /**
+    * @generated
+    */
+    private Real setWorkExperience(Real workExperience) {
+        this.workExperience = workExperience;
+    }
+    
+    /**
+    * @generated
+    */
+    private List<Message> getMessages() {
+        return this.messages;
+    }
+    
+    /**
+    * @generated
+    */
+    private List<Message> setMessages(List<Message> messages) {
+        this.messages = messages;
+    }
+    
+    /**
+    * @generated
+    */
+    private String getId() {
+        return this.id;
+    }
+    
+    /**
+    * @generated
+    */
+    private String setId(String id) {
+        this.id = id;
+    }
+    
+    /**
+    * @generated
+    */
+    private String getLogin() {
+        return this.login;
+    }
+    
+    /**
+    * @generated
+    */
+    private String setLogin(String login) {
+        this.login = login;
+    }
+    
+    /**
+    * @generated
+    */
+    private String getPassword() {
+        return this.password;
+    }
+    
+    /**
+    * @generated
+    */
+    private String setPassword(String password) {
+        this.password = password;
+    }
+    
+    /**
+    * @generated
+    */
+    private List<User> getUsers() {
+        return this.users;
+    }
+    
+    /**
+    * @generated
+    */
+    private List<User> setUsers(List<User> users) {
+        this.users = users;
+    }
+    
+    
+
+    //                          Operations                                  
+    
+    /**
+    * @generated
+    */
+    public signIn() {
+        //TODO
+    }
+    /**
+    * @generated
+    */
+    public changePassword() {
+        //TODO
+    }
+    /**
+    * @generated
+    */
+    public getFirstName() {
+        //TODO
+    }
+    /**
+    * @generated
+    */
+    public sendMessage() {
+        //TODO
+    }
+    /**
+    * @generated
+    */
+    public operation5() {
+        //TODO
+    }
+    /**
+    * @generated
+    */
+    public sendOrder() {
+        //TODO
+    }
+    /**
+    * @generated
+    */
+    public updateSalary() {
+        //TODO
+    }
+    /**
+    * @generated
+    */
+    public sendMessage4() {
+        //TODO
+    }
+    /**
+    * @generated
+    */
+    public sendOrder() {
+        //TODO
+    }
+    /**
+    * @generated
+    */
+    public addUser() {
+        //TODO
+    }
+    /**
+    * @generated
+    */
+    public removeUser() {
+        //TODO
+    }
+    /**
+    * @generated
+    */
+    public updateUser() {
+        //TODO
+    }
+    /**
+    * @generated
+    */
+    public seeLogFiles() {
+        //TODO
+    }
+    
+}

@@ -1,0 +1,148 @@
+package main;
+
+import java.util.List;
+
+/**
+* @generated
+*/
+public class Mark {
+    
+    /**
+    * @generated
+    */
+    private double points;
+    
+    /**
+    * @generated
+    */
+    private Date deadline;
+    
+    /**
+    * @generated
+    */
+    private Course courseName;
+    
+    /**
+    * @generated
+    */
+    private List<Mark> marks;
+    
+    /**
+    * @generated
+    */
+    private double totalGrade;
+    
+    /**
+    * @generated
+    */
+    private double courseGPA;
+    
+    
+    /**
+    * @generated
+    */
+    private double getPoints() {
+        return this.points;
+    }
+    
+    /**
+    * @generated
+    */
+    private void setPoints(double points) {
+        this.points = points;
+    }
+    
+    /**
+    * @generated
+    */
+    private Date getDeadline() {
+        return this.deadline;
+    }
+    
+    /**
+    * @generated
+    */
+    private void setDeadline(Date deadline) {
+        this.deadline = deadline;
+    }
+    
+    /**
+    * @generated
+    */
+    private Course getCourseName() {
+        return this.courseName;
+    }
+    
+    /**
+    * @generated
+    */
+    private void setCourseName(Course courseName) {
+        this.courseName = courseName;
+    }
+    
+    /**
+    * @generated
+    */
+    private List<Mark> getMarks() {
+        return this.marks;
+    }
+    
+    /**
+    * @generated
+    */
+    private void setMarks(List<Mark> marks) {
+        this.marks = marks;
+    }
+    
+    /**
+    * @generated
+    */
+    private double getTotalGrade() {
+        return this.totalGrade;
+    }
+    
+    /**
+    * @generated
+    */
+    private double setTotalGrade(double totalGrade) {
+        this.totalGrade = totalGrade;
+    }
+    
+    /**
+    * @generated
+    */
+    private double getCourseGPA() {
+        return this.courseGPA;
+    }
+    
+    /**
+    * @generated
+    */
+    private double setCourseGPA(double courseGPA) {
+        this.courseGPA = courseGPA;
+    }
+    
+    
+
+    //                          Operations                                  
+    
+    /**
+    * @generated
+    */
+    public updatePoints() {
+        //TODO
+    }
+    /**
+    * @generated
+    */
+    public gradeToLetter() {
+        //TODO
+    }
+    /**
+    * @generated
+    */
+    public convertTo4() {
+        //TODO
+    }
+    
+}

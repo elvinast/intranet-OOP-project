@@ -1,0 +1,223 @@
+package main;
+
+import java.util.List;
+
+/**
+* @generated
+*/
+public class Manager extends Employee {
+    
+    /**
+    * @generated
+    */
+    private Integer salary;
+    
+    /**
+    * @generated
+    */
+    private double workExperience;
+    
+    /**
+    * @generated
+    */
+    private List<Student> students;
+    
+    /**
+    * @generated
+    */
+    private String id;
+    
+    /**
+    * @generated
+    */
+    private String login;
+    
+    /**
+    * @generated
+    */
+    private String password;
+    
+    /**
+    * @generated
+    */
+    private List<Teacher> teachers;
+    
+    /**
+    * @generated
+    */
+    private List<Course> courses;
+    
+    
+    /**
+    * @generated
+    */
+    private News news;
+    
+    
+    /**
+    * @generated
+    */
+    private Integer getSalary() {
+        return this.salary;
+    }
+    
+    /**
+    * @generated
+    */
+    private void setSalary(Integer salary) {
+        this.salary = salary;
+    }
+    
+    /**
+    * @generated
+    */
+    private double getWorkExperience() {
+        return this.workExperience;
+    }
+    
+    /**
+    * @generated
+    */
+    private void setWorkExperience(double workExperience) {
+        this.workExperience = workExperience;
+    }
+    
+    /**
+    * @generated
+    */
+    private List<Student> getStudents() {
+        return this.students;
+    }
+    
+    /**
+    * @generated
+    */
+    private void setStudents(List<Student> students) {
+        this.students = students;
+    }
+    /**
+    * @generated
+    */
+    private List<Teacher> getTeachers() {
+        return this.teachers;
+    }
+    
+    /**
+    * @generated
+    */
+    private void setTeachers(List<Teacher> teachers) {
+        this.teachers = teachers;
+    }
+    
+    /**
+    * @generated
+    */
+    private List<Course> getCourses() {
+        return this.courses;
+    }
+    
+    /**
+    * @generated
+    */
+    private List<Course> setCourses(List<Course> courses) {
+        this.courses = courses;
+    }
+    
+    
+    /**
+    * @generated
+    */
+    public News getNews() {
+        return this.news;
+    }
+    
+    /**
+    * @generated
+    */
+    public News setNews(News news) {
+        this.news = news;
+    }
+    
+
+    //                          Operations                                  
+    
+    /**
+    * @generated
+    */
+    public signIn() {
+        //TODO
+    }
+    /**
+    * @generated
+    */
+    public changePassword() {
+        //TODO
+    }
+    /**
+    * @generated
+    */
+    public getFirstName() {
+        //TODO
+    }
+    /**
+    * @generated
+    */
+    public createCourse() {
+        //TODO
+    }
+    /**
+    * @generated
+    */
+    public operation5() {
+        //TODO
+    }
+    /**
+    * @generated
+    */
+    public sendOrder() {
+        //TODO
+    }
+    /**
+    * @generated
+    */
+    public infoStudents() {
+        //TODO
+    }
+    /**
+    * @generated
+    */
+    public sendMessage4() {
+        //TODO
+    }
+    /**
+    * @generated
+    */
+    public sendOrder() {
+        //TODO
+    }
+    /**
+    * @generated
+    */
+    public infoTeachers() {
+        //TODO
+    }
+    /**
+    * @generated
+    */
+    public suggestCourse() {
+        //TODO
+    }
+    /**
+    * @generated
+    */
+    public createNews() {
+        //TODO
+    }
+    /**
+    * @generated
+    */
+    public approveRegistration() {
+        //TODO
+    }
+    
+}

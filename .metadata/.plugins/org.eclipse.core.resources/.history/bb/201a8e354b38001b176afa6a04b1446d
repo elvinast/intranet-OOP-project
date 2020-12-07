@@ -1,0 +1,22 @@
+package DeadlineExpired;
+
+
+/**
+* @generated
+*/
+public class DeadlineExpired {
+    
+    
+    
+    
+
+    //                          Operations                                  
+    
+    /**
+    * @generated
+    */
+    public DeadlineExpired() {
+        //TODO
+    }
+    
+}
