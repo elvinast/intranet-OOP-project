@@ -11,26 +11,7 @@ public class Teacher extends Employee implements Serializable, Comparable {
     /**
     * @generated
     */
-    private Integer salary;
-    
-    /**
-    * @generated
-    */
-    private double  workExperience;
-    
-    /**
-    * @generated
-    */
     private List<Message> messages;
-    /**
-    * @generated
-    */
-    private String login;
-    
-    /**
-    * @generated
-    */
-    private String password;
     
     /**
     * @generated
@@ -42,52 +23,10 @@ public class Teacher extends Employee implements Serializable, Comparable {
     */
     private TeachingStatus teachingStatus;
     
+    public Faculties faculty;
     
+   
     
-    /**
-    * @generated
-    */
-    private Integer getSalary() {
-        return this.salary;
-    }
-    
-    /**
-    * @generated
-    */
-    private void setSalary(Integer salary) {
-        this.salary = salary;
-    }
-    
-    /**
-    * @generated
-    */
-    private double  getWorkExperience() {
-        return this.workExperience;
-    }
-    
-    /**
-    * @generated
-    */
-    private void setWorkExperience(double  workExperience) {
-        this.workExperience = workExperience;
-    }
-    
-    /**
-    * @generated
-    */
-    private List<Message> getMessages() {
-        return this.messages;
-    }
-    
-    /**
-    * @generated
-    */
-    private void setMessages(List<Message> messages) {
-        this.messages = messages;
-    }
-    /**
-    * @generated
-    */
     private List<Course> getCourses() {
         return this.courses;
     }
@@ -134,7 +73,7 @@ public class Teacher extends Employee implements Serializable, Comparable {
     /**
     * @generated
     */
-    public void putMark(Student student, Course course, MarksType marksType, double points) {
+    public void putMark(Studentt student, Course course, MarksType marksType, double points) {
         //TODO
     }
     /**

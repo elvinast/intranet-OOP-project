@@ -1,0 +1,109 @@
+package main;
+
+import java.io.Serializable;
+import java.util.List;
+
+/**
+* @generated
+*/
+public class Teacher extends Employee implements Serializable, Comparable {
+    
+    /**
+    * @generated
+    */
+    private List<Message> messages;
+    
+    /**
+    * @generated
+    */
+    private List<Course> courses;
+    
+    /**
+    * @generated
+    */
+    private TeachingStatus teachingStatus;
+    
+    
+   
+    
+    private List<Course> getCourses() {
+        return this.courses;
+    }
+    
+    /**
+    * @generated
+    */
+    private void setCourses(List<Course> courses) {
+        this.courses = courses;
+    }
+    
+    /**
+    * @generated
+    */
+    private TeachingStatus getTeachingStatus() {
+        return this.teachingStatus;
+    }
+    
+    /**
+    * @generated
+    */
+    private void setTeachingStatus(TeachingStatus teachingStatus) {
+        this.teachingStatus = teachingStatus;
+    }
+    
+    
+
+    //                          Operations                                  
+    
+
+    /**
+    * @generated
+    */
+    public News createNews(String title, String text) {
+		return null;
+        //TODO
+    }
+    /**
+    * @generated
+    */
+    public void addCourse(Course course) {
+        //TODO
+    }
+    /**
+    * @generated
+    */
+    public void putMark(Student student, Course course, MarksType marksType, double points) {
+        //TODO
+    }
+    /**
+    * @generated
+    */
+    public void addCourseFile(Course course, File file) {
+        //TODO
+    }
+    /**
+    * @generated
+    */
+    public void deleteCourseFile(Course course, File file) {
+        //TODO
+    }
+    /**
+    * @generated
+    */
+    public void viewCourses() {
+        //TODO
+    }
+    /**
+    * @generated
+    */
+    public void viewMarks(Course course) {
+        //TODO
+    }
+
+	@Override
+	public int compareTo(Object o) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+    
+}

@@ -4,19 +4,9 @@ package main;
 /**
 * @generated
 */
-public class CreditsOverflow {
+public class CreditsOverflow extends Exception {
     
-    
-    
-    
-
-    //                          Operations                                  
-    
-    /**
-    * @generated
-    */
-    public CreditsOverflow() {
-        //TODO
+	public CreditsOverflow(Course course, int lim) {
+        super(String.format("Error! Can't add this course with " + course.getCredits() + " credits. Limit of credits is " + lim));
     }
-    
 }

@@ -1,5 +1,6 @@
-package Student;
+package main;
 
+import java.util.HashMap;
 
 /**
 * @generated
@@ -14,7 +15,7 @@ public class Student extends User implements Comparable {
     /**
     * @generated
     */
-    private Real GPA;
+    private double GPA;
     
     /**
     * @generated
@@ -63,21 +64,21 @@ public class Student extends User implements Comparable {
     /**
     * @generated
     */
-    private Integer setYearOfStudy(Integer yearOfStudy) {
+    private void setYearOfStudy(Integer yearOfStudy) {
         this.yearOfStudy = yearOfStudy;
     }
     
     /**
     * @generated
     */
-    private Real getGPA() {
+    private double getGPA() {
         return this.GPA;
     }
     
     /**
     * @generated
     */
-    private Real setGPA(Real GPA) {
+    private void setGPA(double GPA) {
         this.GPA = GPA;
     }
     
@@ -91,7 +92,7 @@ public class Student extends User implements Comparable {
     /**
     * @generated
     */
-    private HashMap<Course, Mark> setCourses(HashMap<Course, Mark> courses) {
+    private void setCourses(HashMap<Course, Mark> courses) {
         this.courses = courses;
     }
     
@@ -105,7 +106,7 @@ public class Student extends User implements Comparable {
     /**
     * @generated
     */
-    private String setId(String id) {
+    private void setId(String id) {
         this.id = id;
     }
     
@@ -119,7 +120,7 @@ public class Student extends User implements Comparable {
     /**
     * @generated
     */
-    private Faculties setFaculty(Faculties faculty) {
+    private void setFaculty(Faculties faculty) {
         this.faculty = faculty;
     }
     
@@ -133,7 +134,7 @@ public class Student extends User implements Comparable {
     /**
     * @generated
     */
-    private Degree setDegree(Degree degree) {
+    private void setDegree(Degree degree) {
         this.degree = degree;
     }
     
@@ -147,7 +148,7 @@ public class Student extends User implements Comparable {
     /**
     * @generated
     */
-    private Transcript setTranscript(Transcript transcript) {
+    private void setTranscript(Transcript transcript) {
         this.transcript = transcript;
     }
     
@@ -161,7 +162,7 @@ public class Student extends User implements Comparable {
     /**
     * @generated
     */
-    public Integer setCreditsLimit(Integer creditsLimit) {
+    public void setCreditsLimit(Integer creditsLimit) {
         this.creditsLimit = creditsLimit;
     }
     
@@ -175,7 +176,7 @@ public class Student extends User implements Comparable {
     /**
     * @generated
     */
-    private HashMap<Course, Mark> setMarks(HashMap<Course, Mark> marks) {
+    private void setMarks(HashMap<Course, Mark> marks) {
         this.marks = marks;
     }
     
@@ -186,68 +187,60 @@ public class Student extends User implements Comparable {
     /**
     * @generated
     */
-    public registerOnCourse() {
+    public boolean registerOnCourse(String courseName) {
+        //TODO
+    	return true;
+    }
+    /**
+    * @generated
+    */
+    public void updateYearOfStudy() {
+        //TODO
+    	this.yearOfStudy++;
+    	
+    }
+    /**
+    * @generated
+    */
+    public String createID(Degree degree) {
+		return id;
         //TODO
     }
     /**
     * @generated
     */
-    public updateYearOfStudy() {
+    public void viewTranscript() {
         //TODO
     }
     /**
     * @generated
     */
-    public getFirstName() {
+    public void viewCourses() {
         //TODO
     }
     /**
     * @generated
     */
-    public createID() {
+    public void viewCourseFiles(Course course) {
         //TODO
     }
     /**
     * @generated
     */
-    public operation5() {
+    public void viewMarks(Course course) {
         //TODO
     }
     /**
     * @generated
     */
-    public viewTranscript() {
+    public void showTeachers(Faculties faculty) {
         //TODO
     }
-    /**
-    * @generated
-    */
-    public viewCourses() {
-        //TODO
-    }
-    /**
-    * @generated
-    */
-    public viewCourseFiles() {
-        //TODO
-    }
-    /**
-    * @generated
-    */
-    public view() {
-        //TODO
-    }
-    /**
-    * @generated
-    */
-    public viewMarks() {
-        //TODO
-    }
-    /**
-    * @generated
-    */
-    public showTeachers() {
-        //TODO
-    }
+
+	@Override
+	public int compareTo(Object o) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
     
 }

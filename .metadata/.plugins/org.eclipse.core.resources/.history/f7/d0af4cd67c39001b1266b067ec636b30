@@ -1,0 +1,289 @@
+package main;
+
+import java.io.Serializable;
+import java.util.HashMap;
+import java.util.List;
+
+/**
+* @generated
+*/
+public class Course implements Serializable, Comparable {
+    
+    /**
+    * @generated
+    */
+    private String courseName;
+    
+    /**
+    * @generated
+    */
+    private Integer credits;
+    
+    /**
+    * @generated
+    */
+    private String description;
+    
+    /**
+    * @generated
+    */
+    private String courseCode;
+    
+    /**
+    * @generated
+    */
+    private boolean isAvailable;
+    
+    /**
+    * @generated
+    */
+    private Teacher teacher;
+    
+    /**
+    * @generated
+    */
+    private List<Student> students;
+    
+    /**
+    * @generated
+    */
+    private List<File> courseFiles;
+    
+    /**
+    * @generated
+    */
+    private HashMap<Student, Mark> marks;
+    
+    /**
+    * @generated
+    */
+    private String prerequisite;
+    
+    
+    /**
+    * @generated
+    */
+    private File file;
+    
+    
+    /**
+    * @generated
+    */
+    public String getCourseName() {
+        return this.courseName;
+    }
+    
+    /**
+    * @generated
+    */
+    public void setCourseName(String courseName) {
+        this.courseName = courseName;
+    }
+    
+    /**
+    * @generated
+    */
+    public Integer getCredits() {
+        return this.credits;
+    }
+    
+    /**
+    * @generated
+    */
+    public void setCredits(Integer credits) {
+        this.credits = credits;
+    }
+    
+    /**
+    * @generated
+    */
+    public String getDescription() {
+        return this.description;
+    }
+    
+    /**
+    * @generated
+    */
+    public void setDescription(String description) {
+        this.description = description;
+    }
+    
+    /**
+    * @generated
+    */
+    public String getCourseCode() {
+        return this.courseCode;
+    }
+    
+    /**
+    * @generated
+    */
+    public void setCourseCode(String courseCode) {
+        this.courseCode = courseCode;
+    }
+    
+    /**
+    * @generated
+    */
+    public boolean getIsAvailable() {
+        return this.isAvailable;
+    }
+    
+    /**
+    * @generated
+    */
+    public void setIsAvailable(boolean isAvailable) {
+        this.isAvailable = isAvailable;
+    }
+    
+    /**
+    * @generated
+    */
+    public Teacher getTeacher() {
+        return this.teacher;
+    }
+    
+    /**
+    * @generated
+    */
+    public void setTeacher(Teacher teacher) {
+        this.teacher = teacher;
+    }
+    
+    /**
+    * @generated
+    */
+    public List<Student> getStudents() {
+        return this.students;
+    }
+    
+    /**
+    * @generated
+    */
+    public void setStudents(List<Student> students) {
+        this.students = students;
+    }
+    
+    /**
+    * @generated
+    */
+    public List<File> getCourseFiles() {
+        return this.courseFiles;
+    }
+    
+    /**
+    * @generated
+    */
+    public void setCourseFiles(List<File> courseFiles) {
+        this.courseFiles = courseFiles;
+    }
+    
+    /**
+    * @generated
+    */
+    public HashMap<Student, Mark> getMarks() {
+        return this.marks;
+    }
+    
+    /**
+    * @generated
+    */
+    public void setMarks(HashMap<Student, Mark> marks) {
+        this.marks = marks;
+    }
+    
+    /**
+    * @generated
+    */
+    public String getPrerequisite() {
+        return this.prerequisite;
+    }
+    
+    /**
+    * @generated
+    */
+    public void setPrerequisite(String prerequisite) {
+        this.prerequisite = prerequisite;
+    }
+    
+    /**
+    * @generated
+    */
+    public File getFile() {
+        return this.file;
+    }
+    
+    /**
+    * @generated
+    */
+    public void setFile(File file) {
+        this.file = file;
+    }
+    
+
+    //                          Operations                                  
+    
+    /**
+    * @return 
+     * @generated
+    */
+    public void addStudent(Student student) {
+        //TODO
+    }
+    /**
+    * @return 
+     * @generated
+    */
+    public boolean removeStudent(Student student) {
+        //TODO
+    	return true;
+    }
+    /**
+    * @return 
+     * @generated
+    */
+    public void addCourseFile(File file) {
+        //TODO
+    }
+    /**
+    * @return 
+     * @generated
+    */
+    public boolean removeCourseFile(File file) {
+        //TODO
+    	return true;
+    }
+//    /**
+//    * @return 
+//     * @generated
+//    */
+//    public void putMark() {
+//        //TODO
+//    }
+    /**
+    * @generated
+    */
+    public boolean hasPrereq() {
+        //TODO
+    	return false;
+    }
+    /**
+    * @generated
+    */
+    public void showPrereq() {
+        //TODO
+    }
+    /**
+    * @generated
+    */
+    public void addPrereq(Course course, String courseCode) {
+        //TODO
+    }
+
+	@Override
+	public int compareTo(Object o) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+    
+}

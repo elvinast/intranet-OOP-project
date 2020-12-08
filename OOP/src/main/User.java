@@ -24,44 +24,44 @@ public class User implements Serializable, Comparable {
     	this.password = password;
     }
     
-	private String getFirstName() {
+    public String getFirstName() {
         return this.firstName;
     }
     
-    private String setFirstName(String firstName) {
+    public String setFirstName(String firstName) {
         return this.firstName = firstName;
     }
   
-    private String getLastName() {
+    public String getLastName() {
         return this.lastName;
     }
     
-    private void setLastName(String lastName) {
+    public void setLastName(String lastName) {
         this.lastName = lastName;
     }
     
-    private String getEmail() {
+    public String getEmail() {
         return this.email;
     }
     
-    private void setEmail(String email) {
+    public void setEmail(String email) {
         this.email = email;
     }
     
-    private String getLogin() {
+    public String getLogin() {
         return this.login;
     }
     
-    private void setLogin(String login) {
+    public void setLogin(String login) {
     	this.login = login;
 //    	this.login = this.firstName.substring(0, 1).toLowerCase() + "_" + this.lastName.toLowerCase();
     }
 
-    private String getPassword() {
+    public String getPassword() {
         return this.password;
     }
 
-    private void setPassword(String password) {
+    public void setPassword(String password) {
         this.password = password;
     }
 

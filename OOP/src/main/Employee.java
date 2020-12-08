@@ -37,27 +37,27 @@ public class Employee extends User {
 		return super.equals(obj) && salary == employee.salary;
 	}
 	
-	private Integer getSalary() {
+	public Integer getSalary() {
         return this.salary;
     }
     
-    private void setSalary(Integer salary) {
+	public void setSalary(Integer salary) {
         this.salary = salary;
     }
     
-    private double getWorkExperience() {
+	public double getWorkExperience() {
         return this.workExperience;
     }
     
-    private void setWorkExperience(double workExperience) {
+	public void setWorkExperience(double workExperience) {
         this.workExperience = workExperience;
     }
 
-    private List<Message> getMessages() {
+	public List<Message> getMessages() {
         return this.messages;
     }
 
-    public void putMessage(Message message) {
+	public void putMessage(Message message) {
         this.messages.add(message);
     }
     

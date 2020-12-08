@@ -1,22 +1,14 @@
 package main;
 
+import java.util.Date;
 
 /**
 * @generated
 */
-public class DeadlineExpired {
-    
-    
-    
-    
+public class DeadlineExpired extends Exception {
 
-    //                          Operations                                  
-    
-    /**
-    * @generated
-    */
-    public DeadlineExpired() {
-        //TODO
+    public DeadlineExpired(Date deadline) {
+        super(String.format("Error! You forgot about the deadline " + deadline));
     }
     
 }

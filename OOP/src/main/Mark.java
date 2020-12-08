@@ -111,7 +111,7 @@ public class Mark {
     /**
     * @generated
     */
-    private double getCourseGPA() {
+    public double getCourseGPA() {
         return this.courseGPA;
     }
     

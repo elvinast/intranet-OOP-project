@@ -1,0 +1,154 @@
+package main;
+
+import java.util.HashMap;
+
+/**
+* @generated
+*/
+public class Student extends User implements Comparable, IOrder {
+    
+    private Integer yearOfStudy;
+    private double GPA;
+    private HashMap<Course, Mark> courses;
+    private String id;
+    private Faculties faculty;
+    private Degree degree;
+    private Transcript transcript;
+    final Integer CREDITS_LIMIT = 21;
+    private HashMap<Course, Mark> marks;
+    
+    private Integer getYearOfStudy() {
+        return this.yearOfStudy;
+    }
+    
+    private void setYearOfStudy(Integer yearOfStudy) {
+        this.yearOfStudy = yearOfStudy;
+    }
+    
+    private double getGPA() {
+        return this.GPA;
+    }
+    
+    private void setGPA(double GPA) {
+        this.GPA = GPA;
+    }
+    
+    private HashMap<Course, Mark> getCourses() {
+        return this.courses;
+    }
+    
+    private void setCourses(HashMap<Course, Mark> courses) {
+        this.courses = courses;
+    }
+    
+    private String getId() {
+        return this.id;
+    }
+    
+    private void setId(String id) {
+        this.id = id;
+    }
+    
+    private Faculties getFaculty() {
+        return this.faculty;
+    }
+    
+    private void setFaculty(Faculties faculty) {
+        this.faculty = faculty;
+    }
+    
+    private Degree getDegree() {
+        return this.degree;
+    }
+    
+    private void setDegree(Degree degree) {
+        this.degree = degree;
+    }
+    
+    private Transcript getTranscript() {
+        return this.transcript;
+    }
+    
+    private void setTranscript(Transcript transcript) {
+        this.transcript = transcript;
+    }
+    
+    public Integer getCreditsLimit() {
+        return this.creditsLimit;
+    }
+    
+    private HashMap<Course, Mark> getMarks() {
+        return this.marks;
+    }
+    
+    private void setMarks(HashMap<Course, Mark> marks) {
+        this.marks = marks;
+    }
+    
+
+    //                          Operations                                  
+    
+    /**
+    * @generated
+    */
+    public boolean registerOnCourse(String courseName) {
+        //TODO
+    	return true;
+    }
+    /**
+    * @generated
+    */
+    public void updateYearOfStudy() {
+    	this.yearOfStudy++;
+    }
+    /**
+    * @generated
+    */
+    public String createID(Degree degree) {
+		return id;
+        //TODO
+    }
+    /**
+    * @generated
+    */
+    public void viewTranscript() {
+        //TODO
+    }
+    /**
+    * @generated
+    */
+    public void viewCourses() {
+        //TODO
+    }
+    /**
+    * @generated
+    */
+    public void viewCourseFiles(Course course) {
+        //TODO
+    }
+    /**
+    * @generated
+    */
+    public void viewMarks(Course course) {
+        //TODO
+    }
+    /**
+    * @generated
+    */
+    public void showTeachers(Faculties faculty) {
+        //TODO
+    }
+
+	@Override
+	public int compareTo(Object o) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public void sendOrder(String problem, TechSupportGuy executor) {
+		// TODO Auto-generated method stub
+		
+	}
+    
+}

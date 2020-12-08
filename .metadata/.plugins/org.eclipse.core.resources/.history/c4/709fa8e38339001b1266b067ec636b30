@@ -1,0 +1,43 @@
+package main;
+
+import java.util.HashMap;
+
+/**
+* @generated
+*/
+public class Transcript {
+    
+    private double totalGPA;
+    HashMap< Integer,HashMap<Course,Mark> > semesters = new HashMap< Integer,HashMap<Course,Mark> >();
+    int totalCredits;
+    
+    
+    private double getTotalGPA() {
+        return this.totalGPA;
+    }
+    
+    private void setTotalGPA(double totalGPA) {
+        this.totalGPA = totalGPA;
+    }
+    //                          Operations                                  
+    
+    public void calculateGPA() {
+		int numOfCourses = 0;
+		double ov=0;
+		for(int i = 1; i <= semesters.size(); i++) {
+			for (HashMap.Entry<Course, Mark> entry : semesters.get(i).entrySet()){
+				numOfCourses++;
+			    ov += entry.getValue().getCourseGPA();
+			}
+		}
+		totalGPA = ov / numOfCourses;
+    }
+    
+    public void addMark(Integer semester, Course course, Mark mark) {
+		semesters.get(semester).put(course, mark);
+		totalCredits = totalCredits + course.getCredits();
+		calculateGPA();
+	}
+    
+    
+}

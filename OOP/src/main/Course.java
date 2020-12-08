@@ -42,7 +42,7 @@ public class Course implements Serializable, Comparable {
     /**
     * @generated
     */
-    private List<Student> students;
+    private List<Studentt> students;
     
     /**
     * @generated
@@ -52,7 +52,7 @@ public class Course implements Serializable, Comparable {
     /**
     * @generated
     */
-    private HashMap<Student, Mark> marks;
+    private HashMap<Studentt, Mark> marks;
     
     /**
     * @generated
@@ -63,146 +63,146 @@ public class Course implements Serializable, Comparable {
     /**
     * @generated
     */
-    private File file;
+    public List<File> files;
     
     
     /**
     * @generated
     */
-    private String getCourseName() {
+    public String getCourseName() {
         return this.courseName;
     }
     
     /**
     * @generated
     */
-    private void setCourseName(String courseName) {
+    public void setCourseName(String courseName) {
         this.courseName = courseName;
     }
     
     /**
     * @generated
     */
-    private Integer getCredits() {
+    public Integer getCredits() {
         return this.credits;
     }
     
     /**
     * @generated
     */
-    private void setCredits(Integer credits) {
+    public void setCredits(Integer credits) {
         this.credits = credits;
     }
     
     /**
     * @generated
     */
-    private String getDescription() {
+    public String getDescription() {
         return this.description;
     }
     
     /**
     * @generated
     */
-    private void setDescription(String description) {
+    public void setDescription(String description) {
         this.description = description;
     }
     
     /**
     * @generated
     */
-    private String getCourseCode() {
+    public String getCourseCode() {
         return this.courseCode;
     }
     
     /**
     * @generated
     */
-    private void setCourseCode(String courseCode) {
+    public void setCourseCode(String courseCode) {
         this.courseCode = courseCode;
     }
     
     /**
     * @generated
     */
-    private boolean getIsAvailable() {
+    public boolean getIsAvailable() {
         return this.isAvailable;
     }
     
     /**
     * @generated
     */
-    private void setIsAvailable(boolean isAvailable) {
+    public void setIsAvailable(boolean isAvailable) {
         this.isAvailable = isAvailable;
     }
     
     /**
     * @generated
     */
-    private Teacher getTeacher() {
+    public Teacher getTeacher() {
         return this.teacher;
     }
     
     /**
     * @generated
     */
-    private void setTeacher(Teacher teacher) {
+    public void setTeacher(Teacher teacher) {
         this.teacher = teacher;
     }
     
     /**
     * @generated
     */
-    private List<Student> getStudents() {
+    public List<Student> getStudents() {
         return this.students;
     }
     
     /**
     * @generated
     */
-    private void setStudents(List<Student> students) {
+    public void setStudents(List<Student> students) {
         this.students = students;
     }
     
     /**
     * @generated
     */
-    private List<File> getCourseFiles() {
+    public List<File> getCourseFiles() {
         return this.courseFiles;
     }
     
     /**
     * @generated
     */
-    private void setCourseFiles(List<File> courseFiles) {
+    public void setCourseFiles(List<File> courseFiles) {
         this.courseFiles = courseFiles;
     }
     
     /**
     * @generated
     */
-    private HashMap<Student, Mark> getMarks() {
+    public HashMap<Student, Mark> getMarks() {
         return this.marks;
     }
     
     /**
     * @generated
     */
-    private void setMarks(HashMap<Student, Mark> marks) {
+    public void setMarks(HashMap<Student, Mark> marks) {
         this.marks = marks;
     }
     
     /**
     * @generated
     */
-    private String getPrerequisite() {
+    public String getPrerequisite() {
         return this.prerequisite;
     }
     
     /**
     * @generated
     */
-    private void setPrerequisite(String prerequisite) {
+    public void setPrerequisite(String prerequisite) {
         this.prerequisite = prerequisite;
     }
     

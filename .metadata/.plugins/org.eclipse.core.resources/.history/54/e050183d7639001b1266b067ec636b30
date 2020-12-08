@@ -1,0 +1,15 @@
+package main;
+
+public class Main {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+			Studentt s = new Studentt("Elvina", "Shamoi", "elvinasmail", 2, Faculties.FIT, Degree.BACHELOR);
+			System.out.println(s.createID());
+//			System.out.println(s.getId());
+			Studentt s1 = new Studentt("Dilana", "Shamoi", "elvinasmail", 2, Faculties.BS, Degree.BACHELOR);
+			System.out.println(s1.createID());
+		
+	}
+
+}

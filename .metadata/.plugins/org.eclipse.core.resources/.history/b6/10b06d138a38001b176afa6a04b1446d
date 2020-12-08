@@ -1,0 +1,13 @@
+package main;
+
+
+/**
+* @generated
+*/
+public class CreditsOverflow extends Exception {
+    
+	public CreditsOverflow(Course course, int limit) {
+        super(String.format("Error! Can't add this course with %d credits, limit is %d",
+                course.getCredits(), limit));
+    }
+}
