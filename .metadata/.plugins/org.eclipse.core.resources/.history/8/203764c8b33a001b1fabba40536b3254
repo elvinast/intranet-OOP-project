@@ -1,0 +1,45 @@
+package main;
+
+import java.util.Date;
+
+/**
+* @generated
+*/
+public class News extends Message {
+	
+    private Faculties faculty;
+    private Manager manager;
+  
+    public News(Faculties faculty, String title, String text, Employee sender, Date date) {
+        super(title, text, sender, date);
+
+        this.faculty = faculty;
+    }
+
+    private Faculties getFaculty() {
+        return this.faculty;
+    }
+    
+    private void setFaculty(Faculties faculty) {
+        this.faculty = faculty;
+    }
+    
+    public Manager getManager() {
+        return this.manager;
+    }
+    
+    public void setManager(Manager manager) {
+        this.manager = manager;
+    }
+    
+
+    //                          Operations                                  
+    
+    
+    public void showNews() {
+        for (News n: Database.news) {
+        	
+        }
+    }
+    
+}

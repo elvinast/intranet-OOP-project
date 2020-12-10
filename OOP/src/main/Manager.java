@@ -1,122 +1,115 @@
 package main;
 
 import java.util.List;
+import java.util.*;
 
 /**
 * @generated
 */
 public class Manager extends Employee implements INews, IOrder {
     
-    /**
-    * @generated
-    */
+
     private List<Student> students;
-    
-    /**
-    * @generated
-    */
     private List<Teacher> teachers;
-    
-    /**
-    * @generated
-    */
     private List<Course> courses;
-    
-    
-    /**
-    * @generated
-    */
     private News news;
+   
+    public Manager() {}
     
-    /**
-    * @generated
-    */
+    public Manager(String firstName, String lastName, String email, 
+    		Integer salary, List<Student> students, List<Teacher> teachers, List<Course> courses, News news) {
+    	super(firstName, lastName, email, salary);
+    	this.students = students;
+    	this.teachers = teachers;
+    	this.courses = courses;
+    	this.news = news;
+    }
+    
     private List<Student> getStudents() {
         return this.students;
     }
     
-    /**
-    * @generated
-    */
     private void setStudents(List<Student> students) {
         this.students = students;
     }
-    /**
-    * @generated
-    */
+    
     private List<Teacher> getTeachers() {
         return this.teachers;
     }
+
     
-    /**
-    * @generated
-    */
     private void setTeachers(List<Teacher> teachers) {
         this.teachers = teachers;
     }
     
-    /**
-    * @generated
-    */
     private List<Course> getCourses() {
         return this.courses;
     }
     
-    /**
-    * @generated
-    */
     private void setCourses(List<Course> courses) {
         this.courses = courses;
     }
     
-    
-    /**
-    * @generated
-    */
     public News getNews() {
         return this.news;
     }
     
-    /**
-    * @generated
-    */
     public void setNews(News news) {
         this.news = news;
     }
     
-
     //                          Operations                                  
+
+    @Override
+	public String toString() {
+		return "Manager [students=" + students + ", teachers=" + teachers + ", courses=" + courses + ", news=" + news
+				+ "]";
+	}
+
+	public void createCourse(String name, int credits, Teacher teacher, String courseCode) {
+    	
+    	Course newCourse = new Course(name, credits, teacher, courseCode);
+    	for (Course course: Database.courses) {
+        	if (!course.getCourseCode().equals(courseCode)) {
+        		Database.courses.add(newCourse);
+        	}else {
+        		System.out.println("This course exists");
+        	}
+        //TODO
+    	}
+    }
     
-    /**
-    * @generated
-    */
-    public Course createCourse(String name, int credits, Teacher teacher) {
-		return null;
-        //TODO
-    }
-    /**
-    * @generated
-    */
     public void infoStudents() {
-        //TODO
+    	for(Student s: Database.students) {
+    		System.out.println("Student name: " + s.getFirstName() + " " + s.getLastName() 
+    			+ ", Faculty: " + s.getFaculty() + ", Year of study: " + s.getYearOfStudy());
+    	}
     }
-    /**
-    * @generated
-    */
+
     public void infoTeachers() {
-        //TODO
+    	for(Teacher t: Database.teachers) {
+    		System.out.println("Teacher name: " + t.getFirstName() + " " + t.getLastName() + ", Faculty: " + t.faculty);
+    	}
     }
-    /**
-    * @generated
-    */
+
     public void suggestCourse(Course course, List<Student> students) {
         //TODO
+    	for(Student s : students) {
+    		if(s.getCourses().contains(course)) {
+    			System.out.println("Course exists");
+    		}else {
+    			course.setIsAvailable(false);
+    		}
+    	}
     }
-    /**
-    * @generated
-    */
-    public boolean approveRegistration(Student student) {
-		return true;
+
+    public boolean approveRegistration(Student student, Course course) {
+		
+    	if(student.getCurCredits() <= (21 - course.getCredits())) {
+    		return true;
+    	}else {
+    		return false;
+    	}
     }
 
 	@Override
@@ -126,9 +119,20 @@ public class Manager extends Employee implements INews, IOrder {
 	}
 
 	@Override
-	public void sendOrder(String problem, TechSupportGuy executor) {
+	public void sendOrder(String problem, Order order) {
 		// TODO Auto-generated method stub
 		
 	}
-    
+	public boolean equals(Object obj) {
+    	if(!super.equals(obj)){
+			return true;
+		}
+    	Manager m = (Manager) obj;
+    	return super.equals(m) && students.equals(m.students) && teachers.equals(m.teachers) 
+    			&& courses.equals(m.courses) && news.equals(m.news);
+    }
+	
+	public int hashCode() {
+		return Objects.hash(super.hashCode(), students, teachers, courses, news);
+	}
 }

@@ -1,176 +1,135 @@
 package main;
 
 import java.util.List;
+import java.util.Random;
 
 /**
 * @generated
 */
 public class TechSupportGuy extends Employee {
-    
-    /**
-    * @generated
-    */
+
     private Integer salary;
-    
-    /**
-    * @generated
-    */
     private double workExperience;
-    
-    /**
-    * @generated
-    */
     private List<Order> orders;
-    
-    /**
-    * @generated
-    */
     private String id;
-    
-    /**
-    * @generated
-    */
     private String login;
-    
-    /**
-    * @generated
-    */
     private String password;
-    
-    
-    /**
-    * @generated
-    */
     private Order order;
-    
-    
-    /**
-    * @generated
-    */
-    private Integer getSalary() {
-        return this.salary;
-    }
-    
-    /**
-    * @generated
-    */
-    private void setSalary(Integer salary) {
+    private OrderStatus orderStatus;
+
+    public OrderStatus getOrderStatus() {
+		return orderStatus;
+	}
+	public void setOrderStatus(OrderStatus orderStatus) {
+		this.orderStatus = orderStatus;
+	}
+	public TechSupportGuy(int salary, double workExperience, String id){
         this.salary = salary;
-    }
-    
-    /**
-    * @generated
-    */
-    private double getWorkExperience() {
-        return this.workExperience;
-    }
-    
-    /**
-    * @generated
-    */
-    private void setWorkExperience(double workExperience) {
-        this.workExperience = workExperience;
-    }
-    
-    /**
-    * @generated
-    */
-    private List<Order> getOrders() {
-        return this.orders;
-    }
-    
-    /**
-    * @generated
-    */
-    private void setOrders(List<Order> orders) {
-        this.orders = orders;
-    }
-    
-    /**
-    * @generated
-    */
-    private String getId() {
-        return this.id;
-    }
-    
-    /**
-    * @generated
-    */
-    private void setId(String id) {
+        this.workExperience  = workExperience;
         this.id = id;
     }
-    
-    /**
-    * @generated
-    */
-    private String getLogin() {
+    public Integer getSalary() {
+        return this.salary;
+    }
+    public void setSalary(Integer salary) {
+        this.salary = salary;
+    }
+    public double getWorkExperience() {
+        return this.workExperience;
+    }
+    public void setWorkExperience(double workExperience) {
+        this.workExperience = workExperience;
+    }
+    public List<Order> getOrders() {
+        return this.orders;
+    }
+    public void setOrders(List<Order> orders) {
+        this.orders = orders;
+    }
+    public String getId() {
+        return this.id;
+    }
+    public void setId(String id) {
+        this.id = id;
+    }
+    public String getLogin() {
         return this.login;
     }
-    
-    /**
-    * @generated
-    */
-    private void setLogin(String login) {
+    public void setLogin(String login) {
         this.login = login;
     }
-    
-    /**
-    * @generated
-    */
-    private String getPassword() {
+    public String getPassword() {
         return this.password;
     }
-    
-    /**
-    * @generated
-    */
-    private void setPassword(String password) {
+    public void setPassword(String password) {
         this.password = password;
     }
-    
-    
-    /**
-    * @generated
-    */
     public Order getOrder() {
         return this.order;
     }
-    
-    /**
-    * @generated
-    */
     public void setOrder(Order order) {
         this.order = order;
     }
     
 
-    //                          Operations                                  
-    
-    /**
-    * @generated
-    */
     public boolean acceptOrder(Order order) {
-        //TODO
+        orders.add(order);
     	return true;
     }
-    /**
-    * @generated
-    */
-    public void updateOrder(Order order, OrderStatus status) {
-        //TODO
+    public void updateOrder(OrderStatus status) {
+        this.setOrderStatus(status);
     }
-    /**
-    * @generated
-    */
-    public void viewOrders() {
-        //TODO
+    public void viewOrders(OrderStatus status) {
+        for (Order order: this.orders) {
+        	if (order.getOrderStatus().equals(orderStatus)){
+        		System.out.println(order);
+        	}
+        }
     }
-    /**
-    * @generated
-    */
+
+//    public String getTechSupportGuy(){
+//        Random rand = new Random();
+//        int num = rand.nextInt(10) + 1;
+//        switch(num){
+//            case 1:
+//                return "Yerbol";
+//                break;
+//            case 2:
+//                return "Nurbol";
+//                break;
+//            case 3:
+//                return "Futbol";
+//                break;
+//            default:
+//                return "No Guy available";
+//                break;
+//        }
+//    }
+
+    public void clearOrders(){
+        orders.clear();
+    }
+
+    public void numberOfOrders(){
+        if(orders.size() == 0){
+            System.out.println("No orders");
+        }
+        else {
+            System.out.println(orders.size());
+        }
+    }
+     
     public boolean rejectOrder(Order order) {
-        //TODO
-    	return true;
+        if(getTechSupportGuy().equals("No guy available"));
+        return true;
+    }
+
+    public String toString(){
+        String str = " ";
+        for(int i = 0; i < orders.size(); i++){
+            str += orders.get(i).toString() + "\n"; 
+        }
+        return str;
     }
     
 }

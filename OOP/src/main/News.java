@@ -1,48 +1,35 @@
 package main;
 
+import java.util.Date;
+import java.util.Objects;
 
 /**
 * @generated
 */
-public class News extends Message implements INews {
-    
-    /**
-    * @generated
-    */
+public class News extends Message {
+	
     private Faculties faculty;
-    
-    
-    /**
-    * @generated
-    */
     private Manager manager;
+  
+    public News() {}
     
-    
-    /**
-    * @generated
-    */
-    private Faculties getFaculty() {
+    public News(Faculties faculty, String title, String text, Employee sender, Date date) {
+        super(title, text, date, sender);
+        this.faculty = faculty;
+    }
+
+    public Faculties getFaculty() {
         return this.faculty;
     }
     
-    /**
-    * @generated
-    */
-    private void setFaculty(Faculties faculty) {
+    public void setFaculty(Faculties faculty) {
         this.faculty = faculty;
     }
     
-    
-    /**
-    * @generated
-    */
     public Manager getManager() {
         return this.manager;
     }
     
-    /**
-    * @generated
-    */
     public void setManager(Manager manager) {
         this.manager = manager;
     }
@@ -50,17 +37,38 @@ public class News extends Message implements INews {
 
     //                          Operations                                  
     
-    /**
-    * @generated
-    */
+    
     public void showNews() {
-        //TODO
+        for (News n: Database.news) {
+        	
+        }
     }
 
 	@Override
-	public News createNews(Message news) {
-		// TODO Auto-generated method stub
-		return null;
+	public String toString() {
+		return "News [faculty=" + faculty + ", manager=" + manager + "]";
 	}
+    
+	public final void showNewsInfo() {
+        Employee sender = this.getSender();
+        System.out.println(String.format("Title: %s [%s]", this.getTitle(), faculty));
+        System.out.println(String.format("Text: %s", this.getText()));
+        System.out.println(String.format("Sender: %s [%s]", sender.getFirstName() + sender.getLastName(), sender.getLogin()));
+        System.out.println(String.format("Date: %s", this.getDate()));
+    }
+	
+	@Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof News)) return false;
+        if (!super.equals(o)) return false;
+        News news = (News) o;
+        return faculty == news.faculty;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), faculty);
+    }
     
 }

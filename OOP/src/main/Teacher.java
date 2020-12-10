@@ -1,110 +1,120 @@
 package main;
 
 import java.io.Serializable;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 /**
 * @generated
 */
-public class Teacher extends Employee implements Serializable, Comparable {
+public class Teacher extends Employee implements Serializable, IOrder, IMessage {
     
-    /**
-    * @generated
-    */
-    private List<Message> messages;
-    
-    /**
-    * @generated
-    */
     private List<Course> courses;
-    
-    /**
-    * @generated
-    */
     private TeachingStatus teachingStatus;
-    
     public Faculties faculty;
     
-   
-    
-    private List<Course> getCourses() {
+    public Teacher() {}
+
+    public Teacher(String firstName, String lastName, String email, int salary, Faculties faculty) {
+    	super(firstName, lastName, email, salary);
+    	this.faculty = faculty;
+    }
+    public List<Course> getCourses() {
         return this.courses;
     }
-    
-    /**
-    * @generated
-    */
-    private void setCourses(List<Course> courses) {
+   
+    public void setCourses(List<Course> courses) {
         this.courses = courses;
     }
-    
-    /**
-    * @generated
-    */
-    private TeachingStatus getTeachingStatus() {
+   
+    public TeachingStatus getTeachingStatus() {
         return this.teachingStatus;
     }
-    
-    /**
-    * @generated
-    */
-    private void setTeachingStatus(TeachingStatus teachingStatus) {
+
+    public void setTeachingStatus(TeachingStatus teachingStatus) {
         this.teachingStatus = teachingStatus;
     }
     
     
-
     //                          Operations                                  
     
 
-    /**
-    * @generated
-    */
-    public News createNews(String title, String text) {
-		return null;
-        //TODO
+
+	public News createNews(String title, String text) {
+		Date timestamp = Calendar.getInstance().getTime();
+		return new News(); //todo
     }
-    /**
-    * @generated
-    */
+    
     public void addCourse(Course course) {
-        //TODO
+        this.courses.add(course);
     }
-    /**
-    * @generated
-    */
-    public void putMark(Studentt student, Course course, MarksType marksType, double points) {
+    
+    public void putMark(Course course, MarksType marksType, double points, Student student) throws DeadlineExpired{
         //TODO
+    	course.putMarks(student, marksType, points);
     }
-    /**
-    * @generated
-    */
-    public void addCourseFile(Course course, File file) {
-        //TODO
+    
+    public boolean addCourseFile(Course course, File file) {
+        for (Course c: this.courses) {
+        	if (c.equals(course)) {
+        		c.courseFiles.add(file);
+        		return true;
+        	}
+        }
+        return false;
     }
-    /**
-    * @generated
-    */
-    public void deleteCourseFile(Course course, File file) {
-        //TODO
+    
+    public boolean deleteCourseFile(Course course, File file) {
+    	for (Course c: this.courses) {
+        	if (c.equals(course)) {
+        		if (c.courseFiles.contains(file)) {
+        			c.courseFiles.remove(file);
+        			return true;
+        		}
+        	}
+        }
+        return false;
     }
-    /**
-    * @generated
-    */
+    
     public void viewCourses() {
-        //TODO
-    }
-    /**
-    * @generated
-    */
-    public void viewMarks(Course course) {
-        //TODO
+        for (Course c: this.courses) {
+        	System.out.println(c);
+        }
     }
 
 	@Override
-	public int compareTo(Object o) {
+	public void sendMessage(Message message, Employee sendTo) {
 		// TODO Auto-generated method stub
-		return 0;
+		
 	}
+
+	@Override
+	public void sendOrder(String problem, Order order) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	@Override
+	public int hashCode() {
+		return Objects.hash(super.hashCode(), faculty, teachingStatus, courses);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if(!super.equals(obj)){
+			return true;
+		}
+    	Teacher s = (Teacher) obj;
+    	return super.equals(s) && teachingStatus.equals(s.teachingStatus) && faculty.equals(faculty)
+    			&& s.courses == this.courses;
+	}
+
+	@Override
+	public String toString() {
+		return "Teacher [courses=" + courses + ", teachingStatus=" + teachingStatus + ", faculty=" + faculty + "]";
+	}
+	
     
 }

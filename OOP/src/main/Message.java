@@ -2,118 +2,94 @@ package main;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Objects;
 
 /**
 * @generated
 */
-public class Message implements Serializable, IMessage {
+public class Message implements Serializable {
     
-    /**
-    * @generated
-    */
     private String title;
-    
-    /**
-    * @generated
-    */
     private String text;
-    
-    /**
-    * @generated
-    */
     private Date date;
+    private Employee sender;
     
-    /**
-    * @generated
-    */
-    private Employee msgFrom;
+    public Message() {}
+    
+    public Message(String title, String text, Date date, Employee sender) {
+    	this.title = title;
+    	this.text = text;
+    	this.date = date;
+    	this.sender = sender;
+    }
     
     
-    /**
-    * @generated
-    */
-    private Employee employee;
-    
-    
-    /**
-    * @generated
-    */
-    private String getTitle() {
+    public String getTitle() {
         return this.title;
     }
     
-    /**
-    * @generated
-    */
-    private void setTitle(String title) {
+    public void setTitle(String title) {
         this.title = title;
     }
     
-    /**
-    * @generated
-    */
-    private String getText() {
+    public String getText() {
         return this.text;
     }
     
-    /**
-    * @generated
-    */
-    private void setText(String text) {
+    public void setText(String text) {
         this.text = text;
     }
     
-    /**
-    * @generated
-    */
-    private Date getDate() {
+    public Date getDate() {
         return this.date;
     }
     
-    /**
-    * @generated
-    */
-    private void setDate(Date date) {
+    public void setDate(Date date) {
         this.date = date;
     }
     
-    /**
-    * @generated
-    */
-    private Employee getMsgFrom() {
-        return this.msgFrom;
+    public Employee getSender() {
+        return this.sender;
     }
     
-    /**
-    * @generated
-    */
-    private void setMsgFrom(Employee msgFrom) {
-        this.msgFrom = msgFrom;
+    public void setSender(Employee sender) {
+        this.sender = sender;
     }
     
-    
-    /**
-    * @generated
-    */
-    public Employee getEmployee() {
-        return this.employee;
-    }
-    
-    /**
-    * @generated
-    */
-    public void setEmployee(Employee employee) {
-        this.employee = employee;
-    }
     
 
     //                          Operations                                  
  
 
-	@Override
-	public void sendMessage(Message message, Employee sendTo) {
-		// TODO Auto-generated method stub
-		
+	public void showMessageInfo() {
+		Employee sender = this.getSender();
+		System.out.println("Message Information:\n");
+		System.out.println(String.format("Title: %s", title));
+        System.out.println(String.format("Text: %s", text));
+        System.out.println(String.format("Sender: %s [%s]", sender.getFirstName() + sender.getLastName(), sender.getLogin()));
+        System.out.println(String.format("Date: %s", date));
 	}
-    
+
+	@Override
+	public String toString() {
+		return "Message [title=" + title + ", text=" + text + ", date=" + date + ", sender=" + sender + "]";
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(title, text, sender, date);
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+        if (!(o instanceof Message)) return false;
+        Message message = (Message) o;
+        return title.equals(message.title) &&
+                text.equals(message.text) &&
+                sender.equals(message.sender) &&
+                date.equals(message.date);
+	}
+	
+	
 }

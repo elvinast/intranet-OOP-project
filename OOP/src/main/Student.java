@@ -5,24 +5,26 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.Objects;
+import java.util.Map.Entry;
 import java.util.Vector;
 
 /**
 * @generated
 */
-public class Student extends User implements Comparable, IOrder {
+public class Student extends User implements IOrder{
     
     private Integer yearOfStudy;
     private double GPA;
     private Vector<Course> courses;
-    private String id;
+    private String id="";
     private int curCredits = 0;
     private Faculties faculty;
     private Degree degree;
     private Transcript transcript;
     private HashMap<Course, Mark> marks;
     final Integer CREDITS_LIMIT = 21;
-    
+    public static int numOfStud = 0;
     public Student() {}
 
     public Student(String firstName, String lastName, String email, Integer yearOfStudy, Faculties faculty, Degree degree) {
@@ -30,6 +32,7 @@ public class Student extends User implements Comparable, IOrder {
     	this.yearOfStudy = yearOfStudy;
     	this.faculty = faculty;
     	this.degree = degree;
+    	numOfStud++;
     }
     
     static BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
@@ -64,6 +67,7 @@ public class Student extends User implements Comparable, IOrder {
 		this.degree = degree;
 		this.transcript = transcript;
 		this.marks = marks;
+		numOfStud++;
 	}
     
 
@@ -85,6 +89,10 @@ public class Student extends User implements Comparable, IOrder {
     
     public Vector<Course> getCourses() {
         return this.courses;
+    }
+    
+    public int getCurCredits() {
+    	return curCredits;
     }
     
     public void setCourses(Vector<Course> courses) {
@@ -157,16 +165,23 @@ public class Student extends User implements Comparable, IOrder {
     }
     
     public String createID() {
-    	String id = "";
     	int year = Calendar.getInstance().get(Calendar.YEAR);
+    	year -= this.yearOfStudy;
+    	year++;
     	id += String.valueOf(year).substring(2);
     	if (this.degree == Degree.BACHELOR) id += "BD";
     	else if (this.degree == Degree.MASTERS) id += "MD";
     	else id += "PD";
-    	
-    	//random
-    	
+    	StringBuilder builder = new StringBuilder(String.valueOf(numOfStud));
+        while (builder.length() < 6) builder.insert(0, "0");
+        id += builder.toString();
+//        this.id = id;
 		return id;
+    }
+    
+    public void showInfo() {
+    	System.out.println("Student Name: " + this.getFirstName() + " " + this.getLastName());
+    	//add more
     }
     
     @Override
@@ -178,11 +193,9 @@ public class Student extends User implements Comparable, IOrder {
     * @generated
     */
     public void viewTranscript() {
-        //TODO
+    	System.out.println(transcript);
     }
-    /**
-    * @generated
-    */
+    
     public void viewCourses() {
     	int num = 0;
     	for (Course course: this.courses) {
@@ -191,70 +204,45 @@ public class Student extends User implements Comparable, IOrder {
     	}
     	System.out.println("You have " + num + "courses. Good Luck)");
     }
-    /**
-    * @generated
-    */
+   
     public void viewCourseFiles(Course course) {
-        //TODO
+        for (File file: course.files) {
+        	file.showFileInfo();
+        }
     }
-    /**
-    * @generated
-    */
+    
     public void viewMarks(Course course) {
-        //TODO
-    }
-    /**
-    * @generated
-    */
-    public void showTeachers(Faculties faculty) {
-        //TODO
+		System.out.println("Marks of the student " + this.getFirstName() + " " + this.getLastName());
+		for (Entry<Course, Mark> entry : this.marks.entrySet()) {
+			System.out.println(entry.getKey() + ":" + entry.getValue());
+		}
     }
 
-	@Override
-	public int compareTo(Object o) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+    public void showTeachers() {
+        for (Teacher t: Database.teachers) {
+        	System.out.println("Teacher name: " + t.getFirstName() + " " + t.getLastName() + ", Faculty: " + t.faculty);
+        }
+    }
+
 
 	@Override
 	public void sendOrder(String problem, Order order) {
-		// TODO Auto-generated method stub
-		
+		//ToDo
 	}
 
 	@Override
 	public int hashCode() {
-		final int prime = 31;
-		int result = super.hashCode();
-		long temp;
-		temp = Double.doubleToLongBits(GPA);
-		result = prime * result + (int) (temp ^ (temp >>> 32));
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result + ((yearOfStudy == null) ? 0 : yearOfStudy.hashCode());
-		return result;
+		return Objects.hash(super.hashCode(), id, yearOfStudy, courses, GPA);
 	}
 
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
+		if(!super.equals(obj)){
 			return true;
-		if (!super.equals(obj))
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Student other = (Student) obj;
-		if (Double.doubleToLongBits(GPA) != Double.doubleToLongBits(other.GPA))
-			return false;
-		if (id == null) {
-			if (other.id != null)
-				return false;
-		} else if (!id.equals(other.id))
-			return false;
-		if (yearOfStudy == null) {
-			if (other.yearOfStudy != null)
-				return false;
-		} else if (!yearOfStudy.equals(other.yearOfStudy))
-			return false;
-		return true;
+		}
+    	Student s = (Student) obj;
+    	return super.equals(s) && yearOfStudy.equals(s.yearOfStudy) && id.equals(s.id)
+    			&& s.GPA == this.GPA;
 	}
+	
 }

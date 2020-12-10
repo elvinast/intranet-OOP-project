@@ -27,3 +27,6 @@
 1607445685799	Copy file
 1607445702138	Delete element
 1607445709564	Copy file
+1607586850903	Encapsulate field 'attestation1'
+1607586857483	Encapsulate field 'attestation2'
+1607586861175	Encapsulate field 'fnal'

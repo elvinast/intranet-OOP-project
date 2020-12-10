@@ -3,94 +3,62 @@ package main;
 /**
 * @generated
 */
-public class File extends Course {
+public class File  {
     
-    /**
-    * @generated
-    */
+	public File() {}
+
+	public File(String fileName, Course course, Teacher t, String description) {
+		this.fileName = fileName;
+        this.course = course;
+        this.creator = t;
+        this.description = description;
+	}
+	
     private String fileName;
-    
-    /**
-    * @generated
-    */
     private Course course;
-    
-    /**
-    * @generated
-    */
     private Teacher creator;
-    
-    /**
-    * @generated
-    */
     private String description;
     
-    
-    /**
-    * @generated
-    */
-    private String getFileName() {
+    public String getFileName() {
         return this.fileName;
     }
     
-    /**
-    * @generated
-    */
-    private void setFileName(String fileName) {
+    public void setFileName(String fileName) {
         this.fileName = fileName;
     }
     
-    /**
-    * @generated
-    */
-    private Course getCourse() {
+    public Course getCourse() {
         return this.course;
     }
     
-    /**
-    * @generated
-    */
-    private void setCourse(Course course) {
+    public void setCourse(Course course) {
         this.course = course;
     }
     
-    /**
-    * @generated
-    */
-    private Teacher getCreator() {
+    public Teacher getCreator() {
         return this.creator;
     }
     
-    /**
-    * @generated
-    */
-    private void setCreator(Teacher creator) {
+    public void setCreator(Teacher creator) {
         this.creator = creator;
     }
     
-    /**
-    * @generated
-    */
-    private String getDescription() {
+    public String getDescription() {
         return this.description;
     }
     
-    /**
-    * @generated
-    */
-    private void setDescription(String description) {
+    public void setDescription(String description) {
         this.description = description;
     }
-    
     
 
     //                          Operations                                  
     
-    /**
-    * @generated
-    */
     public void showFileInfo() {
-        //TODO
+        System.out.println(getDescription());
+        System.out.println(getCreator());
+        System.out.println(getCourse());
+        System.out.println(getFileName());
     }
     
 }

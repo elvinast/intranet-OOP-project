@@ -20,7 +20,7 @@ public class User implements Serializable, Comparable {
     	this.firstName = firstName;
     	this.lastName = lastName;
     	this.email = email;
-    	this.login = login;
+    	this.login = this.firstName.substring(0, 1).toLowerCase() + "_" + this.lastName.toLowerCase();
     	this.password = password;
     }
     
@@ -52,10 +52,6 @@ public class User implements Serializable, Comparable {
         return this.login;
     }
     
-    public void setLogin(String login) {
-    	this.login = login;
-//    	this.login = this.firstName.substring(0, 1).toLowerCase() + "_" + this.lastName.toLowerCase();
-    }
 
     public String getPassword() {
         return this.password;
@@ -67,25 +63,35 @@ public class User implements Serializable, Comparable {
 
     //                          Operations                                  
     
-    
+    Scanner sc = new Scanner(System.in);
     public int signIn() {
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Enter login: ");
-        String in = sc.nextLine();
-        int id = Integer.parseInt(in);
-        if (Database.users.contains(id) == false || Database.users.get(id) == null) {
-        	System.err.println("Error! Wrong login. ");
-        	return -1;
+        
+        
+//        int id = Integer.parseInt(in);
+        for(int i = 0; i < 3; i++) {
+        	System.out.println("Welcome! You have " + (3 - i) + " attempts to login.");
+        	System.out.println("Enter login: ");
+        	String in = sc.next();
+        	for(User u: Database.users) {
+	        	if (u.login.equals(in) == true) {
+	        		System.out.println("Enter password: ");
+	        		String in1 = sc.next();
+	        		String ps = in1;
+	        		if (u.password.equals(ps)) {
+	        			System.out.println("Successfully authorized!");
+	        			return 1;
+	        		}
+	        		else {
+	        			System.out.println("Error! Wrong password!");
+	        			continue;
+	        		}
+	        	}
+        	}
+        	if (i < 2) System.out.println("Try again!");
         }
-        User u = Database.users.get(id);
-        System.out.println("Enter password: ");
-        String in1 = sc.nextLine();
-        String ps = in1;
-		if(ps.equals(u.password)){
-			return id;
-		}
-		System.err.println("Error! Wrong password. ");
-    	return -1;
+        
+        System.out.println("No such user:(");
+        return -1;
     }
 
     public boolean changePassword(String oldPassword, String newPassword) {

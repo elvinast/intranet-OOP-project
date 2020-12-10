@@ -1,0 +1,86 @@
+package main;
+
+import java.util.Date;
+import java.util.List;
+
+/**
+* @generated
+*/
+public class Mark {
+    
+	
+    private double points;
+    private Date deadline;
+    private Course courseName;
+    private List<Mark> marks;
+    private double totalGrade;
+    private double courseGPA;
+    
+    
+    public double getPoints() {
+        return this.points;
+    }
+    
+    public void setPoints(double points) {
+        this.points = points;
+    }
+    
+    public Date getDeadline() {
+        return this.deadline;
+    }
+
+    public void setDeadline(Date deadline) {
+        this.deadline = deadline;
+    }
+    
+    public Course getCourseName() {
+        return this.courseName;
+    }
+    
+    private void setCourseName(Course courseName) {
+        this.courseName = courseName;
+    }
+    
+    public List<Mark> getMarks() {
+        return this.marks;
+    }
+    
+    public void setMarks(List<Mark> marks) {
+        this.marks = marks;
+    }
+    
+    public double getTotalGrade() {
+        return this.totalGrade;
+    }
+    
+    public void setTotalGrade(double totalGrade) {
+        this.totalGrade = totalGrade;
+    }
+    
+    public double getCourseGPA() {
+        return this.courseGPA;
+    }
+    
+    public void setCourseGPA(double courseGPA) {
+        this.courseGPA = courseGPA;
+    }
+    
+    
+
+    //                          Operations                                  
+    
+    public void updatePoints(double addingPoints) {
+        //TODO
+    }
+
+    public String gradeToLetter() {
+		return null;
+        //TODO
+    }
+
+    public double convertTo4() {
+		return courseGPA;
+        //TODO
+    }
+    
+}
