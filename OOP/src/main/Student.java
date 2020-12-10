@@ -135,9 +135,9 @@ public class Student extends User implements IOrder{
         return this.marks;
     }
     
-    public void setMarks(HashMap<Course, Mark> marks) {
-        this.marks = marks;
-    }
+    public void setMark(Course c, Mark m) {
+    	marks.put(c, m);
+    }		
     
 
     //                          Operations                                  
@@ -179,9 +179,11 @@ public class Student extends User implements IOrder{
 		return id;
     }
     
-    public void showInfo() {
-    	System.out.println("Student Name: " + this.getFirstName() + " " + this.getLastName());
-    	//add more
+    public String showInfo() {
+    	String s = "";
+    	s += "\nStudent Name: " + this.getFirstName() + " " + this.getLastName() + 
+    			"\nYear of study: " + this.yearOfStudy + "\nFaculty: " + this.faculty + "\nGPA: " + this.GPA;
+    	return s;
     }
     
     @Override
@@ -206,7 +208,7 @@ public class Student extends User implements IOrder{
     }
    
     public void viewCourseFiles(Course course) {
-        for (File file: course.files) {
+        for (File file: course.courseFiles) {
         	file.showFileInfo();
         }
     }
@@ -218,10 +220,8 @@ public class Student extends User implements IOrder{
 		}
     }
 
-    public void showTeachers() {
-        for (Teacher t: Database.teachers) {
-        	System.out.println("Teacher name: " + t.getFirstName() + " " + t.getLastName() + ", Faculty: " + t.faculty);
-        }
+    public String showTeachers() {
+        return Database.getTeachers();
     }
 
 

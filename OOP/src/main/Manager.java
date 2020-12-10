@@ -1,6 +1,5 @@
 package main;
 
-import java.util.List;
 import java.util.*;
 
 /**
@@ -9,9 +8,9 @@ import java.util.*;
 public class Manager extends Employee implements INews, IOrder {
     
 
-    private List<Student> students;
-    private List<Teacher> teachers;
-    private List<Course> courses;
+//    private List<Student> students;
+//    private List<Teacher> teachers;
+//    private List<Course> courses;
     private News news;
    
     public Manager() {}
@@ -19,36 +18,33 @@ public class Manager extends Employee implements INews, IOrder {
     public Manager(String firstName, String lastName, String email, 
     		Integer salary, List<Student> students, List<Teacher> teachers, List<Course> courses, News news) {
     	super(firstName, lastName, email, salary);
-    	this.students = students;
-    	this.teachers = teachers;
-    	this.courses = courses;
     	this.news = news;
     }
     
-    private List<Student> getStudents() {
-        return this.students;
-    }
-    
-    private void setStudents(List<Student> students) {
-        this.students = students;
-    }
-    
-    private List<Teacher> getTeachers() {
-        return this.teachers;
-    }
-
-    
-    private void setTeachers(List<Teacher> teachers) {
-        this.teachers = teachers;
-    }
-    
-    private List<Course> getCourses() {
-        return this.courses;
-    }
-    
-    private void setCourses(List<Course> courses) {
-        this.courses = courses;
-    }
+//    private List<Student> getStudents() {
+//        return this.students;
+//    }
+//    
+//    private void setStudents(List<Student> students) {
+//        this.students = students;
+//    }
+//    
+//    private List<Teacher> getTeachers() {
+//        return this.teachers;
+//    }
+//
+//    
+//    private void setTeachers(List<Teacher> teachers) {
+//        this.teachers = teachers;
+//    }
+//    
+//    private List<Course> getCourses() {
+//        return this.courses;
+//    }
+//    
+//    private void setCourses(List<Course> courses) {
+//        this.courses = courses;
+//    }
     
     public News getNews() {
         return this.news;
@@ -60,11 +56,11 @@ public class Manager extends Employee implements INews, IOrder {
     
     //                          Operations                                  
 
-    @Override
-	public String toString() {
-		return "Manager [students=" + students + ", teachers=" + teachers + ", courses=" + courses + ", news=" + news
-				+ "]";
-	}
+//    @Override
+//	public String toString() {
+//		return "Manager [students=" + students + ", teachers=" + teachers + ", courses=" + courses + ", news=" + news
+//				+ "]";
+//	}
 
 	public void createCourse(String name, int credits, Teacher teacher, String courseCode) {
     	
@@ -79,18 +75,6 @@ public class Manager extends Employee implements INews, IOrder {
     	}
     }
     
-    public void infoStudents() {
-    	for(Student s: Database.students) {
-    		System.out.println("Student name: " + s.getFirstName() + " " + s.getLastName() 
-    			+ ", Faculty: " + s.getFaculty() + ", Year of study: " + s.getYearOfStudy());
-    	}
-    }
-
-    public void infoTeachers() {
-    	for(Teacher t: Database.teachers) {
-    		System.out.println("Teacher name: " + t.getFirstName() + " " + t.getLastName() + ", Faculty: " + t.faculty);
-    	}
-    }
 
     public void suggestCourse(Course course, List<Student> students) {
         //TODO
@@ -112,10 +96,9 @@ public class Manager extends Employee implements INews, IOrder {
     	}
     }
 
-	@Override
-	public News createNews(Message news) {
-		// TODO Auto-generated method stub
-		return null;
+    @Override
+	public News createNews(Faculties faculty, String title, String text, Date date) {
+		return new News(faculty, title, text, date);
 	}
 
 	@Override
@@ -128,11 +111,16 @@ public class Manager extends Employee implements INews, IOrder {
 			return true;
 		}
     	Manager m = (Manager) obj;
-    	return super.equals(m) && students.equals(m.students) && teachers.equals(m.teachers) 
-    			&& courses.equals(m.courses) && news.equals(m.news);
+    	return super.equals(m) && news.equals(m.news);
     }
 	
 	public int hashCode() {
-		return Objects.hash(super.hashCode(), students, teachers, courses, news);
+		return Objects.hash(super.hashCode(), news);
+	}
+	
+	public String showInfo() {
+		String s = "";
+		s += "\nFull name: " + this.getFirstName() + " " + this.getLastName() + "\nWork Experience: " + this.getWorkExperience();
+		return s;
 	}
 }

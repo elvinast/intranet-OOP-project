@@ -23,6 +23,12 @@ public class Message implements Serializable {
     	this.sender = sender;
     }
     
+    public Message(String title, String text, Date date) {
+    	this.title = title;
+    	this.text = text;
+    	this.date = date;
+    }
+    
     
     public String getTitle() {
         return this.title;

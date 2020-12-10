@@ -1,0 +1,78 @@
+package main;
+
+import java.util.List;
+
+/**
+* @generated
+*/
+public class Admin extends Employee implements INews, IMessage, IOrder{
+
+	public Admin() {}
+	
+	public Admin(String firstName, String lastName, String email, int salary) {
+    	super(firstName, lastName, email, salary);
+    }
+	
+	public static Admin createAdmin(String firstName, String lastName, String email, int salary) {
+        return new Admin(firstName, lastName, email, salary);
+    }
+
+    public Student createStudent(Faculty faculty, Degree degree, String login, String firstName, String lastName) {
+        return new Student(faculty, degree, login, firstName, lastName);
+    }
+
+    public Manager createManager(Faculty faculty, int salary, String login, String firstName, String lastName) {
+        return new Manager(faculty, salary, login, firstName, lastName);
+    }
+
+    public TechSupportGuy createTechSupportGuy(String firstName, String lastName, String email, Integer salary, double workExperience, List<Order> orders){ {
+        return new TechSupportGuy(firstName, lastName, email, salary, workExperience, orders);
+    }
+
+    public Teacher createTeacher(Faculty faculty, TeacherPosition position, int salary, String login, String firstName,
+                                 String lastName) {
+        return new Teacher(faculty, position, salary, login, firstName, lastName);
+
+	
+    @Override
+    public String toString() {
+        return String.format("Admin: { %s }", super.toString());
+    }
+
+	public void addUser(User user) {
+        //TODO
+    }
+
+    public boolean removeUser(User user) {
+        //TODO
+    	return false;
+    }
+
+    public void updateUser(User user) {
+        //TODO
+    }
+
+    public void seeLogFiles() {
+        //TODO
+    }
+
+	@Override
+	public void sendMessage(Message message, Employee sendTo) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public News createNews(Message news) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public void sendOrder(String problem, Order order) {
+		// TODO Auto-generated method stub
+		
+	}
+    
+}

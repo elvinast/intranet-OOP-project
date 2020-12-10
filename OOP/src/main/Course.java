@@ -3,6 +3,7 @@ package main;
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map.Entry;
 
 
 public class Course implements Serializable, Comparable {
@@ -14,7 +15,7 @@ public class Course implements Serializable, Comparable {
     private boolean isAvailable;
     private Teacher teacher;
     private List<Student> students;
-    private List<File> courseFiles;
+    public List<File> courseFiles;
     private HashMap<Student, Mark> marks;
     private String prerequisite;
 //    public List<File> files;
@@ -27,24 +28,8 @@ public class Course implements Serializable, Comparable {
     	this.courseCode = courseCode;
     }
 
-//    public Course(String courseName, Integer credits, String description, String courseCode, Boolean isAvailable, Teacher teacher,
-//    		List<Studentt> students, List<File> courseFiles, HashMap<Studentt, Mark> marks, String prerequisite, List<File> files) {
-//    	this.courseName = courseName;
-//    	this.credits = credits;
-//    	this.description = description;
-//    	this.courseCode = courseCode;
-//    	this.isAvailable = isAvailable;
-//    	this.teacher = teacher;
-//    	this.students = students;
-//    	this.courseFiles = courseFiles;
-//    	this.marks = marks;
-//    	this.prerequisite = prerequisite;
-////    	this.files = files;
-//    	
-//    }
-
     public Course(String courseName, Integer credits, String description, String courseCode, Boolean isAvailable, Teacher teacher,
-    		List<Student> students, List<File> courseFiles, HashMap<Studentt, Mark> marks, String prerequisite) {
+    		List<Student> students, List<File> courseFiles, HashMap<Student, Mark> marks, String prerequisite) {
     	this.courseName = courseName;
     	this.credits = credits;
     	this.description = description;
@@ -138,28 +123,19 @@ public class Course implements Serializable, Comparable {
         this.prerequisite = prerequisite;
     }
 
-//    public File getFile() {
-//        return this.files;
-//    }
-//
-//    public void setFile(File file) {
-//        this.files = file;
-//    }
 
     //                          Operations                                  
 
-    public void addStudent(Student student) {
-        //TODO
-    	if(students.contains(student)) {
-    		System.out.println("This student is in this course");
-    	}else {
+    
+    public boolean addStudent(Student student) {
+    	if(!students.contains(student)) {
     		students.add(student);
-    		System.out.println("Student added");
+    		return true;
     	}
+    	return false;
     }
 
     public boolean removeStudent(Student student) {
-        //TODO
     	if(students.contains(student)) {
     		students.remove(student);
     		System.out.println("This student removed");
@@ -170,60 +146,43 @@ public class Course implements Serializable, Comparable {
     	}
     }
 
-    public void addCourseFile(File courseFile) {
-        //TODO
-    	if(courseFiles.contains(courseFile)) {
-    		System.out.println("This course file was added");
-    	}else {
+    public boolean addCourseFile(File courseFile) {
+    	if(!courseFiles.contains(courseFile)) {
     		courseFiles.add(courseFile);
-    		System.out.println("Course file added");
+    		return true;
     	}
+    	return false;
     }
 
     public boolean removeCourseFile(File courseFile) {
-        //TODO
     	if(courseFiles.contains(courseFile)) {
     		courseFiles.remove(courseFile);
-    		System.out.println("This course file removed");
     		return true;
-    	}else {
-    		System.out.println("This course file isn't exist");
-    		return false;
     	}
+    	return false;
     }
-//    /**
-//    * @return 
-//     * @generated
-//    */
-//    public void putMark() {
-//        //TODO
-//    }
 
     public boolean hasPrereq() {
-        //TODO
     	if(prerequisite != null) {
     		return true;
-    	}else {
-    		return false;
     	}
+    	return false;
     }
 
-    public void showPrereq(Course course) {
-        //TODO
+    public boolean showPrereq(Course course) {
     	if(hasPrereq()) {
     		System.out.println(prerequisite);
-    	}else {
-    		System.out.println("There is no prerequisite");
+    		return true;
     	}
+    	return false;
     }
 
-    public void addPrereq(String courseCode) {
-        //TODO
+    public boolean addPrereq(String courseCode) {
     	if(!hasPrereq()) {
     		setPrerequisite(courseCode);
-    	}else {
-    		System.out.println("Course has prerequisite");
+    		return true;
     	}
+    	return false;
     }
 
 	@Override

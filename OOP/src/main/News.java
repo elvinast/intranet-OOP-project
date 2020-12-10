@@ -13,8 +13,8 @@ public class News extends Message {
   
     public News() {}
     
-    public News(Faculties faculty, String title, String text, Employee sender, Date date) {
-        super(title, text, date, sender);
+    public News(Faculties faculty, String title, String text, Date date) {
+        super(title, text, date);
         this.faculty = faculty;
     }
 

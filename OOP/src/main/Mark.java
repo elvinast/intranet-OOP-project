@@ -4,6 +4,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
+import java.util.Map.Entry;
 
 /**
 * @generated
@@ -13,11 +14,10 @@ public class Mark implements Comparable {
 	
     private double points;
     private Date deadline;
-    private Integer attestation1;
-	private Integer attestation2;
-	private Integer finalEx;
+    private double attestation1;
+	private double attestation2;
+	private double finalEx;
     private Course courseName;
-    private List<Mark> marks;
     private double totalGrade;
     private double courseGPA;
     private String GPAletter;
@@ -28,12 +28,26 @@ public class Mark implements Comparable {
     	this.attestation2 = 0;
     	this.finalEx = 0;
     }
+    
+    public Mark(double points, MarksType marksType) {
+    	this.points = points;
+		switch (marksType) {
+        case ATTESTATION1:
+        	this.setAttestation1(points);
+            break;
+        case ATTESTATION2:
+        	this.setAttestation2(points);
+            break;
+        case FINAL_EXAM:
+        	this.setFinalEx(points);
+            break;
+		}
+    }
 
     public Mark(double points, Course courseName, double totalGrade, List<Mark> marks) {
     	this.points = points;
     	this.courseName = courseName;
     	this.totalGrade = totalGrade;
-    	this.marks = marks;
     }
     
     public double getPoints() {
@@ -60,14 +74,6 @@ public class Mark implements Comparable {
         this.courseName = courseName;
     }
     
-    public List<Mark> getMarks() {
-        return this.marks;
-    }
-    
-    public void setMarks(List<Mark> marks) {
-        this.marks = marks;
-    }
-    
     public double getTotalGrade() {
         return this.totalGrade;
     }
@@ -83,29 +89,29 @@ public class Mark implements Comparable {
     public void setCourseGPA(double courseGPA) {
         this.courseGPA = courseGPA;
     }
-    public Integer getAttestation1() {
+    public double getAttestation1() {
 		return attestation1;
 	}
 
-	public void setAttestation1(Integer attestation1) {
+	public void setAttestation1(double attestation1) {
 		this.attestation1 = attestation1;
 		totalGrade += attestation1;
 	}
 
-	public Integer getAttestation2() {
+	public double getAttestation2() {
 		return attestation2;
 	}
 
-	public void setAttestation2(Integer attestation2) {
+	public void setAttestation2(double attestation2) {
 		this.attestation2 = attestation2;
 		totalGrade += attestation2;
 	}
 
-	public Integer getFinalEx() {
+	public double getFinalEx() {
 		return finalEx;
 	}
 
-	public final void setFinalEx(Integer finalEx) {
+	public final void setFinalEx(double finalEx) {
 		this.finalEx = finalEx;
 		totalGrade += finalEx;
 	}
@@ -165,17 +171,16 @@ public class Mark implements Comparable {
 	@Override
 	public String toString() {
 		return "Mark [points=" + points + ", deadline=" + deadline + ", attestation1=" + attestation1
-				+ ", attestation2=" + attestation2 + ", finalEx=" + finalEx + ", courseName=" + courseName + ", marks="
-				+ marks + ", totalGrade=" + totalGrade + ", courseGPA=" + courseGPA + ", GPAletter=" + GPAletter + "]";
+				+ ", attestation2=" + attestation2 + ", finalEx=" + finalEx + ", courseName=" + courseName +  ", totalGrade=" + totalGrade + ", courseGPA=" + courseGPA + ", GPAletter=" + GPAletter + "]";
 	}
     
-	public int compareTo(Object o) {
-		Mark m = (Mark)o;
-		if(GPAletter.compareTo(m.GPAletter) == 0) {
-			return finalEx.compareTo(m.getFinalEx());
-		}
-		return GPAletter.compareTo(m.GPAletter);
-	}
+//	public int compareTo(Object o) {
+//		Mark m = (Mark)o;
+//		if(GPAletter.compareTo(m.GPAletter) == 0) {
+//			return finalEx.;
+//		}
+//		return GPAletter.compareTo(m.GPAletter);
+//	}
 	
 	@Override
     public boolean equals(Object o) {

@@ -1,11 +1,12 @@
 package main;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
 * @generated
 */
-public class Order implements Serializable, IOrder, Cloneable {
+public class Order implements Serializable, Cloneable {
     
     /**
     * @generated
@@ -27,38 +28,31 @@ public class Order implements Serializable, IOrder, Cloneable {
     /**
     * @generated
     */
-    private OrderStatus getOrderStatus() {
+    public OrderStatus getOrderStatus() {
         return this.orderStatus;
     }
     
     /**
     * @generated
     */
-    private void setOrderStatus(OrderStatus orderStatus) {
+    public void setOrderStatus(OrderStatus orderStatus) {
         this.orderStatus = orderStatus;
     }
     
     /**
     * @generated
     */
-    private Date getDate() {
+    public Date getDate() {
         return this.date;
     }
     
     /**
     * @generated
     */
-    private void setDate(Date date) {
+    public void setDate(Date date) {
         this.date = date;
     }
     
-    
-    /**
-    * @generated
-    */
-    public IOrder getIOrder() {
-        return this.iOrder;
-    }
     
     
     /**
@@ -85,10 +79,5 @@ public class Order implements Serializable, IOrder, Cloneable {
         //TODO
     }
 
-	@Override
-	public void sendOrder(String problem, TechSupportGuy executor) {
-		// TODO Auto-generated method stub
-		
-	}
     
 }

@@ -1,82 +1,64 @@
 package main;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 /**
 * @generated
 */
-public class Admin extends Employee implements INews, IMessage, IOrder{
-    /**
-    * @generated
-    */
-    private List<Message> messages;
-    
-    
-    /**
-    * @generated
-    */
-    private List<User> users;
+public class Admin extends Employee implements Comparable, INews, IMessage, IOrder{
 
-    
-    /**
-    * @generated
-    */
-    private List<Message> getMessages() {
-        return this.messages;
+	public Admin() {}
+	
+	public Admin(String firstName, String lastName, String email, int salary) {
+    	super(firstName, lastName, email, salary);
     }
-    
-    /**
-    * @generated
-    */
-    private void setMessages(List<Message> messages) {
-        this.messages = messages;
+	
+	public static Admin createAdmin(String firstName, String lastName, String email, int salary) {
+        return new Admin(firstName, lastName, email, salary);
     }
-    
-    
-    /**
-    * @generated
-    */
-    private List<User> getUsers() {
-        return this.users;
-    }
-    
-    /**
-    * @generated
-    */
-    private void setUsers(List<User> users) {
-        this.users = users;
-    }
-    
-    
 
-    //                          Operations                                  
+    public Student createStudent(String firstName, String lastName, String email, Integer yearOfStudy, Faculties faculty, Degree degree) {
+        return new Student(firstName, lastName, email, yearOfStudy, faculty, degree);
+    }
 
-   
-    /**
-    * @generated
-    */
-    public void addUser(User user) {
+    public Manager createManager(String firstName, String lastName, String email, 
+    		Integer salary, List<Student> students, List<Teacher> teachers, List<Course> courses, News news) {
+        return new Manager(firstName, lastName, email, salary, students, teachers, courses, news);
+    }
+
+    public TechSupportGuy createTechSupportGuy(String firstName, String lastName, String email, Integer salary, double workExperience, List<Order> orders) {
+        return new TechSupportGuy(firstName, lastName, email, salary, workExperience, orders);
+    }
+
+    public Teacher createTeacher(String firstName, String lastName, String email, int salary, Faculties faculty) {
+        return new Teacher(firstName, lastName, email, salary, faculty);
+    }
+
+    @Override
+    public String toString() {
+        return String.format("Admin: { %s }", super.toString());
+    }
+
+	public void addUser(User user) {
         //TODO
     }
-    /**
-    * @generated
-    */
+
     public boolean removeUser(User user) {
-        //TODO
+        for(User u: Database.users) {
+        	if (user.equals(u)) {
+        		Database.users.remove(user);
+        		return true;
+        	}
+        }
     	return false;
     }
-    /**
-    * @generated
-    */
-    public void updateUser(User user) {
-        //TODO
-    }
-    /**
-    * @generated
-    */
-    public void seeLogFiles() {
-        //TODO
-    }
+    
 
 	@Override
 	public void sendMessage(Message message, Employee sendTo) {
@@ -85,15 +67,45 @@ public class Admin extends Employee implements INews, IMessage, IOrder{
 	}
 
 	@Override
-	public News createNews(Message news) {
-		// TODO Auto-generated method stub
-		return null;
+	public News createNews(Faculties faculty, String title, String text, Date date) {
+		return new News(faculty, title, text, date);
 	}
+	
+	public Course addCourse(String courseName, Integer credits, Teacher teacher, String courseCode) {
+    	Course c = new Course(courseName, credits, teacher, courseCode);
+    	return c;
+    }
+	
+//	private static void seeLogFiles(String h) throws IOException{
+//		BufferedWriter out = new BufferedWriter(new FileWriter("adminHistory.txt", true));
+//		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+//		Date date = new Date();
+//		String history = "";
+//		history = dateFormat.format(date).toString() + " " + h;
+//		out.write(history); 
+//		out.flush();
+//		out.close();
+//	}
+
 
 	@Override
-	public void sendOrder(String problem, TechSupportGuy executor) {
+	public void sendOrder(String problem, Order order) {
 		// TODO Auto-generated method stub
 		
+	}
+	
+	@Override
+	public int compareTo(Object o) {
+		Admin m = (Admin)o;
+		if (m.getSalary() > this.getSalary()) return -1;
+		if (m.getSalary() < this.getSalary()) return 1;
+		return 0;
+	}
+	
+	public String showInfo() {
+		String s = "";
+		s += "\nFull name: " + this.getFirstName() + " " + this.getLastName() + "\nWork Experience: " + this.getWorkExperience();
+		return s;
 	}
     
 }

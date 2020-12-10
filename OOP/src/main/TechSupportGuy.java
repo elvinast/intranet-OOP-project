@@ -17,7 +17,15 @@ public class TechSupportGuy extends Employee {
     private Order order;
     private OrderStatus orderStatus;
 
-    public OrderStatus getOrderStatus() {
+
+	public TechSupportGuy(String firstName, String lastName, String email, Integer salary, double workExperience, List<Order> orders) {
+		super(firstName, lastName, email, salary);
+		this.salary = salary;
+		this.workExperience = workExperience;
+		this.orders = orders;
+	}
+
+	public OrderStatus getOrderStatus() {
 		return orderStatus;
 	}
 	public void setOrderStatus(OrderStatus orderStatus) {
@@ -81,7 +89,7 @@ public class TechSupportGuy extends Employee {
     }
     public void viewOrders(OrderStatus status) {
         for (Order order: this.orders) {
-        	if (order.getOrderStatus().equals(orderStatus)){
+        	if (order.getOrderStatus().equals(orderStatus)) {
         		System.out.println(order);
         	}
         }
@@ -119,10 +127,10 @@ public class TechSupportGuy extends Employee {
         }
     }
      
-    public boolean rejectOrder(Order order) {
-        if(getTechSupportGuy().equals("No guy available"));
-        return true;
-    }
+//    public boolean rejectOrder(Order order) {
+//        if(getTechSupportGuy().equals("No guy available"));
+//        return true;
+//    }
 
     public String toString(){
         String str = " ";

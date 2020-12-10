@@ -13,13 +13,16 @@ public class Main {
 			Database.users.add(s1);
 			System.out.println(s1.getLogin());
 		
-			s1.signIn();
+//			s1.signIn();
 			
 			Teacher t = new Teacher("Teacher111", "235", "emailTeacher", 10000, Faculties.FIT);
 			System.out.println(t.getLogin());
+			Database.users.add(t);
 			
 			
+			System.out.println(Database.getTeachers());
 			
+			System.out.println(Database.getStudents());
 			
 	}
 

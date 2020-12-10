@@ -5,11 +5,12 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
+import java.util.Map.Entry;
 
 /**
 * @generated
 */
-public class Teacher extends Employee implements Serializable, IOrder, IMessage {
+public class Teacher extends Employee implements Serializable, IOrder, IMessage, INews {
     
     private List<Course> courses;
     private TeachingStatus teachingStatus;
@@ -42,18 +43,31 @@ public class Teacher extends Employee implements Serializable, IOrder, IMessage 
     
 
 
-	public News createNews(String title, String text) {
-		Date timestamp = Calendar.getInstance().getTime();
-		return new News(); //todo
-    }
+    @Override
+	public News createNews(Faculties faculty, String title, String text, Date date) {
+		return new News(faculty, title, text, date);
+	}
     
     public void addCourse(Course course) {
         this.courses.add(course);
     }
     
-    public void putMark(Course course, MarksType marksType, double points, Student student) throws DeadlineExpired{
-        //TODO
-    	course.putMarks(student, marksType, points);
+    public boolean putMark(Course course, MarksType marksType, double points, Student student) throws DeadlineExpired{
+    	for (Student s: course.getStudents()) {
+    		if (s.equals(student)) {
+    			for (Entry<Course, Mark> entry : student.getMarks().entrySet()) {
+//    				System.out.println(entry.getValue());
+    				Mark m = entry.getValue();
+    				student.setMark(course, new Mark(points, marksType));
+    				return true;
+    			}
+    		}
+    	}
+    	
+    	return false;
+
+//    	
+//    	course.putMarks(student, marksType, points);
     }
     
     public boolean addCourseFile(Course course, File file) {
@@ -114,6 +128,13 @@ public class Teacher extends Employee implements Serializable, IOrder, IMessage 
 	@Override
 	public String toString() {
 		return "Teacher [courses=" + courses + ", teachingStatus=" + teachingStatus + ", faculty=" + faculty + "]";
+	}
+	
+	public String showInfo() {
+		String s = "";
+		s += "\nFull name: " + this.getFirstName() + " " + this.getLastName() + "\nWork Experience: " + this.getWorkExperience()
+		+ "\nTeaching rank: " + this.getTeachingStatus() + "\nCourses: "+ this.getCourses();
+		return s;
 	}
 	
     
