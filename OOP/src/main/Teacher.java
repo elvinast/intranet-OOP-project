@@ -3,8 +3,10 @@ package main;
 import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
+import java.util.Vector;
 import java.util.Map.Entry;
 
 /**
@@ -16,11 +18,14 @@ public class Teacher extends Employee implements Serializable, IOrder, IMessage,
     private TeachingStatus teachingStatus;
     public Faculties faculty;
     
-    public Teacher() {}
+    public Teacher() {
+    	courses = new Vector<Course>();
+    }
 
     public Teacher(String firstName, String lastName, String email, int salary, Faculties faculty) {
     	super(firstName, lastName, email, salary);
     	this.faculty = faculty;
+    	courses = new Vector<Course>();
     }
     public List<Course> getCourses() {
         return this.courses;
@@ -44,8 +49,9 @@ public class Teacher extends Employee implements Serializable, IOrder, IMessage,
 
 
     @Override
-	public News createNews(Faculties faculty, String title, String text, Date date) {
-		return new News(faculty, title, text, date);
+	public void createNews(String title, String text, Date date) {
+		News n = new News(title, text, date);
+		Database.news.add(n);
 	}
     
     public void addCourse(Course course) {
@@ -92,22 +98,34 @@ public class Teacher extends Employee implements Serializable, IOrder, IMessage,
         return false;
     }
     
-    public void viewCourses() {
-        for (Course c: this.courses) {
-        	System.out.println(c);
+    public String viewCourses() {
+    	String s = "";
+    	if (this.courses.size() >= 1) {
+    		for (Course c: this.courses) {
+    			s += c + "\n";
+    		}
+    		return s;
+    	}
+        return "You have no courses";
+    }
+    
+    public String viewCourseFiles(Course course) {
+    	String s = "";
+        for (File f: course.courseFiles) {
+        	s += f + "\n";
         }
+        return s;
     }
 
 	@Override
 	public void sendMessage(Message message, Employee sendTo) {
-		// TODO Auto-generated method stub
-		
+		sendTo.putMessage(message);
 	}
 
 	@Override
-	public void sendOrder(String problem, Order order) {
-		// TODO Auto-generated method stub
-		
+	public void sendOrder(String problem, Order order, TechSupportGuy techSupportGuy) {
+		techSupportGuy.addOrder(order);
+		order.setOrderStatus(OrderStatus.NEW);
 	}
 	
 	@Override

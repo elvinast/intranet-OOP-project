@@ -1,143 +1,121 @@
 package main;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 import java.util.Random;
+import java.util.Vector;
 
 /**
 * @generated
 */
 public class TechSupportGuy extends Employee {
 
-    private Integer salary;
-    private double workExperience;
-    private List<Order> orders;
-    private String id;
-    private String login;
-    private String password;
-    private Order order;
+	
+    private Vector<Order> orders;
+//    private Order order;
     private OrderStatus orderStatus;
 
+    public TechSupportGuy() {}
 
-	public TechSupportGuy(String firstName, String lastName, String email, Integer salary, double workExperience, List<Order> orders) {
+	public TechSupportGuy(String firstName, String lastName, String email, Integer salary) {
 		super(firstName, lastName, email, salary);
-		this.salary = salary;
-		this.workExperience = workExperience;
-		this.orders = orders;
+		orders = new Vector<Order>();
 	}
 
 	public OrderStatus getOrderStatus() {
 		return orderStatus;
 	}
+	
 	public void setOrderStatus(OrderStatus orderStatus) {
 		this.orderStatus = orderStatus;
 	}
-	public TechSupportGuy(int salary, double workExperience, String id){
-        this.salary = salary;
-        this.workExperience  = workExperience;
-        this.id = id;
-    }
-    public Integer getSalary() {
-        return this.salary;
-    }
-    public void setSalary(Integer salary) {
-        this.salary = salary;
-    }
-    public double getWorkExperience() {
-        return this.workExperience;
-    }
-    public void setWorkExperience(double workExperience) {
-        this.workExperience = workExperience;
-    }
-    public List<Order> getOrders() {
+
+    public Vector<Order> getOrders() {
         return this.orders;
     }
-    public void setOrders(List<Order> orders) {
+    public void setOrders(Vector<Order> orders) {
         this.orders = orders;
     }
-    public String getId() {
-        return this.id;
-    }
-    public void setId(String id) {
-        this.id = id;
-    }
-    public String getLogin() {
-        return this.login;
-    }
-    public void setLogin(String login) {
-        this.login = login;
-    }
-    public String getPassword() {
-        return this.password;
-    }
-    public void setPassword(String password) {
-        this.password = password;
-    }
-    public Order getOrder() {
-        return this.order;
-    }
-    public void setOrder(Order order) {
-        this.order = order;
-    }
+    
+//    public Order getOrder() {
+//        return this.order;
+//    }
+//    
+//    public void setOrder(Order order) {
+//        this.order = order;
+//    }
     
 
-    public boolean acceptOrder(Order order) {
+    public void acceptOrder(Order order) {
         orders.add(order);
-    	return true;
+        order.setOrderStatus(orderStatus.ACCEPTED);
     }
-    public void updateOrder(OrderStatus status) {
-        this.setOrderStatus(status);
-    }
-    public void viewOrders(OrderStatus status) {
-        for (Order order: this.orders) {
-        	if (order.getOrderStatus().equals(orderStatus)) {
-        		System.out.println(order);
-        	}
-        }
-    }
-
-//    public String getTechSupportGuy(){
-//        Random rand = new Random();
-//        int num = rand.nextInt(10) + 1;
-//        switch(num){
-//            case 1:
-//                return "Yerbol";
-//                break;
-//            case 2:
-//                return "Nurbol";
-//                break;
-//            case 3:
-//                return "Futbol";
-//                break;
-//            default:
-//                return "No Guy available";
-//                break;
-//        }
-//    }
+    
+    public void updateOrder(OrderStatus status, Order order) {
+        order.setOrderStatus(status);
+    
 
     public void clearOrders(){
         orders.clear();
     }
 
-    public void numberOfOrders(){
-        if(orders.size() == 0){
-            System.out.println("No orders");
-        }
-        else {
-            System.out.println(orders.size());
-        }
+    public int numberOfOrders(){
+        return orders.size();
+    }
+    
+    public void addOrder(Order order) {
+    	orders.add(order);
     }
      
-//    public boolean rejectOrder(Order order) {
-//        if(getTechSupportGuy().equals("No guy available"));
-//        return true;
-//    }
+    public void rejectOrder(Order order) {
+    	orders.add(order);
+        order.setOrderStatus(orderStatus.REJECTED);
+    }
 
-    public String toString(){
-        String str = " ";
+    public String view0rdersInfo(){
+        String str = "";
         for(int i = 0; i < orders.size(); i++){
             str += orders.get(i).toString() + "\n"; 
         }
         return str;
     }
+    
+    public String view0rderByStatus(OrderStatus status){
+        String str = "";
+        for(Order order: this.orders){
+        	if (order.getOrderStatus().equals(status)) {
+        		 str += order + "\n"; 
+        	}
+        }
+        return str;
+    }
+    
+    public String showInfo() {
+		String s = "";
+		s += "\nFull name: " + this.getFirstName() + " " + this.getLastName() + "\nWork Experience: " + this.getWorkExperience()
+		 + "\n0rders: " + this.orders;
+		return s;
+	 }
+    
+     @Override
+    public boolean equals(Object o) {
+    	 TechSupportGuy guy= (TechSupportGuy) o;
+		 return super.equals(guy) && orders.equals(guy.orders);
+	}
+     
+    @Override
+	public int hashCode() {
+		 return Objects.hash(orders);
+	}
+
+	@Override
+	public int compareTo(Object o) {
+		 TechSupportGuy t = (TechSupportGuy)o;
+		 if (t.getSalary() > this.getSalary()) return -1;
+		 if (t.getSalary() < this.getSalary()) return 1;
+		 return 0;
+	}
     
 }

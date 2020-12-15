@@ -1,6 +1,7 @@
 package main;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map.Entry;
@@ -20,12 +21,18 @@ public class Course implements Serializable, Comparable {
     private String prerequisite;
 //    public List<File> files;
     
-    
-    public Course(String courseName, Integer credits, Teacher teacher, String courseCode) {
+    public Course() {
+    	List<Student> students = new ArrayList <Student>();
+    	List<File> courseFiles = new ArrayList <File>();
+    	marks = new HashMap<Student, Mark>();
+    }
+    public Course(String courseName, Integer credits, String courseCode) {
     	this.courseName = courseName;
     	this.credits = credits;
-    	this.teacher = teacher;
     	this.courseCode = courseCode;
+    	List<Student> students = new ArrayList <Student>();
+    	List<File> courseFiles = new ArrayList <File>();
+    	marks = new HashMap<Student, Mark>();
     }
 
     public Course(String courseName, Integer credits, String description, String courseCode, Boolean isAvailable, Teacher teacher,
@@ -40,7 +47,6 @@ public class Course implements Serializable, Comparable {
     	this.courseFiles = courseFiles;
     	this.marks = marks;
     	this.prerequisite = prerequisite;
-
     	
     }
     public String getCourseName() {

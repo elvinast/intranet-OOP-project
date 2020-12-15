@@ -1,0 +1,110 @@
+package main;
+
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
+
+/**
+* @generated
+*/
+public class Admin extends Employee implements Comparable, INews, IMessage, IOrder{
+
+	public Admin() {}
+	
+	public Admin(String firstName, String lastName, String email, int salary) {
+    	super(firstName, lastName, email, salary);
+    }
+	
+	public static Admin createAdmin(String firstName, String lastName, String email, int salary) {
+        return new Admin(firstName, lastName, email, salary);
+    }
+
+    public Student createStudent(String firstName, String lastName, String email, Integer yearOfStudy, Faculties faculty, Degree degree) {
+        return new Student(firstName, lastName, email, yearOfStudy, faculty, degree);
+    }
+
+    public Manager createManager(String firstName, String lastName, String email, 
+    		Integer salary, List<Student> students, List<Teacher> teachers, List<Course> courses, News news) {
+        return new Manager(firstName, lastName, email, salary, students, teachers, courses, news);
+    }
+
+    public TechSupportGuy createTechSupportGuy(String firstName, String lastName, String email, Integer salary, double workExperience, List<Order> orders) {
+        return new TechSupportGuy(firstName, lastName, email, salary, workExperience);
+    }
+
+    public Teacher createTeacher(String firstName, String lastName, String email, int salary, Faculties faculty) {
+        return new Teacher(firstName, lastName, email, salary, faculty);
+    }
+
+    @Override
+    public String toString() {
+        return String.format("Admin: { %s }", super.toString());
+    }
+
+	public void addUser(User user) {
+        //TODO
+    }
+
+    public boolean removeUser(User user) {
+        for(User u: Database.users) {
+        	if (user.equals(u)) {
+        		Database.users.remove(user);
+        		return true;
+        	}
+        }
+    	return false;
+    }
+    
+
+	@Override
+	public void sendMessage(Message message, Employee sendTo) {
+		sendTo.putMessage(message);
+	}
+
+	@Override
+	public News createNews(Faculties faculty, String title, String text, Date date) {
+		return new News(faculty, title, text, date);
+	}
+	
+	public Course addCourse(String courseName, Integer credits, Teacher teacher, String courseCode) {
+    	Course c = new Course(courseName, credits, teacher, courseCode);
+    	return c;
+    }
+	
+//	private static void seeLogFiles(String h) throws IOException{
+//		BufferedWriter out = new BufferedWriter(new FileWriter("adminHistory.txt", true));
+//		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+//		Date date = new Date();
+//		String history = "";
+//		history = dateFormat.format(date).toString() + " " + h;
+//		out.write(history); 
+//		out.flush();
+//		out.close();
+//	}
+
+
+	@Override
+	public void sendOrder(String problem, Order order, TechSupportGuy techSupportGuy) {
+		techSupportGuy.addOrder(order);
+		order.setOrderStatus(OrderStatus.NEW);
+	}
+	
+	@Override
+	public int compareTo(Object o) {
+		Admin m = (Admin)o;
+		if (m.getSalary() > this.getSalary()) return -1;
+		if (m.getSalary() < this.getSalary()) return 1;
+		return 0;
+	}
+	
+	public String showInfo() {
+		String s = "";
+		s += "\nFull name: " + this.getFirstName() + " " + this.getLastName() + "\nWork Experience: " + this.getWorkExperience();
+		return s;
+	}
+    
+}

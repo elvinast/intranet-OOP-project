@@ -5,122 +5,83 @@ import java.util.*;
 /**
 * @generated
 */
-public class Manager extends Employee implements INews, IOrder {
+public class Manager extends Employee implements INews, IOrder, IMessage {
     
-
-//    private List<Student> students;
-//    private List<Teacher> teachers;
-//    private List<Course> courses;
-    private News news;
    
     public Manager() {}
     
     public Manager(String firstName, String lastName, String email, 
-    		Integer salary, List<Student> students, List<Teacher> teachers, List<Course> courses, News news) {
+    		Integer salary) {
     	super(firstName, lastName, email, salary);
-    	this.news = news;
     }
     
-//    private List<Student> getStudents() {
-//        return this.students;
-//    }
-//    
-//    private void setStudents(List<Student> students) {
-//        this.students = students;
-//    }
-//    
-//    private List<Teacher> getTeachers() {
-//        return this.teachers;
-//    }
-//
-//    
-//    private void setTeachers(List<Teacher> teachers) {
-//        this.teachers = teachers;
-//    }
-//    
-//    private List<Course> getCourses() {
-//        return this.courses;
-//    }
-//    
-//    private void setCourses(List<Course> courses) {
-//        this.courses = courses;
-//    }
-    
-    public News getNews() {
-        return this.news;
-    }
-    
-    public void setNews(News news) {
-        this.news = news;
-    }
     
     //                          Operations                                  
 
-//    @Override
-//	public String toString() {
-//		return "Manager [students=" + students + ", teachers=" + teachers + ", courses=" + courses + ", news=" + news
-//				+ "]";
-//	}
-
-	public void createCourse(String name, int credits, Teacher teacher, String courseCode) {
+	public boolean createCourse(String name, int credits, String courseCode) {
     	
-    	Course newCourse = new Course(name, credits, teacher, courseCode);
+    	Course newCourse = new Course(name, credits, courseCode);
     	for (Course course: Database.courses) {
         	if (!course.getCourseCode().equals(courseCode)) {
         		Database.courses.add(newCourse);
-        	}else {
-        		System.out.println("This course exists");
+        		return true;
         	}
-        //TODO
     	}
+    	return false;
     }
     
 
-    public void suggestCourse(Course course, List<Student> students) {
+    public boolean suggestCourse(Course course, Faculties faculty) {
         //TODO
-    	for(Student s : students) {
-    		if(s.getCourses().contains(course)) {
-    			System.out.println("Course exists");
-    		}else {
-    			course.setIsAvailable(false);
+    	for(User u : Database.users) {
+    		if (u instanceof Student) {
+    			Student s = (Student) u;
+    			if (s.getFaculty().equals(faculty) && !s.getCourses().contains(course)) {
+    				course.setIsAvailable(true);
+    				return true;
+    			}
     		}
     	}
+    	return false;
     }
 
-    public boolean approveRegistration(Student student, Course course) {
-		
-    	if(student.getCurCredits() <= (21 - course.getCredits())) {
-    		return true;
-    	}else {
-    		return false;
-    	}
-    }
+//    public boolean approveRegistration(Student student, Course course) {
+//		
+//    	if(student.getCurCredits() <= (21 - course.getCredits())) {
+//    		return true;
+//    	}else {
+//    		return false;
+//    	}
+//    }
 
     @Override
-	public News createNews(Faculties faculty, String title, String text, Date date) {
-		return new News(faculty, title, text, date);
+	public void createNews(String title, String text, Date date) {
+		News n = new News(title, text, date);
+		Database.news.add(n);
 	}
 
-	@Override
-	public void sendOrder(String problem, Order order) {
-		// TODO Auto-generated method stub
-		
+    @Override
+	public void sendOrder(String problem, Order order, TechSupportGuy techSupportGuy) {
+		techSupportGuy.addOrder(order);
+		order.setOrderStatus(OrderStatus.NEW);
 	}
+    
 	public boolean equals(Object obj) {
-    	if(!super.equals(obj)){
-			return true;
-		}
-    	Manager m = (Manager) obj;
-    	return super.equals(m) && news.equals(m.news);
+    	return super.equals(obj);
     }
 	
 	public int hashCode() {
-		return Objects.hash(super.hashCode(), news);
+		return Objects.hash(super.hashCode());
 	}
 	
 	public String showInfo() {
 		String s = "";
 		s += "\nFull name: " + this.getFirstName() + " " + this.getLastName() + "\nWork Experience: " + this.getWorkExperience();
 		return s;
+	}
+
+	@Override
+	public void sendMessage(Message message, Employee sendTo) {
+		sendTo.putMessage(message);
 	}
 }

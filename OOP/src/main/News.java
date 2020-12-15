@@ -13,9 +13,8 @@ public class News extends Message {
   
     public News() {}
     
-    public News(Faculties faculty, String title, String text, Date date) {
+    public News(String title, String text, Date date) {
         super(title, text, date);
-        this.faculty = faculty;
     }
 
     public Faculties getFaculty() {
@@ -49,7 +48,7 @@ public class News extends Message {
 		return "News [faculty=" + faculty + ", manager=" + manager + "]";
 	}
     
-	public final void showNewsInfo() {
+	public void showNewsInfo() {
         Employee sender = this.getSender();
         System.out.println(String.format("Title: %s [%s]", this.getTitle(), faculty));
         System.out.println(String.format("Text: %s", this.getText()));

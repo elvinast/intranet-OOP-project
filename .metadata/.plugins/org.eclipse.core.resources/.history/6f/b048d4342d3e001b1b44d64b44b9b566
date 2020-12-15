@@ -1,0 +1,616 @@
+package main;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.Date;
+import java.util.Scanner;
+
+
+public class Main {
+
+	static Scanner sc = new Scanner(System.in);
+	static BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+	
+    public static User signIn() {
+        for(int i = 0; i < 3; i++) {
+        	System.out.println("Welcome! You have " + (3 - i) + " attempts to login.");
+        	System.out.println("Enter login: ");
+        	String in = sc.next();
+        	for(User u: Database.users) {
+	        	if (u.getLogin().equals(in) == true) {
+	        		System.out.println("Enter password: ");
+	        		String in1 = sc.next();
+	        		String ps = in1;
+	        		if (u.getPassword().equals(ps)) {
+	        			System.out.println("Successfully authorized!");
+	        			return u;
+	        		}
+	        		else {
+	        			System.out.println("Error! Wrong password!");
+	        			continue;
+	        		}
+	        	}
+        	}
+        	if (i < 2) System.out.println("Try again!");
+        }
+        
+        System.out.println("No such user:(");
+        return null;
+    }
+    
+	public static void main(String[] args){
+	// TODO Auto-generated method stub
+		Student s = new Student("Jack", "V", "hismail", 2, Faculties.FIT, Degree.BACHELOR);
+		Student s1 = new Student("Bob", "KKK", "mail123", 3, Faculties.MCM, Degree.BACHELOR); //b_kkk
+		Database.users.add(s1);
+		Teacher t = new Teacher("Teacher111", "235", "emailTeacher", 10000, Faculties.FIT);
+		System.out.println(t.getLogin());
+		Database.users.add(t);
+		System.out.println(Database.getTeachers());
+		System.out.println(Database.getStudents());
+		
+		while(true) {
+			System.out.println("Welcome to the Intranet System!");
+			User u = signIn();
+			if (u instanceof Student) {
+				System.out.println("Welcome to Student's mode " + u.getFirstName() + "!\n");
+				studentsMenu((Student) u);
+			}
+			else if (u instanceof Teacher) {
+				System.out.println("Welcome to Teahcher's mode " + u.getFirstName() + "!\n");
+				teachersMenu((Teacher) u);
+			}
+			else if (u instanceof Manager) {
+				System.out.println("Welcome to Manager's mode " + u.getFirstName() + "!\n");
+				managersMenu((Manager) u);
+			}
+			else if (u instanceof Admin) {
+				System.out.println("Welcome to Admin's mode " + u.getFirstName() + "!\n");
+				adminsMenu((Admin) u);
+			}
+			else if (u instanceof TechSupportGuy) {
+				System.out.println("Welcome to Executor's mode " + u.getFirstName() + "!\n");
+				techSupportGuysMenu((TechSupportGuy) u);
+			}
+			else {
+				continueAsGuest();
+			}
+			System.out.println("Bye!");
+			break;
+		}
+			
+	}
+
+	private static void continueAsGuest() {
+		// TODO Auto-generated method stub
+		System.out.println("GUEST");
+	}
+
+	private static void techSupportGuysMenu(TechSupportGuy techSupportGuy) {
+		// TODO Auto-generated method stub
+		System.out.println("TechSupport");
+	}
+
+
+	private static void managersMenu(Manager manager) {
+		// TODO Auto-generated method stub
+		System.out.println("Manager");
+	}
+	
+    // ---------------------------- T E A C H E R -----------------------------
+	private static void teachersMenu(Teacher teacher) {
+    	System.out.println(   "		[1]         	Information about teacher\n"
+    						+ "		[2]         	View courses\n"
+    						+ "		[3]         	View course Files\n"
+    						+ "		[4]         	Add course file\n"
+    						+ "		[5]        	Delete course file\n"
+    						+ "		[6]         	Add course\n"
+    						+ "		[7]         	Create News\n"
+    						+ "		[8]         	Put mark to student\n"
+    						+ "		[9]         	Send Message\n"
+    						+ "		[10]        	Send Order to Executor\n"
+    						+ "		[0]         	EXIT\n");
+    	int ans = 0;
+    	ans = sc.nextInt();
+    	switch(ans) {
+    		case 1: 
+    			teacher.showInfo();
+    			break;
+    		case 2:
+    			teacher.viewCourses();
+    			break;
+    		case 3: 
+    			viewCourseFiles(teacher);
+    			break;
+    		case 4: 
+    			addCourseFile(teacher);
+    			break;
+    		case 5: 
+    			deleteCourseFile(teacher);
+    			break;
+    		case 6:
+    			System.out.println(addCourse(teacher));
+    			break;
+    		case 7:
+    			createNews(teacher);
+    			break;
+    		case 8:
+    			putMark(teacher);
+    			break;
+    		case 9:
+    			sendMessage(teacher);
+    			break;
+    		case 10:
+    			sendOrder(teacher);
+    			break;
+    		case 0:
+    			System.exit(0);
+    			break;	
+    	}
+	}
+
+
+	private static void putMark(Teacher teacher) {
+		System.out.println("Enter the ID of the student: ");
+		String id = sc.next();
+		Student student = null;
+		for (User u: Database.users) {
+			if (u instanceof Student) {
+				if (((Student) u).getId().equals(id)) {
+					student = (Student) u;
+				}
+			}
+		}
+		
+		System.out.println("Enter course ID: ");
+		String courseID = sc.next();
+		Course course = null;
+		for (Course c: Database.courses) {
+			if (c.getCourseCode().equals(courseID)) {
+				course = c;
+			}
+		}
+		
+		System.out.println("Choose number of mark's type: \n1. ATTESTATION 1\n2. ATTESTATION 2\n3. FINAL EXAM");
+		int type = sc.nextInt();
+		MarksType mark = null;
+		switch(type) {
+			case 1:
+				mark = MarksType.ATTESTATION1; 
+				break;
+			case 2:
+				mark = MarksType.ATTESTATION2; 
+				break;	
+			case 3:
+				mark = MarksType.FINAL_EXAM; 
+				break;
+		}
+		
+		System.out.println("Enter the number of points: ");
+		Double points = sc.nextDouble();
+		try {
+			if (teacher.putMark(course, mark, points, student)) {
+				System.out.println("Successfully done!");
+			}
+			else {
+				System.out.println("Error!");
+			}
+			
+		} catch (DeadlineExpired e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	//FOR ADMIN, TEACHER, MANAGER
+	private static void createNews(Employee e) {
+		System.out.println("Enter the title of the news: ");
+		String title = sc.next();
+		System.out.println("Enter the text of the news: ");
+		String text = sc.next();
+		Date date = java.util.Calendar.getInstance().getTime(); 
+		News n = new News(title, text, date);
+		if (e instanceof Teacher) {
+			Teacher t = (Teacher) e;
+			t.createNews(title, text, date);
+		}
+		else if (e instanceof Manager) {
+			Manager t = (Manager) e;
+			t.createNews(title, text, date);
+		}
+		else if (e instanceof Admin) {
+			Admin t = (Admin) e;
+			t.createNews(title, text, date);
+		}
+	}
+	
+	//FOR TEACHER, MANAGER
+	private static void sendMessage(Employee e) {
+		System.out.println("Enter the title of the message: ");
+		String title = sc.next();
+		System.out.println("Enter the text of the message: ");
+		String text = sc.next();
+		Date date = java.util.Calendar.getInstance().getTime(); 
+		Message m = new Message(title, text, date);
+		System.out.println("Enter the login of Manager/Teacher to send message: ");
+		String login = sc.next();
+		for(User u : Database.users) {
+			if (u instanceof Manager || u instanceof Teacher) {
+				if (u.getLogin().equals(login)) {
+					if (e instanceof Teacher) {
+						Teacher t = (Teacher) e;
+						Employee sendTo = (Employee) u;
+						t.sendMessage(m, sendTo);
+					}
+					else if (e instanceof Manager) {
+						Manager t = (Manager) e;
+						Employee sendTo = (Employee) u;
+						t.sendMessage(m, sendTo);
+					}
+				}
+			}
+		}
+	}
+	
+	//FOR ADMIN TEACHER MANAGER
+	private static void sendOrder(Employee e) {
+		System.out.println("Enter the problem: ");
+		String problem = sc.next();
+		System.out.println("Enter the text of the message: ");
+		String text = sc.next();
+		Date date = java.util.Calendar.getInstance().getTime(); 
+		Order m = new Order(OrderStatus.NEW, text, date, e);
+		System.out.println("Enter the name or login of Tech Support Guy to send order: ");
+		String login = sc.next();
+		for(User u : Database.users) {
+			if (u instanceof TechSupportGuy) {
+				if (u.getLogin().equals(login) || u.getFirstName().equals(login)) {
+					if (e instanceof Teacher) {
+						Teacher t = (Teacher) e;
+						TechSupportGuy sendTo = (TechSupportGuy) u;
+						t.sendOrder(problem, m, sendTo);
+					}
+					else if (e instanceof Manager) {
+						Manager t = (Manager) e;
+						TechSupportGuy sendTo = (TechSupportGuy) u;
+						t.sendOrder(problem, m, sendTo);
+					}
+					else if (e instanceof Admin) {
+						Admin t = (Admin) e;
+						TechSupportGuy sendTo = (TechSupportGuy) u;
+						t.sendOrder(problem, m, sendTo);
+					}
+				}
+			}
+		}
+	}
+		
+
+	private static String addCourse(Teacher teacher) {
+		System.out.println("Enter course ID: ");
+		String c = sc.next();
+		for(Course course: Database.courses) {
+			if (course.getCourseCode().equals(c)) {
+				teacher.addCourse(course);
+				return "New course successfully added!";
+			}
+		}
+		return "Oops! No such course in KBTU";
+	}
+
+	private static void deleteCourseFile(Teacher teacher) {
+		System.out.println("Enter course ID to remove file of this course: ");
+		String c = sc.next();
+		if (teacher.getCourses().size() >= 1) {
+			for (Course course: teacher.getCourses()) {
+    			if (c.equals(course.getCourseCode())) {
+    				if (course.getCourseFiles().size() >= 1) {
+    					System.out.println("Enter the title of the file: ");
+	    				String fileTitle = sc.next();
+	    				for (File f : course.getCourseFiles()) {
+	    					if (f.getFileName().equals(fileTitle)) {
+	    						course.getCourseFiles().remove(f);
+	    						System.out.println("File successfully deleted\nCourse has " + course.getCourseFiles().size() + " files.");
+	    						break;
+	    					}
+	    				}
+    				}
+    				else {
+    					System.out.println("You have no files in this course;");
+    				}
+    			}
+    		}
+		}
+		else {
+			System.out.println("You have no courses");
+		}
+	}
+	
+	private static void addCourseFile(Teacher teacher) {
+		System.out.println("Enter course ID to add file to this course: ");
+		String c = "";
+		c = sc.next();
+		if (teacher.getCourses().size() >= 1) {
+			for (Course course: teacher.getCourses()) {
+    			if (c.equals(course.getCourseCode())) {
+    				System.out.println("Enter the title of the new file: ");
+    				String fileTitle = sc.next();
+    				System.out.println("Enter the description of the new file: ");
+    				String fileDescription = sc.next();
+    				if (teacher.addCourseFile(course, new File(fileTitle, course, teacher, fileDescription))) {
+    					System.out.println("New file successfully added to " + course.getCourseName() + "course!\n");
+    				}
+    				break;
+    			}
+    		}
+		}
+		else {
+			System.out.println("You have no courses");
+		}
+	}
+
+	private static void viewCourseFiles(Teacher teacher) {
+		System.out.println("Enter course ID to see the files of this course: ");
+		String c = "";
+		c = sc.next();
+		if (teacher.getCourses().size() >= 1) {
+			for (Course course: teacher.getCourses()) {
+    			if (c.equals(course.getCourseCode())) {
+    				teacher.viewCourseFiles(course);
+    				break;
+    			}
+    		}
+		}
+		else {
+			System.out.println("You have no courses");
+		}
+	}
+
+	// ---------------------------- S T U D E N T -----------------------------
+	
+	
+	
+	
+	private static void studentsMenu(Student student){
+		while (true) {
+	    	System.out.println(    " 		[1]		Information about student\n"
+	    						+ "		[2]         	View courses\n"
+	    						+ "		[3]         	View teachers\n"
+	    						+ "		[4]         	View transcript\n"
+	    						+ "		[5]         	View Marks\n"
+	    						+ "		[6]         	View course files\n"
+	    						+ "		[7]         	View news\n"
+	    						+ "		[8]         	Registration for disciplines\n"
+	    						+ "		[0]        		EXIT\n");
+	    	int ans = 0;
+	    	ans = sc.nextInt();
+	    	switch(ans) {
+	    		case 1: 
+	    			System.out.println(student.showInfo());
+	    			break;
+	    		case 2:
+	    			System.out.println(student.viewCourses());
+	    			break;
+	    		case 3: 
+	    			System.out.println(student.showTeachers());
+	    			break;
+	    		case 4: 
+	    			System.out.println(student.viewTranscript());
+	    			break;
+	    		case 5: 
+	    			showMarks(student);
+	    			break;
+	    		case 6:
+	    			showCourseFiles(student);
+	    			break;
+	    		case 7:
+	    			System.out.println(student.viewNews());
+	    			break;
+	    		case 8:
+	    			registerOnCourse(student);
+	    			break;
+	    		default:
+	    			System.out.println("Bye!");
+	    			System.exit(0);
+	    			break;	
+	    	}
+		}
+	}
+
+
+
+	private static void showMarks(Student student) {
+		// TODO Auto-generated method stub
+		System.out.println("Enter course id to see the marks of this course: ");
+		String c = "";
+		c = sc.next();
+		if (student.getCourses() != null) {
+			for (Course course: student.getCourses()) {
+    			if (c.equals(course.getCourseCode())) {
+    				student.viewMarks(course);
+    				break;
+    			}
+    		}
+		}
+		else {
+			System.out.println("You should register for at least one course.");
+		}
+	}
+	
+	private static void showCourseFiles(Student student) {
+		System.out.println("Enter course id to see the files of this course: ");
+		String c = "";
+		c = sc.next();
+		if (student.getCourses() != null) {
+			for (Course course: student.getCourses()) {
+    			if (c.equals(course.getCourseCode())) {
+    				student.viewCourseFiles(course);
+    				break;
+    			}
+    		}
+		}
+		else {
+			System.out.println("You should register for at least one course.");
+		}
+	}
+	
+	private static void registerOnCourse(Student student) {
+		System.out.println("Enter ID of the course for registration: ");
+		String c = sc.next();
+		try {
+			if (student.registerOnCourse(c)) {
+				System.out.println("New course successfully added!");
+			}
+			else {
+				System.out.println("Error!");
+			}
+		} catch (CreditsOverflow e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	
+	
+	
+	
+	
+	//----------------------------- A D M I N ---------------------------------------
+	
+	
+	
+	
+	private static void adminsMenu(Admin admin) {
+    	System.out.println(   "		[1]         	Add user\n"
+    						+ "		[2]         	Remove user\n"
+    						+ "		[3]         	Show info about admin\n"
+    						+ "		[4]         	Create news\n"
+    						+ "		[5]         	Add course\n"
+    						+ "		[6]        		Send Order to Executor\n"
+    						+ "		[0]         	EXIT\n");
+    	int ans = 0;
+    	ans = sc.nextInt();
+    	switch(ans) {
+    		case 1: 
+    			addUser(admin);
+    			break;
+    		case 2:
+    			removeUser(admin);
+    			break;
+    		case 3: 
+    			showInfo(admin);
+    		case 4: 
+    			createNews(admin);
+    			break;
+    		case 5: 
+    			addCourse(admin);
+    			break;
+    		case 6: 
+    			sendOrder(admin);
+    			break;
+    		case 0:
+    			System.exit(0);
+    			break;	
+    	}
+	}
+
+	private static void addCourse(Admin admin) {
+		
+	}
+
+	private static void removeUser(Admin admin) {
+		System.out.println("Enter login of the user");
+	}
+
+	private static void showInfo(Admin admin) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private static void addUser(Admin admin) {
+		// TODO Auto-generated method stub		
+		System.out.println("		[1]		Add Student\n"
+						 + " 		[2]		Add Teacher\n"
+						 + " 		[3]		Add Manager\n"
+						 + " 		[4]		Add TechSupportGuy\n"
+						 + " 		[5]		Add Admin\n");
+		int res = sc.nextInt();
+		
+		System.out.println("Enter the first name: ");
+		String firstName = sc.next();
+		System.out.println("Enter the last name: ");
+		String lastName = sc.next();
+		System.out.println("Enter the email: ");
+		String email = sc.next();
+		
+		switch(res) {
+			case 1:
+				System.out.println("Enter the year of study: ");
+				int yearOfStudy = sc.nextInt();
+				
+				System.out.println("Enter the faculty: ");
+				String fac = sc.next();
+				Faculties f = null;
+				switch(fac) {
+					case "FIT": f = Faculties.FIT; break;
+					case "BS": f = Faculties.BS; break;
+					case "ISE": f = Faculties.ISE; break;
+					case "FGA": f = Faculties.FGA; break;
+					case "FEOGI": f = Faculties.FEOGI; break;
+					case "KMA": f = Faculties.KMA; break;
+					case "MCM": f = Faculties.MCM; break;
+				}
+				
+				System.out.println("Enter the degree: ");
+				String deg = sc.next();
+				Degree d = null;
+				switch(fac) {
+					case "PHD": d = Degree.PHD; break;
+					case "Masters": d = Degree.MASTERS; break;
+					case "Bachelor": d = Degree.BACHELOR; break;
+				}
+				
+				admin.createStudent(firstName, lastName, email, yearOfStudy, f, d);
+				break;
+			case 2:
+				System.out.println("Enter the salary: ");
+				int salary = sc.nextInt();
+				
+				System.out.println("Enter the faculty: ");
+				String fac1 = sc.next();
+				Faculties f1 = null;
+				switch(fac1) {
+					case "FIT": f1 = Faculties.FIT; break;
+					case "BS": f1 = Faculties.BS; break;
+					case "ISE": f1 = Faculties.ISE; break;
+					case "FGA": f1 = Faculties.FGA; break;
+					case "FEOGI": f1 = Faculties.FEOGI; break;
+					case "KMA": f1 = Faculties.KMA; break;
+					case "MCM": f1 = Faculties.MCM; break;
+				}
+				
+				admin.createTeacher(firstName, lastName, email, salary, f1);
+				break;
+				
+			case 3:
+				System.out.println("Enter the salary for manager: ");
+				int salaryM = sc.nextInt();
+				admin.createManager(firstName, lastName, email, salaryM);
+				break;
+				
+			case 4:
+				System.out.println("Enter the salary for executor: ");
+				int salaryT = sc.nextInt();
+				admin.createTechSupportGuy(firstName, lastName, email, salaryT);
+				break;
+				
+			case 5:
+				System.out.println("Enter the salary for administrator: ");
+				int salaryA = sc.nextInt();
+				admin.createAdmin(firstName, lastName, email, salaryA);
+				break;
+				
+		}
+	}
+} 

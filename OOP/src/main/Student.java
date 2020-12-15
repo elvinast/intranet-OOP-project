@@ -12,7 +12,7 @@ import java.util.Vector;
 /**
 * @generated
 */
-public class Student extends User implements IOrder{
+public class Student extends User {
     
     private Integer yearOfStudy;
     private double GPA;
@@ -25,7 +25,12 @@ public class Student extends User implements IOrder{
     private HashMap<Course, Mark> marks;
     final Integer CREDITS_LIMIT = 21;
     public static int numOfStud = 0;
-    public Student() {}
+    
+    public Student() {
+    	courses = new Vector<Course>();
+    	marks = new HashMap<Course, Mark>();
+    	this.createID();
+    }
 
     public Student(String firstName, String lastName, String email, Integer yearOfStudy, Faculties faculty, Degree degree) {
     	super(firstName, lastName, email);
@@ -33,25 +38,9 @@ public class Student extends User implements IOrder{
     	this.faculty = faculty;
     	this.degree = degree;
     	numOfStud++;
-    }
-    
-    static BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-    //to main driver
-    public static void studentsMode(Student student) throws IOException {
-    	System.out.println("Welcome to Student mode " + student.getFirstName() + "!\n:");
-    	System.out.println("1. Information about student\n"
-    						+ "2. View courses\n"
-    						+ "3. View teachers\n"
-    						+ "4. View transcript\n"
-    						+ "5. View Marks\n"
-    						+ "6. View course files\n"
-    						+ "7. View news\n"
-    						+ "8. Registration for disciplines\n"
-    						+ "9. Send order to Executor\n"
-    						+ "10. EXIT\n");
-    	
-    	int ans = reader.read();
-    	
+    	courses = new Vector<Course>();
+    	marks = new HashMap<Course, Mark>();
+    	this.createID();
     }
     
     
@@ -68,6 +57,9 @@ public class Student extends User implements IOrder{
 		this.transcript = transcript;
 		this.marks = marks;
 		numOfStud++;
+		courses = new Vector<Course>();
+		marks = new HashMap<Course, Mark>();
+		this.createID();
 	}
     
 
@@ -142,47 +134,49 @@ public class Student extends User implements IOrder{
 
     //                          Operations                                  
     
-    public void registerOnCourse(String courseID) throws CreditsOverflow{
+    public boolean registerOnCourse(String courseID) throws CreditsOverflow{
     	Course newCourse = null;
-        for (Course course: Database.courses) {
-        	if (course.getCourseCode().equals(courseID)) {
-        		this.curCredits += course.getCredits();
-        		newCourse = course;
-        	}
-        }
-        if (this.curCredits <= this.CREDITS_LIMIT) {
-        	courses.add(newCourse);
-    		marks.put(newCourse, null);
-    		System.out.println("New course successfully added!");
-        }
-        else {
-            throw new CreditsOverflow(newCourse, CREDITS_LIMIT);
-        }
+    	if (Database.courses.size() >= 1) {
+	        for (Course course: Database.courses) {
+	        	if (course.getCourseCode().equals(courseID)) {
+	        		this.curCredits += course.getCredits();
+	        		newCourse = course;
+	        	}
+	        }
+	        if (this.curCredits <= this.CREDITS_LIMIT) {
+	        	courses.add(newCourse);
+	    		marks.put(newCourse, null);
+	    		return true;
+	        }
+	        else {
+	            throw new CreditsOverflow(newCourse, CREDITS_LIMIT);
+	        }
+    	}
+    	return false;
+    	
     }
     
     public void updateYearOfStudy() {
     	this.yearOfStudy++;
     }
     
-    public String createID() {
+    public void createID() {
     	int year = Calendar.getInstance().get(Calendar.YEAR);
     	year -= this.yearOfStudy;
     	year++;
-    	id += String.valueOf(year).substring(2);
-    	if (this.degree == Degree.BACHELOR) id += "BD";
-    	else if (this.degree == Degree.MASTERS) id += "MD";
-    	else id += "PD";
+    	this.id += String.valueOf(year).substring(2);
+    	if (this.degree == Degree.BACHELOR) this.id += "BD";
+    	else if (this.degree == Degree.MASTERS) this.id += "MD";
+    	else this.id += "PD";
     	StringBuilder builder = new StringBuilder(String.valueOf(numOfStud));
         while (builder.length() < 6) builder.insert(0, "0");
-        id += builder.toString();
-//        this.id = id;
-		return id;
+        this.id += builder.toString();
     }
     
     public String showInfo() {
     	String s = "";
     	s += "\nStudent Name: " + this.getFirstName() + " " + this.getLastName() + 
-    			"\nYear of study: " + this.yearOfStudy + "\nFaculty: " + this.faculty + "\nGPA: " + this.GPA;
+    			"\nYear of study: " + this.yearOfStudy + "\nFaculty: " + this.faculty + "\nGPA: " + this.GPA + "\nID: " + this.id + "\n";
     	return s;
     }
     
@@ -194,23 +188,28 @@ public class Student extends User implements IOrder{
 	/**
     * @generated
     */
-    public void viewTranscript() {
-    	System.out.println(transcript);
+    public Transcript viewTranscript() {
+    	return this.transcript;
     }
     
-    public void viewCourses() {
+    public String viewCourses() {
     	int num = 0;
-    	for (Course course: this.courses) {
-    		num++;
-    		System.out.println(course);
+    	String s = "";
+    	if (this.courses != null) {
+	    	for (Course course: this.courses) {
+	    		num++;
+	    		s += course + "\n";
+	    	}
     	}
-    	System.out.println("You have " + num + "courses. Good Luck)");
+    	return s + "You have " + num + " courses.";
     }
    
-    public void viewCourseFiles(Course course) {
+    public String viewCourseFiles(Course course) {
+    	String s = "";
         for (File file: course.courseFiles) {
-        	file.showFileInfo();
+        	s += file + "\n";
         }
+        return s;
     }
     
     public void viewMarks(Course course) {
@@ -223,12 +222,6 @@ public class Student extends User implements IOrder{
     public String showTeachers() {
         return Database.getTeachers();
     }
-
-
-	@Override
-	public void sendOrder(String problem, Order order) {
-		//ToDo
-	}
 
 	@Override
 	public int hashCode() {

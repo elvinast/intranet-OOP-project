@@ -1,0 +1,8 @@
+package main;
+
+import java.util.Date;
+
+public interface INews {
+
+	News createNews(String title, String text, Date date);
+}

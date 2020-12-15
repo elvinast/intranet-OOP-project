@@ -11,7 +11,7 @@ import java.util.List;
 /**
 * @generated
 */
-public class Admin extends Employee implements Comparable, INews, IMessage, IOrder{
+public class Admin extends Employee implements Comparable, INews, IOrder{
 
 	public Admin() {}
 	
@@ -19,34 +19,35 @@ public class Admin extends Employee implements Comparable, INews, IMessage, IOrd
     	super(firstName, lastName, email, salary);
     }
 	
-	public static Admin createAdmin(String firstName, String lastName, String email, int salary) {
-        return new Admin(firstName, lastName, email, salary);
+	public static void createAdmin(String firstName, String lastName, String email, int salary) {
+        Admin a = new Admin(firstName, lastName, email, salary);
+        Database.users.add(a);
+	}
+
+    public void createStudent(String firstName, String lastName, String email, Integer yearOfStudy, Faculties faculty, Degree degree) {
+        Student s = new Student(firstName, lastName, email, yearOfStudy, faculty, degree);
+        Database.users.add(s);
     }
 
-    public Student createStudent(String firstName, String lastName, String email, Integer yearOfStudy, Faculties faculty, Degree degree) {
-        return new Student(firstName, lastName, email, yearOfStudy, faculty, degree);
+    public void createManager(String firstName, String lastName, String email, 
+    		Integer salary) {
+        Manager m =  new Manager(firstName, lastName, email, salary);
+        Database.users.add(m);
     }
 
-    public Manager createManager(String firstName, String lastName, String email, 
-    		Integer salary, List<Student> students, List<Teacher> teachers, List<Course> courses, News news) {
-        return new Manager(firstName, lastName, email, salary, students, teachers, courses, news);
+    public void createTechSupportGuy(String firstName, String lastName, String email, Integer salary) {
+        TechSupportGuy guy = new TechSupportGuy(firstName, lastName, email, salary);
+        Database.users.add(guy);
     }
 
-    public TechSupportGuy createTechSupportGuy(String firstName, String lastName, String email, Integer salary, double workExperience, List<Order> orders) {
-        return new TechSupportGuy(firstName, lastName, email, salary, workExperience, orders);
-    }
-
-    public Teacher createTeacher(String firstName, String lastName, String email, int salary, Faculties faculty) {
-        return new Teacher(firstName, lastName, email, salary, faculty);
+    public void createTeacher(String firstName, String lastName, String email, int salary, Faculties faculty) {
+        Teacher t = new Teacher(firstName, lastName, email, salary, faculty);
+        Database.users.add(t);
     }
 
     @Override
     public String toString() {
         return String.format("Admin: { %s }", super.toString());
-    }
-
-	public void addUser(User user) {
-        //TODO
     }
 
     public boolean removeUser(User user) {
@@ -58,22 +59,17 @@ public class Admin extends Employee implements Comparable, INews, IMessage, IOrd
         }
     	return false;
     }
-    
+  
 
 	@Override
-	public void sendMessage(Message message, Employee sendTo) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public News createNews(Faculties faculty, String title, String text, Date date) {
-		return new News(faculty, title, text, date);
+	public void createNews(String title, String text, Date date) {
+		News n = new News(title, text, date);
+		Database.news.add(n);
 	}
 	
-	public Course addCourse(String courseName, Integer credits, Teacher teacher, String courseCode) {
-    	Course c = new Course(courseName, credits, teacher, courseCode);
-    	return c;
+	public void addCourse(String courseName, Integer credits, String courseCode) {
+    	Course c = new Course(courseName, credits, courseCode);
+    	Database.courses.add(c);
     }
 	
 //	private static void seeLogFiles(String h) throws IOException{
@@ -89,9 +85,9 @@ public class Admin extends Employee implements Comparable, INews, IMessage, IOrd
 
 
 	@Override
-	public void sendOrder(String problem, Order order) {
-		// TODO Auto-generated method stub
-		
+	public void sendOrder(String problem, Order order, TechSupportGuy techSupportGuy) {
+		techSupportGuy.addOrder(order);
+		order.setOrderStatus(OrderStatus.NEW);
 	}
 	
 	@Override

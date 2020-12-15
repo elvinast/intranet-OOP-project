@@ -2,82 +2,73 @@ package main;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Objects;
 
 /**
 * @generated
 */
 public class Order implements Serializable, Cloneable {
-    
-    /**
-    * @generated
-    */
+
     private OrderStatus orderStatus;
-    
-    /**
-    * @generated
-    */
+    private String text;
     private Date date;
+    private Employee sender;
     
+    public Order() {}
     
-    /**
-    * @generated
-    */
-    private TechSupportGuy techSupportGuy;
+    public Order(OrderStatus orderStatus, String text, Date date, Employee sender) {
+		this.orderStatus = orderStatus;
+		this.text = text;
+		this.date = date;
+		this.sender = sender;
+	}
     
-    
-    /**
-    * @generated
-    */
     public OrderStatus getOrderStatus() {
         return this.orderStatus;
     }
     
-    /**
-    * @generated
-    */
     public void setOrderStatus(OrderStatus orderStatus) {
         this.orderStatus = orderStatus;
     }
     
-    /**
-    * @generated
-    */
     public Date getDate() {
         return this.date;
     }
     
-    /**
-    * @generated
-    */
     public void setDate(Date date) {
         this.date = date;
     }
     
-    
-    
-    /**
-    * @generated
-    */
-    public TechSupportGuy getTechSupportGuy() {
-        return this.techSupportGuy;
-    }
-    
-    /**
-    * @generated
-    */
-    public void setTechSupportGuy(TechSupportGuy techSupportGuy) {
-        this.techSupportGuy = techSupportGuy;
-    }
-    
+    public Employee getSender() {
+		return sender;
+	}
+
+	public void setSender(Employee sender) {
+		this.sender = sender;
+	}
 
     //                          Operations                                  
     
-    /**
-    * @generated
-    */
-    public void showOrderInfo() {
-        //TODO
+    
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Order)) return false;
+        if (!super.equals(o)) return false;
+        Order order = (Order) o;
+        return orderStatus == order.orderStatus;
     }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), orderStatus);
+    }
+
+	@Override
+	public String toString() {
+		return "Order [orderStatus=" + orderStatus + ", text=" + text + ", date=" + date + ", sender=" + sender + "]";
+	}
+	
 
     
 }

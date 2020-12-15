@@ -1,0 +1,89 @@
+package main;
+
+import java.util.*;
+
+/**
+* @generated
+*/
+public class Manager extends Employee implements INews, IOrder, IMessage {
+    
+   
+    public Manager() {}
+    
+    public Manager(String firstName, String lastName, String email, 
+    		Integer salary) {
+    	super(firstName, lastName, email, salary);
+    }
+    
+    
+    //                          Operations                                  
+
+	public void createCourse(String name, int credits, Teacher teacher, String courseCode) {
+    	
+    	Course newCourse = new Course(name, credits, courseCode);
+    	for (Course course: Database.courses) {
+        	if (!course.getCourseCode().equals(courseCode)) {
+        		Database.courses.add(newCourse);
+        	}else {
+        		System.out.println("This course exists");
+        	}
+        //TODO
+    	}
+    }
+    
+
+    public void suggestCourse(Course course, List<Student> students) {
+        //TODO
+    	for(Student s : students) {
+    		if(s.getCourses().contains(course)) {
+    			System.out.println("Course exists");
+    		}else {
+    			course.setIsAvailable(false);
+    		}
+    	}
+    }
+
+    public boolean approveRegistration(Student student, Course course) {
+		
+    	if(student.getCurCredits() <= (21 - course.getCredits())) {
+    		return true;
+    	}else {
+    		return false;
+    	}
+    }
+
+    @Override
+	public void createNews(String title, String text, Date date) {
+		News n = new News(title, text, date);
+		Database.news.add(n);
+	}
+
+    @Override
+	public void sendOrder(String problem, Order order, TechSupportGuy techSupportGuy) {
+		techSupportGuy.addOrder(order);
+		order.setOrderStatus(OrderStatus.NEW);
+	}
+    
+	public boolean equals(Object obj) {
+    	if(!super.equals(obj)){
+			return true;
+		}
+    	Manager m = (Manager) obj;
+    	return super.equals(m) && news.equals(m.news);
+    }
+	
+	public int hashCode() {
+		return Objects.hash(super.hashCode(), news);
+	}
+	
+	public String showInfo() {
+		String s = "";
+		s += "\nFull name: " + this.getFirstName() + " " + this.getLastName() + "\nWork Experience: " + this.getWorkExperience();
+		return s;
+	}
+
+	@Override
+	public void sendMessage(Message message, Employee sendTo) {
+		sendTo.putMessage(message);
+	}
+}
