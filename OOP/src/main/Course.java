@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map.Entry;
+import java.util.Vector;
 
 
 public class Course implements Serializable, Comparable {
@@ -16,14 +17,14 @@ public class Course implements Serializable, Comparable {
     private boolean isAvailable;
     private Teacher teacher;
     private List<Student> students;
-    public List<File> courseFiles;
+    public  Vector<File> courseFiles;
     private HashMap<Student, Mark> marks;
     private String prerequisite;
 //    public List<File> files;
     
     public Course() {
     	List<Student> students = new ArrayList <Student>();
-    	List<File> courseFiles = new ArrayList <File>();
+    	courseFiles = new Vector<File>();
     	marks = new HashMap<Student, Mark>();
     }
     public Course(String courseName, Integer credits, String courseCode) {
@@ -31,12 +32,12 @@ public class Course implements Serializable, Comparable {
     	this.credits = credits;
     	this.courseCode = courseCode;
     	List<Student> students = new ArrayList <Student>();
-    	List<File> courseFiles = new ArrayList <File>();
+    	courseFiles = new Vector<File>();
     	marks = new HashMap<Student, Mark>();
     }
 
     public Course(String courseName, Integer credits, String description, String courseCode, Boolean isAvailable, Teacher teacher,
-    		List<Student> students, List<File> courseFiles, HashMap<Student, Mark> marks, String prerequisite) {
+    		List<Student> students, Vector<File> courseFiles, HashMap<Student, Mark> marks, String prerequisite) {
     	this.courseName = courseName;
     	this.credits = credits;
     	this.description = description;
@@ -105,14 +106,6 @@ public class Course implements Serializable, Comparable {
         this.students = students;
     }
     
-    public List<File> getCourseFiles() {
-        return this.courseFiles;
-    }
-
-    public void setCourseFiles(List<File> courseFiles) {
-        this.courseFiles = courseFiles;
-    }
-
     public HashMap<Student, Mark> getMarks() {
         return this.marks;
     }
@@ -196,6 +189,11 @@ public class Course implements Serializable, Comparable {
 		// TODO Auto-generated method stub
 		Course c = (Course) o;
 		return this.courseCode.compareTo(c.courseCode);
+	}
+	@Override
+	public String toString() {
+		return "Course [courseName=" + courseName + ", credits=" + credits + ", description=" + description
+				+ ", prerequisite=" + prerequisite + "]";
 	}
 	
     

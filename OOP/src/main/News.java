@@ -37,10 +37,12 @@ public class News extends Message {
     //                          Operations                                  
     
     
-    public void showNews() {
+    public String showNews() {
+    	String s = "";
         for (News n: Database.news) {
-        	
+        	s += n + "\n";
         }
+        return s;
     }
 
 	@Override

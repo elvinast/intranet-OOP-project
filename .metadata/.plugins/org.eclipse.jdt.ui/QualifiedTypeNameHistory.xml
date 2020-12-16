@@ -21,7 +21,6 @@
     <fullyQualifiedTypeName name="java.text.SimpleDateFormat"/>
     <fullyQualifiedTypeName name="main.MarksType"/>
     <fullyQualifiedTypeName name="main.Message"/>
-    <fullyQualifiedTypeName name="java.util.Vector"/>
     <fullyQualifiedTypeName name="main.IMessage"/>
     <fullyQualifiedTypeName name="main.OrderStatus"/>
     <fullyQualifiedTypeName name="main.TeachingStatus"/>
@@ -36,7 +35,8 @@
     <fullyQualifiedTypeName name="java.awt.List"/>
     <fullyQualifiedTypeName name="main.Student"/>
     <fullyQualifiedTypeName name="java.util.ArrayList"/>
-    <fullyQualifiedTypeName name="main.TechSupportGuy"/>
     <fullyQualifiedTypeName name="java.awt.desktop.UserSessionEvent"/>
     <fullyQualifiedTypeName name="main.Database"/>
+    <fullyQualifiedTypeName name="main.TechSupportGuy"/>
+    <fullyQualifiedTypeName name="java.util.Vector"/>
 </qualifiedTypeNameHistroy>

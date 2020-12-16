@@ -41,15 +41,55 @@ public class Main {
     }
     
 	public static void main(String[] args){
-	// TODO Auto-generated method stub
-		Student s = new Student("Jack", "V", "hismail", 2, Faculties.FIT, Degree.BACHELOR);
-		Student s1 = new Student("Bob", "KKK", "mail123", 3, Faculties.MCM, Degree.BACHELOR); //b_kkk
-		Database.users.add(s1);
-		Teacher t = new Teacher("Teacher111", "235", "emailTeacher", 10000, Faculties.FIT);
-		System.out.println(t.getLogin());
-		Database.users.add(t);
-		System.out.println(Database.getTeachers());
-		System.out.println(Database.getStudents());
+		//                STUDENTS
+		Student s1 = new Student("Jack", "Back", "email123", 2, Faculties.FIT, Degree.BACHELOR);
+		Student s2 = new Student("Bob", "KKK", "newmail123", 3, Faculties.MCM, Degree.BACHELOR); 
+		Student s3 = new Student("Mike", "Vaz", "gmail", 4, Faculties.ISE, Degree.BACHELOR); 
+		Student s4 = new Student("Brown", "Les", "mailru", 1, Faculties.FIT, Degree.BACHELOR); 
+		Student s5 = new Student("Jony", "TTT", "emailgoogle", 2, Faculties.FIT, Degree.BACHELOR);
+		Database.users.add(s1); Database.users.add(s2); Database.users.add(s3); Database.users.add(s4); Database.users.add(s5);
+		
+		//                TEACHERS
+		Teacher t1 = new Teacher("Teacher111", "235", "emailTeacher", 10000, Faculties.FIT);
+		Teacher t2 = new Teacher("Teacher222", "123", "emailTeacher1", 100200, Faculties.FIT);
+		Teacher t3 = new Teacher("Teacher333", "New", "emailTeacher2", 110000, Faculties.MCM);
+		Teacher t4 = new Teacher("Teacher444", "AAA", "emailTeacher3", 310000, Faculties.FIT);
+		Teacher t5 = new Teacher("Teacher555", "BBB", "emailTeacher4", 101000, Faculties.ISE);
+		Database.users.add(t1); Database.users.add(t2); Database.users.add(t3); Database.users.add(t4); Database.users.add(t5);
+		
+		//                TechSupportGuy
+		TechSupportGuy techGuy = new TechSupportGuy("TechGuy", "111", "emailTechGuy", 123000);
+		Database.users.add(techGuy);
+		
+		//      		  Manager
+		Manager manager = new Manager("FirstManader", "111", "emailManager", 11223000);
+		Database.users.add(manager); 
+		
+		//      		  Admin
+		Admin admin = new Admin("Admin", "First", "emailAdmin", 12312000);
+		Database.users.add(admin); 
+		
+		//      		  Courses
+		Course OOP = new Course("Object-Oriented Programming and Design", 3, "CS1");
+		Course ADS = new Course("Algorithms and Data Structures", 3, "CS2");
+		Course DB = new Course("Databases", 3, "CS3");
+		Course ICT = new Course("Information and Communication Technologies", 3, "CS4");
+		Course PP2 = new Course("Programming principles 2", 4, "CS5");
+		Course PP1 = new Course("Programming principles 1", 4, "CS6");
+		Database.courses.add(PP1); Database.courses.add(PP2); Database.courses.add(OOP); Database.courses.add(DB); Database.courses.add(ADS); Database.courses.add(ICT);
+		
+
+		
+//		System.out.println(Database.getTeachers());
+//		System.out.println(Database.getStudents());
+		
+		
+		
+//		Database.saveCourses();
+//		Database.loadCourses();
+		
+		
+//		System.exit(0);
 		
 		while(true) {
 			System.out.println("Welcome to the Intranet System!");
@@ -94,58 +134,60 @@ public class Main {
 	
 	
 	private static void teachersMenu(Teacher teacher) {
-    	System.out.println(   "		[1]         	Information about teacher\n"
-    						+ "		[2]         	View courses\n"
-    						+ "		[3]         	View course Files\n"
-    						+ "		[4]         	Add course file\n"
-    						+ "		[5]        	Delete course file\n"
-    						+ "		[6]         	Add course\n"
-    						+ "		[7]         	Create News\n"
-    						+ "		[8]         	Put mark to student\n"
-    						+ "		[9]         	Send Message\n"
-    						+ "		[10]        	Send Order to Executor\n"
-    						+ "		[11]        	View news\n"
-    						+ "		[0]         	EXIT\n");
-    	int ans = 0;
-    	ans = sc.nextInt();
-    	switch(ans) {
-    		case 1: 
-    			teacher.showInfo();
-    			break;
-    		case 2:
-    			teacher.viewCourses();
-    			break;
-    		case 3: 
-    			viewCourseFiles(teacher);
-    			break;
-    		case 4: 
-    			addCourseFile(teacher);
-    			break;
-    		case 5: 
-    			deleteCourseFile(teacher);
-    			break;
-    		case 6:
-    			System.out.println(addCourse(teacher));
-    			break;
-    		case 7:
-    			createNews(teacher);
-    			break;
-    		case 8:
-    			putMark(teacher);
-    			break;
-    		case 9:
-    			sendMessage(teacher);
-    			break;
-    		case 10:
-    			sendOrder(teacher);
-    			break;
-    		case 11: 
-    			viewNews();;
-    			break;
-    		case 0:
-    			System.exit(0);
-    			break;	
-    	}
+		while (true) {
+	    	System.out.println(   "		[1]         	Information about teacher\n"
+	    						+ "		[2]         	View courses\n"
+	    						+ "		[3]         	View course Files\n"
+	    						+ "		[4]         	Add course file\n"
+	    						+ "		[5]        	Delete course file\n"
+	    						+ "		[6]         	Add course\n"
+	    						+ "		[7]         	Create News\n"
+	    						+ "		[8]         	Put mark to student\n"
+	    						+ "		[9]         	Send Message\n"
+	    						+ "		[10]        	Send Order to Executor\n"
+	    						+ "		[11]        	View news\n"
+	    						+ "		[0]         	EXIT\n");
+	    	int ans = 0;
+	    	ans = sc.nextInt();
+	    	switch(ans) {
+	    		case 1: 
+	    			System.out.println(teacher.showInfo());
+	    			break;
+	    		case 2:
+	    			System.out.println(teacher.viewCourses());
+	    			break;
+	    		case 3: 
+	    			viewCourseFiles(teacher);
+	    			break;
+	    		case 4: 
+	    			addCourseFile(teacher);
+	    			break;
+	    		case 5: 
+	    			deleteCourseFile(teacher);
+	    			break;
+	    		case 6:
+	    			System.out.println(addCourse(teacher));
+	    			break;
+	    		case 7:
+	    			createNews(teacher);
+	    			break;
+	    		case 8:
+	    			putMark(teacher);
+	    			break;
+	    		case 9:
+	    			sendMessage(teacher);
+	    			break;
+	    		case 10:
+	    			sendOrder(teacher);
+	    			break;
+	    		case 11: 
+	    			viewNews();;
+	    			break;
+	    		case 0:
+	    			System.exit(0);
+	    			break;	
+	    	}
+		}
 	}
 
 
@@ -169,35 +211,39 @@ public class Main {
 				course = c;
 			}
 		}
-		
-		System.out.println("Choose number of mark's type: \n1. ATTESTATION 1\n2. ATTESTATION 2\n3. FINAL EXAM");
-		int type = sc.nextInt();
-		MarksType mark = null;
-		switch(type) {
-			case 1:
-				mark = MarksType.ATTESTATION1; 
-				break;
-			case 2:
-				mark = MarksType.ATTESTATION2; 
-				break;	
-			case 3:
-				mark = MarksType.FINAL_EXAM; 
-				break;
-		}
-		
-		System.out.println("Enter the number of points: ");
-		Double points = sc.nextDouble();
-		try {
-			if (teacher.putMark(course, mark, points, student)) {
-				System.out.println("Successfully done!");
-			}
-			else {
-				System.out.println("Error!");
+		if (student.getCourses().contains(course)) {
+			System.out.println("Choose number of mark's type: \n1. ATTESTATION 1\n2. ATTESTATION 2\n3. FINAL EXAM");
+			int type = sc.nextInt();
+			MarksType mark = null;
+			switch(type) {
+				case 1:
+					mark = MarksType.ATTESTATION1; 
+					break;
+				case 2:
+					mark = MarksType.ATTESTATION2; 
+					break;	
+				case 3:
+					mark = MarksType.FINAL_EXAM; 
+					break;
 			}
 			
-		} catch (DeadlineExpired e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println("Enter the number of points: ");
+			Double points = sc.nextDouble();
+			try {
+				if (teacher.putMark(course, mark, points, student)) {
+					System.out.println("Successfully done!");
+				}
+				else {
+					System.out.println("Error!");
+				}
+				
+			} catch (DeadlineExpired e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		else {
+			System.out.println("Error!");
 		}
 	}
 
@@ -268,16 +314,19 @@ public class Main {
 						Teacher t = (Teacher) e;
 						TechSupportGuy sendTo = (TechSupportGuy) u;
 						t.sendOrder(problem, m, sendTo);
+						System.out.println("Done!");
 					}
 					else if (e instanceof Manager) {
 						Manager t = (Manager) e;
 						TechSupportGuy sendTo = (TechSupportGuy) u;
 						t.sendOrder(problem, m, sendTo);
+						System.out.println("Done!");
 					}
 					else if (e instanceof Admin) {
 						Admin t = (Admin) e;
 						TechSupportGuy sendTo = (TechSupportGuy) u;
 						t.sendOrder(problem, m, sendTo);
+						System.out.println("Done!");
 					}
 				}
 			}
@@ -303,13 +352,13 @@ public class Main {
 		if (teacher.getCourses().size() >= 1) {
 			for (Course course: teacher.getCourses()) {
     			if (c.equals(course.getCourseCode())) {
-    				if (course.getCourseFiles().size() >= 1) {
+    				if (course.courseFiles.size() >= 1) {
     					System.out.println("Enter the title of the file: ");
 	    				String fileTitle = sc.next();
-	    				for (File f : course.getCourseFiles()) {
+	    				for (File f : course.courseFiles) {
 	    					if (f.getFileName().equals(fileTitle)) {
-	    						course.getCourseFiles().remove(f);
-	    						System.out.println("File successfully deleted\nCourse has " + course.getCourseFiles().size() + " files.");
+	    						course.courseFiles.remove(f);
+	    						System.out.println("File successfully deleted\nCourse has " + course.courseFiles.size() + " files.");
 	    						break;
 	    					}
 	    				}
@@ -337,7 +386,7 @@ public class Main {
     				System.out.println("Enter the description of the new file: ");
     				String fileDescription = sc.next();
     				if (teacher.addCourseFile(course, new File(fileTitle, course, teacher, fileDescription))) {
-    					System.out.println("New file successfully added to " + course.getCourseName() + "course!\n");
+    					System.out.println("New file successfully added to " + course.getCourseName() + " course!\n");
     				}
     				break;
     			}
@@ -355,7 +404,7 @@ public class Main {
 		if (teacher.getCourses().size() >= 1) {
 			for (Course course: teacher.getCourses()) {
     			if (c.equals(course.getCourseCode())) {
-    				teacher.viewCourseFiles(course);
+    				System.out.println(teacher.viewCourseFiles(course));
     				break;
     			}
     		}
@@ -436,9 +485,7 @@ public class Main {
     			}
     		}
 		}
-		else {
-			System.out.println("You should register for at least one course.");
-		}
+		System.out.println("You don't have such course.");
 	}
 	
 	private static void showCourseFiles(Student student) {
@@ -453,9 +500,7 @@ public class Main {
     			}
     		}
 		}
-		else {
-			System.out.println("You should register for at least one course.");
-		}
+		System.out.println("You don't have such course.");
 	}
 	
 	private static void registerOnCourse(Student student) {
@@ -526,7 +571,7 @@ public class Main {
 	private static void viewNews() {
 		// TODO Auto-generated method stub
 		for (News n: Database.news) {
-			n.showNews();
+			System.out.println(n.showNews());
 		}
 	}
 
