@@ -143,7 +143,7 @@ public class Student extends User {
 	        		newCourse = course;
 	        	}
 	        }
-	        if (this.curCredits <= this.CREDITS_LIMIT) {
+	        if (this.curCredits <= this.CREDITS_LIMIT && newCourse.getIsAvailable()) {
 	        	courses.add(newCourse);
 	    		marks.put(newCourse, null);
 	    		return true;
@@ -198,7 +198,7 @@ public class Student extends User {
     	if (this.courses != null) {
 	    	for (Course course: this.courses) {
 	    		num++;
-	    		s += course + "\n";
+	    		s += course.showInfo() + "\n";
 	    	}
     	}
     	return s + "You have " + num + " courses.";
@@ -207,7 +207,7 @@ public class Student extends User {
     public String viewCourseFiles(Course course) {
     	String s = "";
         for (File file: course.courseFiles) {
-        	s += file + "\n";
+        	s += file.showFileInfo() + "\n";
         }
         return s;
     }

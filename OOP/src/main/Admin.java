@@ -62,9 +62,8 @@ public class Admin extends Employee implements Comparable, INews, IOrder{
   
 
 	@Override
-	public void createNews(String title, String text, Date date) {
-		News n = new News(title, text, date);
-		Database.news.add(n);
+	public void createNews(String title, String text, Date date, Employee sender) {
+		News n = new News(title, text, date, sender);
 	}
 	
 	public void addCourse(String courseName, Integer credits, String courseCode) {

@@ -49,10 +49,8 @@ public class Teacher extends Employee implements Serializable, IOrder, IMessage,
 
 
     @Override
-	public void createNews(String title, String text, Date date) {
-		News n = new News(title, text, date);
-		Database.news.add(n);
-		Database.save();
+    public void createNews(String title, String text, Date date, Employee sender) {
+		News n = new News(title, text, date, sender);
 	}
     
     public void addCourse(Course course) {
@@ -112,7 +110,7 @@ public class Teacher extends Employee implements Serializable, IOrder, IMessage,
     		}
     		return s;
     	}
-        return "You have no courses";
+        return "You have no courses:(";
     }
     
     public String showCourseFiles(Course course) {

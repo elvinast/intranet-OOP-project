@@ -55,9 +55,8 @@ public class Manager extends Employee implements INews, IOrder, IMessage {
 //    }
 
     @Override
-	public void createNews(String title, String text, Date date) {
-		News n = new News(title, text, date);
-		Database.news.add(n);
+    public void createNews(String title, String text, Date date, Employee sender) {
+		News n = new News(title, text, date, sender);
 	}
 
     @Override

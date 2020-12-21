@@ -14,9 +14,14 @@ public class Main {
 	
     public static User signIn() throws IOException {
         for(int i = 0; i < 3; i++) {
-        	System.out.println("You have " + (3 - i) + " attempts to login.");
+        	System.out.println("\nYou have " + (3 - i) + " attempts to login.");
+        	System.out.println("Press q to quit");
         	System.out.println("Enter login: ");
         	String in = reader.readLine();
+        	if (in.equals("q")) {
+        		System.out.println("Bye!");
+        		System.exit(0);
+        	}
         	for(User u: Database.users) {
 	        	if (u.getLogin().equals(in) == true) {
 	        		System.out.println("Enter password: ");
@@ -58,11 +63,15 @@ public class Main {
 		Database.users.add(t1); Database.users.add(t2); Database.users.add(t3); Database.users.add(t4); Database.users.add(t5);
 		
 		//                TechSupportGuy
-		TechSupportGuy techGuy = new TechSupportGuy("TechGuy", "111", "emailTechGuy", 123000);
+		TechSupportGuy techGuy = new TechSupportGuy("Nurbol", "111", "emailTechGuy", 123000);
 		Database.users.add(techGuy);
+		TechSupportGuy techGuy1 = new TechSupportGuy("Erbol", "111", "emailTechGuy", 123000);
+		Database.users.add(techGuy1);
+		TechSupportGuy techGuy2 = new TechSupportGuy("Futbol", "111", "emailTechGuy", 123000);
+		Database.users.add(techGuy2);
 		
 		//      		  Manager
-		Manager manager = new Manager("FirstManader", "111", "emailManager", 11223000);
+		Manager manager = new Manager("FirstManager", "111", "emailManager", 11223000);
 		Database.users.add(manager); 
 		
 		//      		  Admin
@@ -98,30 +107,38 @@ public class Main {
 	
     public static void log() throws IOException {
     	while(true) {
-			System.out.println("Welcome to the Intranet System!");
+    		
+    		//welcome message
+    		String www = "Welcome to the Intranet System!";
+    		System.out.print("			 ");
+    		for (int i = 0; i <= www.length() + 1; i++) System.out.print("-");
+    		System.out.println("\n			| " + www + " |");
+    		System.out.print("			 ");
+    		for (int i = 0; i <= www.length() + 1; i++) System.out.print("-");
+    		//login process
 			User u = signIn();
 			if (u instanceof Student) {
-				System.out.println("Welcome to Student's mode " + u.getFirstName() + "!\n");
+				System.err.println("			  Welcome to Student's mode " + u.getFirstName() + "!\n");
 				studentsMenu((Student) u);
 				break;
 			}
 			else if (u instanceof Teacher) {
-				System.out.println("Welcome to Teahcher's mode " + u.getFirstName() + "!\n");
+				System.err.println("		     Welcome to Teacher's mode " + u.getFirstName() + "!\n");
 				teachersMenu((Teacher) u);
 				break;
 			}
 			else if (u instanceof Manager) {
-				System.out.println("Welcome to Manager's mode " + u.getFirstName() + "!\n");
+				System.err.println("			 Welcome to Manager's mode " + u.getFirstName() + "!\n");
 				managersMenu((Manager) u);
 				break;
 			}
 			else if (u instanceof Admin) {
-				System.out.println("Welcome to Admin's mode " + u.getFirstName() + "!\n");
+				System.err.println("			 Welcome to Admin's mode " + u.getFirstName() + "!\n");
 				adminsMenu((Admin) u);
 				break;
 			}
 			else if (u instanceof TechSupportGuy) {
-				System.out.println("Welcome to Executor's mode " + u.getFirstName() + "!\n");
+				System.err.println("			 Welcome to Executor's mode " + u.getFirstName() + "!\n");
 				techSupportGuysMenu((TechSupportGuy) u);
 				break;
 			}
@@ -134,6 +151,7 @@ public class Main {
 	
 	private static void teachersMenu(Teacher teacher) throws IOException {
 		while (true) {
+			System.out.println("                    ------------------------------------------------");
 	    	System.out.println(   "		[1]         	Information about teacher\n"
 	    						+ "		[2]         	View courses\n"
 	    						+ "		[3]         	View course Files\n"
@@ -146,11 +164,13 @@ public class Main {
 	    						+ "		[10]        	Send Order to Executor\n"
 	    						+ "		[11]        	View news\n"
 	    						+ "		[12]         	Change password\n"
-	    						+ "		[0]         	EXIT\n");
+	    						+ "		[0]         	EXIT");
+	    	System.out.println("                    ------------------------------------------------");
 	    	int ans = 0;
 	    	ans = Integer.parseInt(reader.readLine());
 	    	switch(ans) {
 	    		case 1: 
+	    			System.err.println("Information about teacher: ");
 	    			System.out.println(teacher.showInfo());
 	    			break;
 	    		case 2:
@@ -258,19 +278,19 @@ public class Main {
 		System.out.println("Enter the text of the news: ");
 		String text = reader.readLine();
 		Date date = java.util.Calendar.getInstance().getTime(); 
-		News n = new News(title, text, date);
+		News n = new News(title, text, date, e);
 		Database.news.add(n);
 		if (e instanceof Teacher) {
 			Teacher t = (Teacher) e;
-			t.createNews(title, text, date);
+			t.createNews(title, text, date, t);
 		}
 		else if (e instanceof Manager) {
 			Manager t = (Manager) e;
-			t.createNews(title, text, date);
+			t.createNews(title, text, date, t);
 		}
 		else if (e instanceof Admin) {
 			Admin t = (Admin) e;
-			t.createNews(title, text, date);
+			t.createNews(title, text, date, t);
 		}
 		Database.save();
 	}
@@ -435,6 +455,7 @@ public class Main {
 	
 	private static void studentsMenu(Student student) throws NumberFormatException, IOException{
 		while (true) {
+			System.out.println("                    ------------------------------------------------");
 	    	System.out.println(    " 		[1]		Information about student\n"
 	    						+ "		[2]         	View courses\n"
 	    						+ "		[3]         	View teachers\n"
@@ -445,6 +466,7 @@ public class Main {
 	    						+ "		[8]         	Registration for disciplines\n"
 	    						+ "		[9]         	Change password\n"
 	    						+ "		[0]        		EXIT\n");
+	    	System.out.println("                    ------------------------------------------------");
 	    	int ans = 0;
 	    	ans = Integer.parseInt(reader.readLine());
 	    	switch(ans) {
@@ -453,7 +475,8 @@ public class Main {
 	    			System.out.println(student.showInfo());
 	    			break;
 	    		case 2:
-	    			System.out.println(student.viewCourses());
+	    			System.out.println("Courses of " + student.getFirstName() + " " + 
+	    					student.getLastName() + "\n" +  student.viewCourses());
 	    			break;
 	    		case 3: 
 	    			System.out.println(student.showTeachers());
@@ -468,7 +491,7 @@ public class Main {
 	    			showCourseFiles(student);
 	    			break;
 	    		case 7:
-	    			System.out.println(student.viewNews());
+	    			viewNews();
 	    			break;
 	    		case 8:
 	    			registerOnCourse(student);
@@ -487,13 +510,18 @@ public class Main {
 		String old = reader.readLine();
 		System.out.println("Enter new password: ");
 		String neww = reader.readLine();
-		u.changePassword(old, neww);
-		System.out.println("Password successfully updated!");
+		if (u.changePassword(old, neww))
+			System.out.println("Password successfully updated!");
+		else System.out.println("Error!");
 	}
 
 	private static void showMarks(Student student) throws IOException {
 		// TODO Auto-generated method stub
 		Database.load();
+		if (student.getCourses().size() == 0) {
+			System.out.println("You have 0 courses");
+			return;
+		}
 		System.out.println("Enter course id to see the marks of this course: ");
 		String c = reader.readLine();
 		if (student.getCourses() != null) {
@@ -509,15 +537,18 @@ public class Main {
 	
 	private static void showCourseFiles(Student student) throws IOException {
 		Database.load();
+		if (student.getCourses().size() == 0) {
+			System.out.println("You have 0 courses");
+			return;
+		}
 		System.out.println("Enter course id to see the files of this course: ");
 		String c = reader.readLine();
-		if (student.getCourses() != null) {
-			for (Course course: student.getCourses()) {
-    			if (c.equals(course.getCourseCode())) {
-    				student.viewCourseFiles(course);
-    				break;
-    			}
-    		}
+		for (Course course: student.getCourses()) {
+			System.out.println(course.courseFiles);
+			if (c.equals(course.getCourseCode())) {
+				student.viewCourseFiles(course);
+				break;
+			}
 		}
 		System.out.println("Error");
 	}
@@ -549,15 +580,17 @@ public class Main {
 	
 	
 	private static void adminsMenu(Admin admin) throws NumberFormatException, IOException {
+		System.out.println("                    ------------------------------------------------");
     	System.out.println(   "		[1]         	Add user\n"
     						+ "		[2]         	Remove user\n"
     						+ "		[3]         	Show info about admin\n"
     						+ "		[4]         	Create news\n"
     						+ "		[5]         	Add course\n"
-    						+ "		[6]        		Send Order to Executor\n"
+    						+ "		[6]        	Send Order to Executor\n"
     						+ "		[7]         	View news\n"
     						+ "		[8]         	Change password\n"
-    						+ "		[0]         	EXIT\n");
+    						+ "		[0]         		EXIT\n");
+    	System.out.println("                    ------------------------------------------------");
     	int ans = 0;
     	ans = Integer.parseInt(reader.readLine());
     	switch(ans) {
@@ -592,8 +625,12 @@ public class Main {
 
 	private static void viewNews() {
 		Database.load();
+		if (Database.news.size() == 0) {
+			System.out.println("No news");
+			return;
+		}
 		for (News n: Database.news) {
-			System.out.println(n.showNews());
+			n.showNewsInfo();
 		}
 	}
 
@@ -701,18 +738,20 @@ public class Main {
 	
 	
 	private static void techSupportGuysMenu(TechSupportGuy guy) throws NumberFormatException, IOException {
+		System.out.println("                    ------------------------------------------------");
 		System.out.println(   "		[1]         	View new orders\n"
 							+ "		[2]         	View accepted orders\n"
 							+ "		[3]         	View rejected orders\n"
 							+ "		[4]         	View finished orders\n"
 							+ "		[5]         	View pending orders\n"
 							+ "		[6]         	Delete all orders\n"
-							+ "		[7]        		Manage new orders\n"
+							+ "		[7]        	Manage new orders\n"
 							+ "		[8]         	View all orders\n"
 							+ "		[9]         	Finish order\n"
 							+ "		[10]         	Show info about executor\n"
 							+ "		[11]         	Change password\n"
-							+ "		[0]         	EXIT\n");
+							+ "		[0]         		EXIT\n");
+		System.out.println("                    ------------------------------------------------");
 		int ans = 0;
 		ans = Integer.parseInt(reader.readLine());
 		switch(ans) {
@@ -824,15 +863,17 @@ public class Main {
 	
 	
 	private static void managersMenu(Manager manager) throws NumberFormatException, IOException {
+		System.out.println("                    ------------------------------------------------");
 		System.out.println(   "		[1]         	Create course\n"
 							+ "		[2]         	Open course for registration\n"
-							+ "		[3]        		View news\n"
+							+ "		[3]        	View news\n"
 							+ "		[4]         	Create news\n"
 							+ "		[5]         	Send order to executor\n"
 							+ "		[6]         	Show info about manager\n"
 							+ "		[7]         	Send message\n"
 							+ "		[8]         	Change password\n"
-							+ "		[0]         	EXIT\n");
+							+ "		[0]         		EXIT\n");
+		System.out.println("                    ------------------------------------------------");
 		int ans = 0;
 		ans = Integer.parseInt(reader.readLine());
 		switch(ans) {
