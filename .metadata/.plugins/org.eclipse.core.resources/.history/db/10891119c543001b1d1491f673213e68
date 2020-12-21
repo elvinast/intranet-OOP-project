@@ -697,7 +697,6 @@ public class Main {
 				}
 				
 				admin.createStudent(firstName, lastName, email, yearOfStudy, f, d);
-				System.out.println("New student successfully added!");
 				Database.save();
 				break;
 			case 2:
@@ -709,7 +708,6 @@ public class Main {
 				Faculties f1 = getFacultiesss(fac1);
 				
 				admin.createTeacher(firstName, lastName, email, salary, f1);
-				System.out.println("New teacher successfully added!");
 				Database.save();
 				break;
 				
@@ -717,21 +715,18 @@ public class Main {
 				System.out.println("Enter the salary for manager: ");
 				int salaryM = Integer.parseInt(reader.readLine());
 				admin.createManager(firstName, lastName, email, salaryM);
-				System.out.println("New manager successfully added!");
 				Database.save();
 				break;
 			case 4:
 				System.out.println("Enter the salary for executor: ");
 				int salaryT = Integer.parseInt(reader.readLine());
 				admin.createTechSupportGuy(firstName, lastName, email, salaryT);
-				System.out.println("New executor successfully added!");
 				Database.save();
 				break;
 			case 5:
 				System.out.println("Enter the salary for administrator: ");
 				int salaryA = Integer.parseInt(reader.readLine());
 				admin.createAdmin(firstName, lastName, email, salaryA);
-				System.out.println("New admin successfully added!");
 				Database.save();
 				break;
 		}

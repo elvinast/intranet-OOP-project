@@ -86,9 +86,6 @@ public class TechSupportGuy extends Employee {
     public String view0rderByStatus(OrderStatus status){
     	Database.load();
         String str = "";
-        if (orders.size() == 0) {
-			return "You have 0 orders:(";
-		}
         for(Order order: this.orders){
         	if (order.getOrderStatus().equals(status)) {
         		 str += order + "\n"; 
