@@ -143,7 +143,7 @@ public class Student extends User {
 	        		newCourse = course;
 	        	}
 	        }
-	        if (this.curCredits <= this.CREDITS_LIMIT) {
+	        if (this.curCredits <= this.CREDITS_LIMIT && newCourse.getIsAvailable()) {
 	        	courses.add(newCourse);
 	    		marks.put(newCourse, null);
 	    		return true;
@@ -185,29 +185,24 @@ public class Student extends User {
 		return "Student [yearOfStudy=" + yearOfStudy + ", GPA=" + GPA + ", id=" + id + ", faculty=" + faculty + "]";
 	}
 
-	/**
-    * @generated
-    */
     public Transcript viewTranscript() {
     	return this.transcript;
     }
     
     public String viewCourses() {
-    	int num = 0;
     	String s = "";
     	if (this.courses != null) {
 	    	for (Course course: this.courses) {
-	    		num++;
-	    		s += course + "\n";
+	    		s += course.showInfo() + "\n";
 	    	}
     	}
-    	return s + "You have " + num + " courses.";
+    	return s + "You have " + this.courses.size() + " courses.";
     }
    
     public String viewCourseFiles(Course course) {
     	String s = "";
         for (File file: course.courseFiles) {
-        	s += file + "\n";
+        	s += file.showFileInfo() + "\n";
         }
         return s;
     }

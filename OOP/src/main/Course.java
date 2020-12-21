@@ -15,16 +15,16 @@ public class Course implements Serializable, Comparable {
     private String description;
     private String courseCode;
     private boolean isAvailable;
-    private Teacher teacher;
+//    private Teacher teacher;
     public  Vector<File> courseFiles;
-    private HashMap<Student, Mark> marks;
+//    private HashMap<Student, Mark> marks;
     private String prerequisite;
 //    public List<File> files;
     
     public Course() {
     	List<Student> students = new ArrayList <Student>();
     	courseFiles = new Vector<File>();
-    	marks = new HashMap<Student, Mark>();
+//    	marks = new HashMap<Student, Mark>();
     }
     public Course(String courseName, Integer credits, String courseCode) {
     	this.courseName = courseName;
@@ -32,7 +32,8 @@ public class Course implements Serializable, Comparable {
     	this.courseCode = courseCode;
     	List<Student> students = new ArrayList <Student>();
     	courseFiles = new Vector<File>();
-    	marks = new HashMap<Student, Mark>();
+//    	marks = new HashMap<Student, Mark>();
+    	this.isAvailable = true;
     }
 
     public Course(String courseName, Integer credits, String description, String courseCode, Boolean isAvailable, Teacher teacher,
@@ -42,9 +43,9 @@ public class Course implements Serializable, Comparable {
     	this.description = description;
     	this.courseCode = courseCode;
     	this.isAvailable = isAvailable;
-    	this.teacher = teacher;
+//    	this.teacher = teacher;
     	this.courseFiles = courseFiles;
-    	this.marks = marks;
+//    	this.marks = marks;
     	this.prerequisite = prerequisite;
     	
     }
@@ -88,21 +89,21 @@ public class Course implements Serializable, Comparable {
         this.isAvailable = isAvailable;
     }
 
-    public Teacher getTeacher() {
-        return this.teacher;
-    }
-
-    public void setTeacher(Teacher teacher) {
-        this.teacher = teacher;
-    }
-    
-    public HashMap<Student, Mark> getMarks() {
-        return this.marks;
-    }
-
-    public void setMarks(HashMap<Student, Mark> marks) {
-        this.marks = marks;
-    }
+//    public Teacher getTeacher() {
+//        return this.teacher;
+//    }
+//
+//    public void setTeacher(Teacher teacher) {
+//        this.teacher = teacher;
+//    }
+//    
+//    public HashMap<Student, Mark> getMarks() {
+//        return this.marks;
+//    }
+//
+//    public void setMarks(HashMap<Student, Mark> marks) {
+//        this.marks = marks;
+//    }
 
     public String getPrerequisite() {
         return this.prerequisite;
@@ -115,21 +116,6 @@ public class Course implements Serializable, Comparable {
 
     //                          Operations                                  
 
-//    
-//    public boolean addStudent(Student student) {
-//    	return 
-//    }
-//
-//    public boolean removeStudent(Student student) {
-//    	if(students.contains(student)) {
-//    		students.remove(student);
-//    		System.out.println("This student removed");
-//    		return true;
-//    	}else {
-//    		System.out.println("This student isn't in this course");
-//    		return false;
-//    	}
-//    }
 
     public boolean addCourseFile(File courseFile) {
     	if(!courseFiles.contains(courseFile)) {
@@ -175,6 +161,11 @@ public class Course implements Serializable, Comparable {
 		// TODO Auto-generated method stub
 		Course c = (Course) o;
 		return this.courseCode.compareTo(c.courseCode);
+	}
+	
+	public String showInfo() {
+		return "Course name: " + this.courseName + "\nCourse credits: " + this.credits + "\nCourse prerequisite: " + 
+				this.prerequisite + "\nCourse description: " + this.description;
 	}
 	@Override
 	public String toString() {

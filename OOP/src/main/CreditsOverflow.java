@@ -1,9 +1,6 @@
 package main;
 
 
-/**
-* @generated
-*/
 public class CreditsOverflow extends Exception {
     
 	public CreditsOverflow(Course course, int lim) {

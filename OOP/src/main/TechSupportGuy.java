@@ -14,8 +14,8 @@ public class TechSupportGuy extends Employee {
 
 	
     private Vector<Order> orders;
-//    private Order order;
-    private OrderStatus orderStatus;
+////    private Order order;
+//    private OrderStatus orderStatus;
 
     public TechSupportGuy() {}
 
@@ -24,13 +24,13 @@ public class TechSupportGuy extends Employee {
 		orders = new Vector<Order>();
 	}
 
-	public OrderStatus getOrderStatus() {
-		return orderStatus;
-	}
-	
-	public void setOrderStatus(OrderStatus orderStatus) {
-		this.orderStatus = orderStatus;
-	}
+//	public OrderStatus getOrderStatus() {
+//		return orderStatus;
+//	}
+//	
+//	public void setOrderStatus(OrderStatus orderStatus) {
+//		this.orderStatus = orderStatus;
+//	}
 
     public Vector<Order> getOrders() {
         return this.orders;
@@ -50,14 +50,13 @@ public class TechSupportGuy extends Employee {
 
     public void acceptOrder(Order order) {
         orders.add(order);
-        order.setOrderStatus(orderStatus.ACCEPTED);
+        order.setOrderStatus(OrderStatus.ACCEPTED);
     }
     
     public void updateOrder(OrderStatus status, Order order) {
         order.setOrderStatus(status);
     }
     
-
     public void clearOrders(){
         orders.clear();
     }
@@ -72,7 +71,7 @@ public class TechSupportGuy extends Employee {
      
     public void rejectOrder(Order order) {
     	orders.add(order);
-        order.setOrderStatus(orderStatus.REJECTED);
+        order.setOrderStatus(OrderStatus.REJECTED);
     }
 
     public String view0rdersInfo(){
@@ -87,6 +86,9 @@ public class TechSupportGuy extends Employee {
     public String view0rderByStatus(OrderStatus status){
     	Database.load();
         String str = "";
+        if (orders.size() == 0) {
+			return "You have 0 orders:(";
+		}
         for(Order order: this.orders){
         	if (order.getOrderStatus().equals(status)) {
         		 str += order + "\n"; 

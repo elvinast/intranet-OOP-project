@@ -12,6 +12,7 @@ public class Employee extends User {
     private List<Message> messages;
     
     public Employee() {}
+    
     public Employee(String firstName, String lastName, String email, Integer salary) {
     	super(firstName, lastName, email);
     	this.salary = salary;

@@ -1,6 +1,7 @@
 package main;
 
 import java.io.Serializable;
+import java.util.Objects;
 import java.util.Scanner;
 
 /**
@@ -63,40 +64,11 @@ public class User implements Serializable, Comparable {
 
     //                          Operations                                  
     
-//    Scanner sc = new Scanner(System.in);
-//    public int signIn() {
-//        
-//        
-////        int id = Integer.parseInt(in);
-//        for(int i = 0; i < 3; i++) {
-//        	System.out.println("Welcome! You have " + (3 - i) + " attempts to login.");
-//        	System.out.println("Enter login: ");
-//        	String in = sc.next();
-//        	for(User u: Database.users) {
-//	        	if (u.login.equals(in) == true) {
-//	        		System.out.println("Enter password: ");
-//	        		String in1 = sc.next();
-//	        		String ps = in1;
-//	        		if (u.password.equals(ps)) {
-//	        			System.out.println("Successfully authorized!");
-//	        			return 1;
-//	        		}
-//	        		else {
-//	        			System.out.println("Error! Wrong password!");
-//	        			continue;
-//	        		}
-//	        	}
-//        	}
-//        	if (i < 2) System.out.println("Try again!");
-//        }
-//        
-//        System.out.println("No such user:(");
-//        return -1;
-//    }
 
     public boolean changePassword(String oldPassword, String newPassword) {
         if (oldPassword.equals(this.password)) {
         	this.password = newPassword;
+        	Database.save();
         	return true;
         }
     	return false;
@@ -109,14 +81,7 @@ public class User implements Serializable, Comparable {
 
 	@Override
 	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((email == null) ? 0 : email.hashCode());
-		result = prime * result + ((firstName == null) ? 0 : firstName.hashCode());
-		result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
-		result = prime * result + ((login == null) ? 0 : login.hashCode());
-		result = prime * result + ((password == null) ? 0 : password.hashCode());
-		return result;
+		return Objects.hash(login, password, email, firstName, lastName);
 	}
 
 	@Override
@@ -165,5 +130,4 @@ public class User implements Serializable, Comparable {
 		}
 		return s;
 	}
-
 }

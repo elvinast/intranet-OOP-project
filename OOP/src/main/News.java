@@ -13,10 +13,11 @@ public class News extends Message {
   
     public News() {}
     
-    public News(String title, String text, Date date) {
-        super(title, text, date);
+    
+    public News(String title, String text, Date date, Employee sender) {
+        super(title, text, date, sender);
     }
-
+    
     public Faculties getFaculty() {
         return this.faculty;
     }

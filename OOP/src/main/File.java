@@ -1,8 +1,6 @@
 package main;
 
-/**
-* @generated
-*/
+
 public class File  {
     
 	public File() {}

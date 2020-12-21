@@ -1,28 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
-		<item key="selection" value="sc."/>
+		<item key="selection" value="viewNews"/>
 		<item key="wrap" value="true"/>
 		<item key="casesensitive" value="false"/>
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="true"/>
 		<item key="isRegEx" value="false"/>
 		<list key="findhistory">
+			<item value="viewNews"/>
+			<item value="exit"/>
+			<item value="signIn"/>
+			<item value="singIn"/>
+			<item value="You don&apos;t have such course."/>
+			<item value="News"/>
+			<item value="showNews"/>
+			<item value="send"/>
+			<item value="order"/>
+			<item value="admin"/>
 			<item value="sc."/>
 			<item value="nextInt"/>
 			<item value="putM"/>
 			<item value="put"/>
 			<item value="addCourseFile"/>
-			<item value="viewNews"/>
-			<item value="sendOrder"/>
-			<item value="user.out"/>
-			<item value="usersout"/>
-			<item value="users.out"/>
-			<item value="case &quot;FIT&quot;"/>
-			<item value="fac"/>
-			<item value="Mark"/>
-			<item value="setM"/>
-			<item value="set"/>
 		</list>
 		<list key="replacehistory">
 			<item value="double"/>
