@@ -16,7 +16,6 @@ public class Course implements Serializable, Comparable {
     private String courseCode;
     private boolean isAvailable;
     private Teacher teacher;
-    private List<Student> students;
     public  Vector<File> courseFiles;
     private HashMap<Student, Mark> marks;
     private String prerequisite;
@@ -37,14 +36,13 @@ public class Course implements Serializable, Comparable {
     }
 
     public Course(String courseName, Integer credits, String description, String courseCode, Boolean isAvailable, Teacher teacher,
-    		List<Student> students, Vector<File> courseFiles, HashMap<Student, Mark> marks, String prerequisite) {
+    		 Vector<File> courseFiles, HashMap<Student, Mark> marks, String prerequisite) {
     	this.courseName = courseName;
     	this.credits = credits;
     	this.description = description;
     	this.courseCode = courseCode;
     	this.isAvailable = isAvailable;
     	this.teacher = teacher;
-    	this.students = students;
     	this.courseFiles = courseFiles;
     	this.marks = marks;
     	this.prerequisite = prerequisite;
@@ -97,14 +95,6 @@ public class Course implements Serializable, Comparable {
     public void setTeacher(Teacher teacher) {
         this.teacher = teacher;
     }
-
-    public List<Student> getStudents() {
-        return this.students;
-    }
-    
-    public void setStudents(List<Student> students) {
-        this.students = students;
-    }
     
     public HashMap<Student, Mark> getMarks() {
         return this.marks;
@@ -125,25 +115,21 @@ public class Course implements Serializable, Comparable {
 
     //                          Operations                                  
 
-    
-    public boolean addStudent(Student student) {
-    	if(!students.contains(student)) {
-    		students.add(student);
-    		return true;
-    	}
-    	return false;
-    }
-
-    public boolean removeStudent(Student student) {
-    	if(students.contains(student)) {
-    		students.remove(student);
-    		System.out.println("This student removed");
-    		return true;
-    	}else {
-    		System.out.println("This student isn't in this course");
-    		return false;
-    	}
-    }
+//    
+//    public boolean addStudent(Student student) {
+//    	return 
+//    }
+//
+//    public boolean removeStudent(Student student) {
+//    	if(students.contains(student)) {
+//    		students.remove(student);
+//    		System.out.println("This student removed");
+//    		return true;
+//    	}else {
+//    		System.out.println("This student isn't in this course");
+//    		return false;
+//    	}
+//    }
 
     public boolean addCourseFile(File courseFile) {
     	if(!courseFiles.contains(courseFile)) {

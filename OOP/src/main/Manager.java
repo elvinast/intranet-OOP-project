@@ -82,6 +82,7 @@ public class Manager extends Employee implements INews, IOrder, IMessage {
 
 	@Override
 	public void sendMessage(Message message, Employee sendTo) {
-		sendTo.putMessage(message);
+		Teacher m = (Teacher) sendTo;
+		m.putMessage(message);
 	}
 }

@@ -76,6 +76,7 @@ public class TechSupportGuy extends Employee {
     }
 
     public String view0rdersInfo(){
+    	Database.load();
         String str = "";
         for(int i = 0; i < orders.size(); i++){
             str += orders.get(i).toString() + "\n"; 
@@ -84,6 +85,7 @@ public class TechSupportGuy extends Employee {
     }
     
     public String view0rderByStatus(OrderStatus status){
+    	Database.load();
         String str = "";
         for(Order order: this.orders){
         	if (order.getOrderStatus().equals(status)) {

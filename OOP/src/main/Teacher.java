@@ -52,6 +52,7 @@ public class Teacher extends Employee implements Serializable, IOrder, IMessage,
 	public void createNews(String title, String text, Date date) {
 		News n = new News(title, text, date);
 		Database.news.add(n);
+		Database.save();
 	}
     
     public void addCourse(Course course) {
@@ -59,17 +60,22 @@ public class Teacher extends Employee implements Serializable, IOrder, IMessage,
     }
     
     public boolean putMark(Course course, MarksType marksType, double points, Student student) throws DeadlineExpired{
-    	for (Student s: course.getStudents()) {
-    		if (s.equals(student)) {
-    			for (Entry<Course, Mark> entry : student.getMarks().entrySet()) {
-//    				System.out.println(entry.getValue());
-    				Mark m = entry.getValue();
-    				student.setMark(course, new Mark(points, marksType));
-    				return true;
+    	for (User u: Database.users) {
+    		if (u instanceof Student) {
+    			Student s = (Student) u;
+    			if (s.equals(student)) {
+    				if (s.getCourses().contains(course)) {
+	    				for (Entry<Course, Mark> entry : student.getMarks().entrySet()) {
+		//    				System.out.println(entry.getValue());
+		    				Mark m = entry.getValue();
+		    				Database.marks.put(course, m);
+		    				student.setMark(course, new Mark(points, marksType));
+		    				return true;
+	    			}
+    				}
     			}
     		}
     	}
-    	
     	return false;
 
 //    	
@@ -109,17 +115,18 @@ public class Teacher extends Employee implements Serializable, IOrder, IMessage,
         return "You have no courses";
     }
     
-    public String viewCourseFiles(Course course) {
+    public String showCourseFiles(Course course) {
     	String s = "";
         for (File f: course.courseFiles) {
-        	s += f + "\n";
+        	s += f.showFileInfo() + "\n";
         }
         return s;
     }
 
 	@Override
 	public void sendMessage(Message message, Employee sendTo) {
-		sendTo.putMessage(message);
+		Manager m = (Manager) sendTo;
+		m.putMessage(message);
 	}
 
 	@Override

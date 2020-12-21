@@ -54,11 +54,13 @@ public class File  {
 
     //                          Operations                                  
     
-    public void showFileInfo() {
-        System.out.println(getDescription());
-        System.out.println(getCreator());
-        System.out.println(getCourse());
-        System.out.println(getFileName());
+    public String showFileInfo() {
+//        System.out.println(getDescription());
+//        System.out.println(getCreator());
+//        System.out.println(getCourse());
+//        System.out.println(getFileName());
+        return "File name: " + this.fileName + "\nDescription: " + this.description + 
+        		"\nOwner: " +  this.creator + "\nCourse: " + this.course;
     }
     
 }

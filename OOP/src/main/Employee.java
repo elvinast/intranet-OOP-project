@@ -65,4 +65,15 @@ public class Employee extends User {
     	this.salary += newSalary;
     }
     
+    public String showMessages() {
+    	String s = "";
+    	Database.load();
+    	for (Message m: Database.messages) {
+    		if (this.getLogin().equals(m.getSender().getLogin())) {
+    			s += m + "\n";
+    		}
+    	}
+    	return s;
+    }
+    
 }

@@ -1,6 +1,5 @@
 package main;
 
-import java.awt.desktop.UserSessionEvent;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -13,15 +12,15 @@ public class Main {
 	static Scanner sc = new Scanner(System.in);
 	static BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 	
-    public static User signIn() {
+    public static User signIn() throws IOException {
         for(int i = 0; i < 3; i++) {
-        	System.out.println("Welcome! You have " + (3 - i) + " attempts to login.");
+        	System.out.println("You have " + (3 - i) + " attempts to login.");
         	System.out.println("Enter login: ");
-        	String in = sc.next();
+        	String in = reader.readLine();
         	for(User u: Database.users) {
 	        	if (u.getLogin().equals(in) == true) {
 	        		System.out.println("Enter password: ");
-	        		String in1 = sc.next();
+	        		String in1 = reader.readLine();
 	        		String ps = in1;
 	        		if (u.getPassword().equals(ps)) {
 	        			System.out.println("Successfully authorized!");
@@ -37,10 +36,11 @@ public class Main {
         }
         
         System.out.println("No such user:(");
+        System.exit(0);
         return null;
     }
     
-	public static void main(String[] args){
+	public static void main(String[] args) throws IOException{
 		//                STUDENTS
 		Student s1 = new Student("Jack", "Back", "email123", 2, Faculties.FIT, Degree.BACHELOR);
 		Student s2 = new Student("Bob", "KKK", "newmail123", 3, Faculties.MCM, Degree.BACHELOR); 
@@ -78,8 +78,8 @@ public class Main {
 		Course PP1 = new Course("Programming principles 1", 4, "CS6");
 		Database.courses.add(PP1); Database.courses.add(PP2); Database.courses.add(OOP); Database.courses.add(DB); Database.courses.add(ADS); Database.courses.add(ICT);
 		
-
-		
+		//                Saving data
+		Database.save();
 //		System.out.println(Database.getTeachers());
 //		System.out.println(Database.getStudents());
 		
@@ -90,8 +90,14 @@ public class Main {
 		
 		
 //		System.exit(0);
-		
-		while(true) {
+		log();
+	}
+
+	
+
+	
+    public static void log() throws IOException {
+    	while(true) {
 			System.out.println("Welcome to the Intranet System!");
 			User u = signIn();
 			if (u instanceof Student) {
@@ -120,20 +126,13 @@ public class Main {
 				break;
 			}
 		}
-			
 	}
 
-	
-	
-
-
-	
-    // ---------------------------- T E A C H E R -----------------------------
+	// ---------------------------- T E A C H E R -----------------------------
 	
 	
 	
-	
-	private static void teachersMenu(Teacher teacher) {
+	private static void teachersMenu(Teacher teacher) throws IOException {
 		while (true) {
 	    	System.out.println(   "		[1]         	Information about teacher\n"
 	    						+ "		[2]         	View courses\n"
@@ -146,9 +145,10 @@ public class Main {
 	    						+ "		[9]         	Send Message\n"
 	    						+ "		[10]        	Send Order to Executor\n"
 	    						+ "		[11]        	View news\n"
+	    						+ "		[12]         	Change password\n"
 	    						+ "		[0]         	EXIT\n");
 	    	int ans = 0;
-	    	ans = sc.nextInt();
+	    	ans = Integer.parseInt(reader.readLine());
 	    	switch(ans) {
 	    		case 1: 
 	    			System.out.println(teacher.showInfo());
@@ -183,17 +183,20 @@ public class Main {
 	    		case 11: 
 	    			viewNews();;
 	    			break;
+	    		case 12:
+	    			changePassword(teacher);
+	    			break;
 	    		case 0:
-	    			System.exit(0);
+	    			log();
 	    			break;	
 	    	}
 		}
 	}
 
 
-	private static void putMark(Teacher teacher) {
+	private static void putMark(Teacher teacher) throws NumberFormatException, IOException {
 		System.out.println("Enter the ID of the student: ");
-		String id = sc.next();
+		String id = reader.readLine();
 		Student student = null;
 		for (User u: Database.users) {
 			if (u instanceof Student) {
@@ -204,7 +207,7 @@ public class Main {
 		}
 		
 		System.out.println("Enter course ID: ");
-		String courseID = sc.next();
+		String courseID = reader.readLine();
 		Course course = null;
 		for (Course c: Database.courses) {
 			if (c.getCourseCode().equals(courseID)) {
@@ -213,7 +216,7 @@ public class Main {
 		}
 		if (student.getCourses().contains(course)) {
 			System.out.println("Choose number of mark's type: \n1. ATTESTATION 1\n2. ATTESTATION 2\n3. FINAL EXAM");
-			int type = sc.nextInt();
+			int type = Integer.parseInt(reader.readLine());
 			MarksType mark = null;
 			switch(type) {
 				case 1:
@@ -228,10 +231,11 @@ public class Main {
 			}
 			
 			System.out.println("Enter the number of points: ");
-			Double points = sc.nextDouble();
+			Double points = Double.parseDouble(reader.readLine());
 			try {
 				if (teacher.putMark(course, mark, points, student)) {
 					System.out.println("Successfully done!");
+					Database.save();
 				}
 				else {
 					System.out.println("Error!");
@@ -248,13 +252,14 @@ public class Main {
 	}
 
 	//FOR ADMIN, TEACHER, MANAGER
-	private static void createNews(Employee e) {
+	private static void createNews(Employee e) throws IOException {
 		System.out.println("Enter the title of the news: ");
-		String title = sc.next();
+		String title = reader.readLine();
 		System.out.println("Enter the text of the news: ");
-		String text = sc.next();
+		String text = reader.readLine();
 		Date date = java.util.Calendar.getInstance().getTime(); 
 		News n = new News(title, text, date);
+		Database.news.add(n);
 		if (e instanceof Teacher) {
 			Teacher t = (Teacher) e;
 			t.createNews(title, text, date);
@@ -267,94 +272,102 @@ public class Main {
 			Admin t = (Admin) e;
 			t.createNews(title, text, date);
 		}
+		Database.save();
 	}
 	
 	//FOR TEACHER, MANAGER
-	private static void sendMessage(Employee e) {
+	private static void sendMessage(Employee e) throws IOException {
 		System.out.println("Enter the title of the message: ");
-		String title = sc.next();
+		String title = reader.readLine();
 		System.out.println("Enter the text of the message: ");
-		String text = sc.next();
+		String text = reader.readLine();
 		Date date = java.util.Calendar.getInstance().getTime(); 
-		Message m = new Message(title, text, date);
 		System.out.println("Enter the login of Manager/Teacher to send message: ");
-		String login = sc.next();
+		String login = reader.readLine();
 		for(User u : Database.users) {
 			if (u instanceof Manager || u instanceof Teacher) {
 				if (u.getLogin().equals(login)) {
 					if (e instanceof Teacher) {
 						Teacher t = (Teacher) e;
+						Message m = new Message(title, text, date, t);
 						Employee sendTo = (Employee) u;
+						Database.messages.add(m);
 						t.sendMessage(m, sendTo);
 					}
 					else if (e instanceof Manager) {
 						Manager t = (Manager) e;
 						Employee sendTo = (Employee) u;
+						Message m = new Message(title, text, date, t);
+						Database.messages.add(m);
 						t.sendMessage(m, sendTo);
 					}
+					Database.save();
 				}
 			}
 		}
 	}
 	
 	//FOR ADMIN TEACHER MANAGER
-	private static void sendOrder(Employee e) {
+	private static void sendOrder(Employee e) throws IOException {
 		System.out.println("Enter the problem: ");
-		String problem = sc.next();
+		String problem = reader.readLine();
 		System.out.println("Enter the text of the message: ");
-		String text = sc.next();
+		String text = reader.readLine();
 		Date date = java.util.Calendar.getInstance().getTime(); 
 		Order m = new Order(OrderStatus.NEW, text, date, e);
 		System.out.println("Enter the name or login of Tech Support Guy to send order: ");
-		String login = sc.next();
+		String login = reader.readLine();
+		Database.load();
 		for(User u : Database.users) {
 			if (u instanceof TechSupportGuy) {
 				if (u.getLogin().equals(login) || u.getFirstName().equals(login)) {
+					TechSupportGuy sendTo = (TechSupportGuy) u;
+					Database.orders.add(m);
+					Database.save();
 					if (e instanceof Teacher) {
 						Teacher t = (Teacher) e;
-						TechSupportGuy sendTo = (TechSupportGuy) u;
 						t.sendOrder(problem, m, sendTo);
-						System.out.println("Done!");
 					}
 					else if (e instanceof Manager) {
 						Manager t = (Manager) e;
-						TechSupportGuy sendTo = (TechSupportGuy) u;
 						t.sendOrder(problem, m, sendTo);
-						System.out.println("Done!");
 					}
 					else if (e instanceof Admin) {
 						Admin t = (Admin) e;
-						TechSupportGuy sendTo = (TechSupportGuy) u;
 						t.sendOrder(problem, m, sendTo);
-						System.out.println("Done!");
 					}
+					else {
+						break;
+					}
+					System.out.println("Done!");
 				}
 			}
 		}
 	}
 		
 
-	private static String addCourse(Teacher teacher) {
+	private static String addCourse(Teacher teacher) throws IOException {
 		System.out.println("Enter course ID: ");
-		String c = sc.next();
+		String c = reader.readLine();
 		for(Course course: Database.courses) {
 			if (course.getCourseCode().equals(c)) {
 				teacher.addCourse(course);
+				Database.save();
 				return "New course successfully added!";
 			}
 		}
 		return "Oops! No such course in KBTU";
 	}
 
-	private static void deleteCourseFile(Teacher teacher) {
+	private static void deleteCourseFile(Teacher teacher) throws IOException {
 		System.out.println("Enter course ID to remove file of this course: ");
-		String c = sc.next();
+		String c = reader.readLine();
 		if (teacher.getCourses().size() >= 1) {
 			for (Course course: teacher.getCourses()) {
     			if (c.equals(course.getCourseCode())) {
     				if (course.courseFiles.size() >= 1) {
     					System.out.println("Enter the title of the file: ");
-	    				String fileTitle = sc.next();
+	    				String fileTitle = reader.readLine();
 	    				for (File f : course.courseFiles) {
 	    					if (f.getFileName().equals(fileTitle)) {
 	    						course.courseFiles.remove(f);
@@ -374,17 +387,16 @@ public class Main {
 		}
 	}
 	
-	private static void addCourseFile(Teacher teacher) {
+	private static void addCourseFile(Teacher teacher) throws IOException {
 		System.out.println("Enter course ID to add file to this course: ");
-		String c = "";
-		c = sc.next();
+		String c = reader.readLine();
 		if (teacher.getCourses().size() >= 1) {
 			for (Course course: teacher.getCourses()) {
     			if (c.equals(course.getCourseCode())) {
     				System.out.println("Enter the title of the new file: ");
-    				String fileTitle = sc.next();
+    				String fileTitle = reader.readLine();
     				System.out.println("Enter the description of the new file: ");
-    				String fileDescription = sc.next();
+    				String fileDescription = reader.readLine();
     				if (teacher.addCourseFile(course, new File(fileTitle, course, teacher, fileDescription))) {
     					System.out.println("New file successfully added to " + course.getCourseName() + " course!\n");
     				}
@@ -397,14 +409,14 @@ public class Main {
 		}
 	}
 
-	private static void viewCourseFiles(Teacher teacher) {
+	private static void viewCourseFiles(Teacher teacher) throws IOException {
+		Database.load();
 		System.out.println("Enter course ID to see the files of this course: ");
-		String c = "";
-		c = sc.next();
+		String c = reader.readLine();
 		if (teacher.getCourses().size() >= 1) {
 			for (Course course: teacher.getCourses()) {
     			if (c.equals(course.getCourseCode())) {
-    				System.out.println(teacher.viewCourseFiles(course));
+    				System.out.println(teacher.showCourseFiles(course));
     				break;
     			}
     		}
@@ -417,14 +429,11 @@ public class Main {
 	
 	
 	
-	
 	// ---------------------------- S T U D E N T -----------------------------
 	
 	
 	
-	
-	
-	private static void studentsMenu(Student student){
+	private static void studentsMenu(Student student) throws NumberFormatException, IOException{
 		while (true) {
 	    	System.out.println(    " 		[1]		Information about student\n"
 	    						+ "		[2]         	View courses\n"
@@ -434,11 +443,13 @@ public class Main {
 	    						+ "		[6]         	View course files\n"
 	    						+ "		[7]         	View news\n"
 	    						+ "		[8]         	Registration for disciplines\n"
+	    						+ "		[9]         	Change password\n"
 	    						+ "		[0]        		EXIT\n");
 	    	int ans = 0;
-	    	ans = sc.nextInt();
+	    	ans = Integer.parseInt(reader.readLine());
 	    	switch(ans) {
 	    		case 1: 
+	    			System.out.println("Information about student:");
 	    			System.out.println(student.showInfo());
 	    			break;
 	    		case 2:
@@ -462,21 +473,29 @@ public class Main {
 	    		case 8:
 	    			registerOnCourse(student);
 	    			break;
+	    		case 9:
+	    			changePassword(student);
 	    		default:
-	    			System.out.println("Bye!");
-	    			System.exit(0);
+	    			log();
 	    			break;	
 	    	}
 		}
 	}
 
+	private static void changePassword(User u) throws IOException {
+		System.out.println("Enter old password: ");
+		String old = reader.readLine();
+		System.out.println("Enter new password: ");
+		String neww = reader.readLine();
+		u.changePassword(old, neww);
+		System.out.println("Password successfully updated!");
+	}
 
-
-	private static void showMarks(Student student) {
+	private static void showMarks(Student student) throws IOException {
 		// TODO Auto-generated method stub
+		Database.load();
 		System.out.println("Enter course id to see the marks of this course: ");
-		String c = "";
-		c = sc.next();
+		String c = reader.readLine();
 		if (student.getCourses() != null) {
 			for (Course course: student.getCourses()) {
     			if (c.equals(course.getCourseCode())) {
@@ -485,13 +504,13 @@ public class Main {
     			}
     		}
 		}
-		System.out.println("You don't have such course.");
+		System.out.println("Error");
 	}
 	
-	private static void showCourseFiles(Student student) {
+	private static void showCourseFiles(Student student) throws IOException {
+		Database.load();
 		System.out.println("Enter course id to see the files of this course: ");
-		String c = "";
-		c = sc.next();
+		String c = reader.readLine();
 		if (student.getCourses() != null) {
 			for (Course course: student.getCourses()) {
     			if (c.equals(course.getCourseCode())) {
@@ -500,12 +519,12 @@ public class Main {
     			}
     		}
 		}
-		System.out.println("You don't have such course.");
+		System.out.println("Error");
 	}
 	
-	private static void registerOnCourse(Student student) {
+	private static void registerOnCourse(Student student) throws IOException {
 		System.out.println("Enter ID of the course for registration: ");
-		String c = sc.next();
+		String c = reader.readLine();
 		try {
 			if (student.registerOnCourse(c)) {
 				System.out.println("New course successfully added!");
@@ -517,9 +536,8 @@ public class Main {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		Database.save();
 	}
-	
-	
 	
 	
 	
@@ -530,7 +548,7 @@ public class Main {
 	
 	
 	
-	private static void adminsMenu(Admin admin) {
+	private static void adminsMenu(Admin admin) throws NumberFormatException, IOException {
     	System.out.println(   "		[1]         	Add user\n"
     						+ "		[2]         	Remove user\n"
     						+ "		[3]         	Show info about admin\n"
@@ -538,9 +556,10 @@ public class Main {
     						+ "		[5]         	Add course\n"
     						+ "		[6]        		Send Order to Executor\n"
     						+ "		[7]         	View news\n"
+    						+ "		[8]         	Change password\n"
     						+ "		[0]         	EXIT\n");
     	int ans = 0;
-    	ans = sc.nextInt();
+    	ans = Integer.parseInt(reader.readLine());
     	switch(ans) {
     		case 1: 
     			addUser(admin);
@@ -560,72 +579,76 @@ public class Main {
     			sendOrder(admin);
     			break;
     		case 7: 
-    			viewNews();;
+    			viewNews();
+    			break;
+    		case 8:
+    			changePassword(admin);
     			break;
     		case 0:
-    			System.exit(0);
-    			break;	
+    			log();
+    			break;
     	}
 	}
 
 	private static void viewNews() {
-		// TODO Auto-generated method stub
+		Database.load();
 		for (News n: Database.news) {
 			System.out.println(n.showNews());
 		}
 	}
 
-	private static void addCourse(Admin admin) {
+	private static void addCourse(Admin admin) throws NumberFormatException, IOException {
 		System.out.println("Enter the name of the course: ");
-		String name = sc.next();
+		String name = reader.readLine();
 		System.out.println("Enter the number of credits: ");
-		int credits = sc.nextInt();
+		int credits = Integer.parseInt(reader.readLine());
 		System.out.println("Enter the ID of the course: ");
-		String courseID = sc.next();
+		String courseID = reader.readLine();
 		admin.addCourse(name, credits, courseID);
+		Course c = new Course(name, credits, courseID);
+		Database.courses.add(c);
+		Database.save();
 	}
 
-	private static void removeUser(Admin admin) {
+	private static void removeUser(Admin admin) throws IOException {
 		System.out.println("Enter login of the user: ");
-		String log = sc.next();
+		String log = reader.readLine();
 		System.out.println("Enter the email: ");
-		String email = sc.next();
+		String email = reader.readLine();
+		Database.load();
 		for (User u: Database.users) {
 			if (u.getLogin().equals(log) && u.getEmail().equals(email)) {
 				Database.users.remove(u);
 				System.out.println("User successfully removed from KBTU.");
+				Database.save();
 			}
 		}
 		System.out.println("Error");
 	}
 
-	private static void addUser(Admin admin) {
-		// TODO Auto-generated method stub		
+	private static void addUser(Admin admin) throws NumberFormatException, IOException {
 		System.out.println("		[1]		Add Student\n"
 						 + " 		[2]		Add Teacher\n"
 						 + " 		[3]		Add Manager\n"
 						 + " 		[4]		Add TechSupportGuy\n"
 						 + " 		[5]		Add Admin\n");
-		int res = sc.nextInt();
-		
+		Database.load();
+		int res = Integer.parseInt(reader.readLine());
 		System.out.println("Enter the first name: ");
-		String firstName = sc.next();
+		String firstName = reader.readLine();
 		System.out.println("Enter the last name: ");
-		String lastName = sc.next();
+		String lastName = reader.readLine();
 		System.out.println("Enter the email: ");
-		String email = sc.next();
-		
+		String email = reader.readLine();
 		switch(res) {
 			case 1:
 				System.out.println("Enter the year of study: ");
-				int yearOfStudy = sc.nextInt();
-				
+				int yearOfStudy = Integer.parseInt(reader.readLine());
 				System.out.println("Enter the faculty: ");
-				String fac = sc.next();
+				String fac = reader.readLine();
 				Faculties f = getFacultiesss(fac);
-				
 				System.out.println("Enter the degree: ");
-				String deg = sc.next();
+				String deg = reader.readLine();
 				Degree d = null;
 				switch(fac) {
 					case "PHD": d = Degree.PHD; break;
@@ -634,39 +657,40 @@ public class Main {
 				}
 				
 				admin.createStudent(firstName, lastName, email, yearOfStudy, f, d);
+				Database.save();
 				break;
 			case 2:
 				System.out.println("Enter the salary: ");
-				int salary = sc.nextInt();
+				int salary = Integer.parseInt(reader.readLine());
 				
 				System.out.println("Enter the faculty: ");
-				String fac1 = sc.next();
+				String fac1 = reader.readLine();
 				Faculties f1 = getFacultiesss(fac1);
 				
 				admin.createTeacher(firstName, lastName, email, salary, f1);
+				Database.save();
 				break;
 				
 			case 3:
 				System.out.println("Enter the salary for manager: ");
-				int salaryM = sc.nextInt();
+				int salaryM = Integer.parseInt(reader.readLine());
 				admin.createManager(firstName, lastName, email, salaryM);
+				Database.save();
 				break;
-				
 			case 4:
 				System.out.println("Enter the salary for executor: ");
-				int salaryT = sc.nextInt();
+				int salaryT = Integer.parseInt(reader.readLine());
 				admin.createTechSupportGuy(firstName, lastName, email, salaryT);
+				Database.save();
 				break;
-				
 			case 5:
 				System.out.println("Enter the salary for administrator: ");
-				int salaryA = sc.nextInt();
+				int salaryA = Integer.parseInt(reader.readLine());
 				admin.createAdmin(firstName, lastName, email, salaryA);
+				Database.save();
 				break;
-				
 		}
 	}
-	
 	
 	
 	
@@ -676,9 +700,7 @@ public class Main {
 	
 	
 	
-	
-	
-	private static void techSupportGuysMenu(TechSupportGuy guy) {
+	private static void techSupportGuysMenu(TechSupportGuy guy) throws NumberFormatException, IOException {
 		System.out.println(   "		[1]         	View new orders\n"
 							+ "		[2]         	View accepted orders\n"
 							+ "		[3]         	View rejected orders\n"
@@ -689,9 +711,10 @@ public class Main {
 							+ "		[8]         	View all orders\n"
 							+ "		[9]         	Finish order\n"
 							+ "		[10]         	Show info about executor\n"
+							+ "		[11]         	Change password\n"
 							+ "		[0]         	EXIT\n");
 		int ans = 0;
-		ans = sc.nextInt();
+		ans = Integer.parseInt(reader.readLine());
 		switch(ans) {
 		case 1: 
 			System.out.println(guy.view0rderByStatus(OrderStatus.NEW));
@@ -710,6 +733,7 @@ public class Main {
 			break;
 		case 6: 
 			guy.clearOrders();
+			Database.orders.remove(guy);
 			System.out.println("Now you have 0 orders.");
 			break;
 		case 7: 
@@ -724,13 +748,16 @@ public class Main {
 		case 10: 
 			System.out.println(guy.showInfo());
 			break;
+		case 11:
+			changePassword(guy);
+			break;
 		case 0:
-			System.exit(0);
+			log();
 			break;	
 		}
 	}
 
-	private static void finishOrder(TechSupportGuy guy) {
+	private static void finishOrder(TechSupportGuy guy) throws NumberFormatException, IOException {
 		int i = 1;
 		System.out.println("Enter the number of order you want to finish.");
 		for(Order order: guy.getOrders()) {
@@ -740,19 +767,19 @@ public class Main {
 			}
 		}
 		int k = 1;
-		int res = sc.nextInt();
+		int res = Integer.parseInt(reader.readLine());
 		for(Order order: guy.getOrders()) {
 			if (order.getOrderStatus().equals(OrderStatus.IN_PROGRESS)) {
 				k++;
 				if (k == res) {
 					guy.updateOrder(OrderStatus.DONE, order);
-					System.out.println("Congrats! You finished 1 order.");
+					System.out.println("You finished one order.");
 				}
 			}
 		}
 	}
 
-	private static void manageNewOrders(TechSupportGuy guy) {
+	private static void manageNewOrders(TechSupportGuy guy) throws NumberFormatException, IOException {
 		int cnt = 0;
 		if (guy.getOrders().size() >= 1) {
 			for(Order order: guy.getOrders()) {
@@ -770,7 +797,7 @@ public class Main {
 			if (order.getOrderStatus().equals(OrderStatus.NEW)) {
 				System.out.println(order);
 				System.out.println("Choose 1 option:\n[1] Accept order\n[2] Reject order\n[3] Back");
-				int ans = sc.nextInt();
+				int ans = Integer.parseInt(reader.readLine());
 				switch(ans) {
 					case 1:
 						guy.acceptOrder(order);
@@ -796,7 +823,7 @@ public class Main {
 	
 	
 	
-	private static void managersMenu(Manager manager) {
+	private static void managersMenu(Manager manager) throws NumberFormatException, IOException {
 		System.out.println(   "		[1]         	Create course\n"
 							+ "		[2]         	Open course for registration\n"
 							+ "		[3]        		View news\n"
@@ -804,9 +831,10 @@ public class Main {
 							+ "		[5]         	Send order to executor\n"
 							+ "		[6]         	Show info about manager\n"
 							+ "		[7]         	Send message\n"
+							+ "		[8]         	Change password\n"
 							+ "		[0]         	EXIT\n");
 		int ans = 0;
-		ans = sc.nextInt();
+		ans = Integer.parseInt(reader.readLine());
 		switch(ans) {
 			case 1: 
 				createCourse(manager);
@@ -828,28 +856,34 @@ public class Main {
 				break;
 			case 7:
 				sendMessage(manager);
+			case 8:
+				changePassword(manager);
+				break;
 			case 0:
-				System.exit(0);
+				log();
 				break;	
 		}
 	}
 
-	private static void createCourse(Manager manager) {
+	private static void createCourse(Manager manager) throws NumberFormatException, IOException {
 		System.out.println("Enter the name of the course: ");
-		String name = sc.next();
+		String name = reader.readLine();
 		System.out.println("Enter the number of credits: ");
-		int credits = sc.nextInt();
+		int credits = Integer.parseInt(reader.readLine());
 		System.out.println("Enter the ID of the course: ");
-		String courseID = sc.next();
-		if (manager.createCourse(name, credits, courseID))
+		String courseID = reader.readLine();
+		if (manager.createCourse(name, credits, courseID)) {
+			Database.courses.add(new Course(name, credits, courseID));
+			Database.save();
 			System.out.println("Course successfully created!");
+		}
 		else System.out.println("Error");
 		
 	}
 
-	private static void openCourseForRegistration(Manager manager) {
+	private static void openCourseForRegistration(Manager manager) throws IOException {
 		System.out.println("Enter course ID: ");
-		String id = sc.next();
+		String id = reader.readLine();
 		Course course = null;
 		
 		for(Course c: Database.courses) {
@@ -859,7 +893,7 @@ public class Main {
 		}
 		
 		System.out.println("Enter faculty: ");
-		String fac = sc.next();
+		String fac = reader.readLine();
 		Faculties f = getFacultiesss(fac);
 		if (manager.suggestCourse(course, f))
 			System.out.println("Course is available now");
