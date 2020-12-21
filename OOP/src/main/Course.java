@@ -15,16 +15,16 @@ public class Course implements Serializable, Comparable {
     private String description;
     private String courseCode;
     private boolean isAvailable;
-    private Teacher teacher;
+//    private Teacher teacher;
     public  Vector<File> courseFiles;
-    private HashMap<Student, Mark> marks;
+//    private HashMap<Student, Mark> marks;
     private String prerequisite;
 //    public List<File> files;
     
     public Course() {
     	List<Student> students = new ArrayList <Student>();
     	courseFiles = new Vector<File>();
-    	marks = new HashMap<Student, Mark>();
+//    	marks = new HashMap<Student, Mark>();
     }
     public Course(String courseName, Integer credits, String courseCode) {
     	this.courseName = courseName;
@@ -32,7 +32,7 @@ public class Course implements Serializable, Comparable {
     	this.courseCode = courseCode;
     	List<Student> students = new ArrayList <Student>();
     	courseFiles = new Vector<File>();
-    	marks = new HashMap<Student, Mark>();
+//    	marks = new HashMap<Student, Mark>();
     	this.isAvailable = true;
     }
 
@@ -43,9 +43,9 @@ public class Course implements Serializable, Comparable {
     	this.description = description;
     	this.courseCode = courseCode;
     	this.isAvailable = isAvailable;
-    	this.teacher = teacher;
+//    	this.teacher = teacher;
     	this.courseFiles = courseFiles;
-    	this.marks = marks;
+//    	this.marks = marks;
     	this.prerequisite = prerequisite;
     	
     }
@@ -89,21 +89,21 @@ public class Course implements Serializable, Comparable {
         this.isAvailable = isAvailable;
     }
 
-    public Teacher getTeacher() {
-        return this.teacher;
-    }
-
-    public void setTeacher(Teacher teacher) {
-        this.teacher = teacher;
-    }
-    
-    public HashMap<Student, Mark> getMarks() {
-        return this.marks;
-    }
-
-    public void setMarks(HashMap<Student, Mark> marks) {
-        this.marks = marks;
-    }
+//    public Teacher getTeacher() {
+//        return this.teacher;
+//    }
+//
+//    public void setTeacher(Teacher teacher) {
+//        this.teacher = teacher;
+//    }
+//    
+//    public HashMap<Student, Mark> getMarks() {
+//        return this.marks;
+//    }
+//
+//    public void setMarks(HashMap<Student, Mark> marks) {
+//        this.marks = marks;
+//    }
 
     public String getPrerequisite() {
         return this.prerequisite;

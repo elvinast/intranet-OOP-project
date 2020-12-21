@@ -107,7 +107,6 @@ public class Main {
 	
     public static void log() throws IOException {
     	while(true) {
-    		
     		//welcome message
     		String www = "Welcome to the Intranet System!";
     		System.out.print("			 ");
@@ -622,7 +621,8 @@ public class Main {
     			break;
     	}
 	}
-
+	
+	//for all users
 	private static void viewNews() {
 		Database.load();
 		if (Database.news.size() == 0) {

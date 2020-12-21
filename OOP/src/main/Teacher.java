@@ -69,15 +69,12 @@ public class Teacher extends Employee implements Serializable, IOrder, IMessage,
 		    				Database.marks.put(course, m);
 		    				student.setMark(course, new Mark(points, marksType));
 		    				return true;
-	    			}
+	    				}
     				}
     			}
     		}
     	}
     	return false;
-
-//    	
-//    	course.putMarks(student, marksType, points);
     }
     
     public boolean addCourseFile(Course course, File file) {
@@ -159,6 +156,8 @@ public class Teacher extends Employee implements Serializable, IOrder, IMessage,
 		+ "\nTeaching rank: " + this.getTeachingStatus() + "\nCourses: "+ this.getCourses();
 		return s;
 	}
+	
+	
 	
     
 }

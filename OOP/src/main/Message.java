@@ -96,6 +96,4 @@ public class Message implements Serializable {
                 sender.equals(message.sender) &&
                 date.equals(message.date);
 	}
-	
-	
 }

@@ -1,6 +1,7 @@
 package main;
 
 import java.io.Serializable;
+import java.util.Objects;
 import java.util.Scanner;
 
 /**
@@ -80,14 +81,7 @@ public class User implements Serializable, Comparable {
 
 	@Override
 	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((email == null) ? 0 : email.hashCode());
-		result = prime * result + ((firstName == null) ? 0 : firstName.hashCode());
-		result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
-		result = prime * result + ((login == null) ? 0 : login.hashCode());
-		result = prime * result + ((password == null) ? 0 : password.hashCode());
-		return result;
+		return Objects.hash(login, password, email, firstName, lastName);
 	}
 
 	@Override
@@ -136,5 +130,4 @@ public class User implements Serializable, Comparable {
 		}
 		return s;
 	}
-
 }

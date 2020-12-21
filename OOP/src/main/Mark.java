@@ -134,7 +134,6 @@ public class Mark {
 		else if(totalGrade < 80) {
 			GPAletter = "B-"; courseGPA = 2.67;
 		}
-		
 		else if(totalGrade < 85) {
 			GPAletter = "B"; courseGPA = 3.0;
 		}
@@ -169,7 +168,6 @@ public class Mark {
 	@Override
 	public int hashCode() {
 		return Objects.hash(points, GPAletter);
-
 	}
 
 	@Override
@@ -184,7 +182,4 @@ public class Mark {
 			return false;
 		return true;
 	}
-	
-	
-
 }

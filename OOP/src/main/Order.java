@@ -68,7 +68,4 @@ public class Order implements Serializable, Cloneable {
 	public String toString() {
 		return "Order [orderStatus=" + orderStatus + ", text=" + text + ", date=" + date + ", sender=" + sender + "]";
 	}
-	
-
-    
 }

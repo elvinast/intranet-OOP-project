@@ -164,14 +164,14 @@ public class Database implements Serializable {
         return null;
     }
     
-    public User removeUser(String login) {
+    public boolean removeUser(String login) {
         for (User user: users) {
             if (user.getLogin().equals(login)) {
                 users.remove(user);
-                return user;
+                return true;
             }
         }
-        return null;
+        return false;
     }
     
     public void addUser(User user) {

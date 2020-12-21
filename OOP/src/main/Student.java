@@ -185,23 +185,18 @@ public class Student extends User {
 		return "Student [yearOfStudy=" + yearOfStudy + ", GPA=" + GPA + ", id=" + id + ", faculty=" + faculty + "]";
 	}
 
-	/**
-    * @generated
-    */
     public Transcript viewTranscript() {
     	return this.transcript;
     }
     
     public String viewCourses() {
-    	int num = 0;
     	String s = "";
     	if (this.courses != null) {
 	    	for (Course course: this.courses) {
-	    		num++;
 	    		s += course.showInfo() + "\n";
 	    	}
     	}
-    	return s + "You have " + num + " courses.";
+    	return s + "You have " + this.courses.size() + " courses.";
     }
    
     public String viewCourseFiles(Course course) {
